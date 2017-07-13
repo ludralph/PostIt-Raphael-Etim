@@ -1,14 +1,26 @@
 /* eslint linebreak-style: ['error', 'windows']*/
 import express from 'express';
-import consign from 'consign';
+import bodyParser from 'body-parser';
+import env from 'dotenv';
+import routes from './routes/index';
 
+
+env.config();
 const app = express();
-consign({ verbose: false })
-  .include('libs/config.js')
-  .then('db.js')
-  .then('libs/middlewares.js')
-  .then('routes')
-  .then('libs/boot.js')
-  .into(app);
+const port = process.env.PORT || 3000;
 
-module.exports = app;
+
+// Middlewares used
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/api/', routes);
+app.listen(port, () => {
+  console.log('Listening on port 3000');
+});
+export default app;
