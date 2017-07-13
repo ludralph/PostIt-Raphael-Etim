@@ -1,59 +1,63 @@
 /* eslint linebreak-style: ['error', 'windows']*/
-import bcrypt from 'bcrypt';
 
-module.exports = (sequelize, DataType) => {
-  const Users = sequelize.define('Users', {
-    userId: {
-      type: DataType.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false
-    },
-    name: {
-      type: DataType.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
-    password: {
-      type: DataType.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
-    email: {
-      type: DataType.STRING,
-      unique: true,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+import Sequelize from 'sequelize';
+
+
+const sequelize = new Sequelize('mockpostit', 'postgres', 'bootcamp', {
+  host: 'localhost',
+  dialect: 'postgres',
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  }
+});
+
+const Users = sequelize.define('Users', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  username: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true
+  },
+  email: {
+    type: Sequelize.STRING,
+    unique: true,
+    validate: {
+      isEmail: true
     }
-  }, {
-    hooks: {
-      beforeCreate: (user) => {
-        const salt = bcrypt.genSaltSync();
-        user.password = bcrypt.hashSync(user.password, salt);
-      }
-    },
-    classMethods: {
-      associate: (models) => {
-        Users.hasMany(models.Groups, {
-          foreignKey: 'userId'
-        });
-        Users.hasMany(models.GroupMembers, {
-          foreignKey: 'userId',
-          as: 'userId'
-        });
-        Users.hasMany(models.Messages, {
-          foreignKey: 'userId',
-          as: 'userId'
-        });
-      },
-      isPassword: (encodedPassword, password) => bcrypt.compareSync(password, encodedPassword)
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+}, {
+  classMethods: {
+    associate: (models) => {
+      // associations can be defined here
+      Users.hasMany(models.Groups, {
+        foreignKey: 'userId',
+        as: 'userId'
+      });
+      Users.hasMany(models.GroupMembers, {
+        foreignKey: 'userId',
+        as: 'userId'
+      });
+      Users.hasMany(models.Messages, {
+        foreignKey: 'userId',
+        as: 'userId'
+      });
     }
-  });
-  return Users;
-};
+  }
+});
+
+export default Users;
