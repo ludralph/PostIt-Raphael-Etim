@@ -1,3 +1,4 @@
+
 # PostIt App
 
 ## Introduction 
@@ -52,3 +53,5 @@ The form fields are **message**, **priority**, and **userId**. The **priority** 
 
 ### Retrieve messages posted on group
 To get all messages posted on the group, use the link ""/api/group/:groupId/messages. This is a **get** request.
+
+
