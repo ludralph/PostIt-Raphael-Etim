@@ -64,7 +64,7 @@ export default class ApiController {
         const check = bcrypt.compareSync(password, user.dataValues.password);
         const payload = { username: user.dataValues.username };
         if (check) {
-          const token = jwt.sign(payload, 'kitongifuuiiwtylkkksshdywywy', {
+          const token = jwt.sign(payload, 'playf111@@@990', {
             expiresIn: 60 * 60 * 24
           });
           res.status(200).json({
@@ -93,7 +93,7 @@ export default class ApiController {
     // decode token
     if (token) {
     // verifies secret and checks exp
-      jwt.verify(token, 'kitongifuuiiwtylkkksshdywywy', (err, decoded) => {
+      jwt.verify(token, 'playf111@@@990', (err, decoded) => {
         if (err) {
           return res.json({ success: false, message: 'Failed to authenticate token.' });
         }
