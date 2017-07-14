@@ -1,12 +1,14 @@
 /* eslint linebreak-style: ['error', 'windows']*/
+import expect from 'expect';
+import supertest from 'supertest';
 import Users from '../models/users';
 import Group from '../models/group';
 import GroupMembers from '../models/groupMembers';
 import Messages from '../models/messages';
-import expect from 'expect';
-import supertest from 'supertest';
+import index from '../index';
 
-const request = supertest(app);
+
+const request = supertest(index);
 
 
 // TESTING all the models used in the application
