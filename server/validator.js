@@ -1,4 +1,7 @@
 /* eslint linebreak-style: ['error', 'windows']*/
+
+'esversion: 6';
+
 /**
  * @class Validator
  */

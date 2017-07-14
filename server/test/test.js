@@ -1,4 +1,7 @@
 /* eslint linebreak-style: ['error', 'windows']*/
+
+'esversion: 6';
+
 import expect from 'expect';
 import supertest from 'supertest';
 import Users from '../models/users';

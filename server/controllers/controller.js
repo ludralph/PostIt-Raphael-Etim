@@ -1,4 +1,7 @@
 /* eslint linebreak-style: ['error', 'windows']*/
+
+'esversion: 6';
+
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Users from '../models/users';

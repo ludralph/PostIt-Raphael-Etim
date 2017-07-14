@@ -1,5 +1,8 @@
 
 /* eslint linebreak-style: ['error', 'windows']*/
+
+'esversion: 6';
+
 import Sequelize from 'sequelize';
 import config from '../config/dbUrl.json';
 

@@ -1,4 +1,7 @@
 /* eslint linebreak-style: ['error', 'windows']*/
+
+'esversion: 6';
+
 import express from 'express';
 import controller from '../controllers/controller';
 import Validate from '../validator';
