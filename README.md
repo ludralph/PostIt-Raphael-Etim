@@ -1,4 +1,5 @@
 <a href="https://codeclimate.com/github/codeclimate/codeclimate"><img src="https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg" /></a>
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)](
 # PostIt App
 
 ## Introduction 
