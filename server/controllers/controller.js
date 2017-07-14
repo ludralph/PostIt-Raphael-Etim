@@ -86,7 +86,7 @@ export default class ApiController {
  * @param {obj} next
  */
   static ensureToken(req, res, next) {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    const token = req.body.token || req.query.token || req.headers.authorization['x-access-token'];
     // decode token
     if (token) {
     // verifies secret and checks exp

@@ -3,20 +3,24 @@
 import Sequelize from 'sequelize';
 import config from '../config/dbUrl.json';
 
+
 const sequelize = new Sequelize(config.url);
-const Group = sequelize.define('Groups', {
+
+const Messages = sequelize.define('Messages', {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: Sequelize.INTEGER
   },
-  groupName: {
+  message: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true
+    validate: {
+      notEmpty: true
+    }
   },
-  description: {
+  priority: {
     type: Sequelize.STRING
   },
   userId: {
@@ -27,22 +31,31 @@ const Group = sequelize.define('Groups', {
       key: 'id',
       as: 'userId'
     }
+  },
+  groupId: {
+    type: Sequelize.INTEGER,
+    onDelete: 'CASCADE',
+    references: {
+      model: 'Groups',
+      key: 'id',
+      as: 'groupId'
+    }
   }
 }, {
   classMethods: {
     associate: (models) => {
       // associations can be defined here
-      Group.hasMany(models.GroupMembers, {
-        foreignKey: 'groupId',
-        as: 'groupId'
-      });
-      Group.belongsTo(models.Users, {
+      Messages.belongsTo(models.Users, {
         foreignKey: 'userId',
+        onDelete: 'CASCADE',
+      });
+      Messages.belongsTo(models.Groups, {
+        foreignKey: 'groupId',
         onDelete: 'CASCADE',
       });
     }
   }
 });
 
-export default Group;
+export default Messages;
 
