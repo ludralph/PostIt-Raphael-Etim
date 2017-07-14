@@ -27,11 +27,11 @@ describe('Model test suite', () => {
   });
   it('I should be able to create a new user with this model', (done) => {
     Users.sync({ force: true }).then(() => {
-      Users.create({ name: 'Helen', username: 'Sam', email: 'aloba@gmail.com', password: 'showa' })
+      Users.create({ name: 'Ralph', username: 'Ralp', email: 'ralph@gmail.com', password: 'hellotest' })
         .then((user) => {
           if (user) {
-            expect('Sam').toBe(user.dataValues.username);
-            expect('aloba@gmail.com').toBe(user.dataValues.email);
+            expect('Ralph').toBe(user.dataValues.username);
+            expect('raphael@gmail.com').toBe(user.dataValues.email);
           }
           done();
         }).catch((err) => { done(err); });
@@ -39,7 +39,7 @@ describe('Model test suite', () => {
   }, 10000);
   it('I should be able to create a new group with this model', (done) => {
     Group.sync({ force: true }).then(() => {
-      Group.create({ groupName: 'Zikites', description: 'Class of 2015', userId: 1 })
+      Group.create({ groupName: 'Man United', description: 'Class of 2015', userId: 1 })
         .then((group) => {
           expect('Zikites').toNotBe('Zike');
           expect('Class of 2015').toBe(group.dataValues.description);
@@ -294,95 +294,5 @@ describe('ROUTE TESTING ', () => {
         done();
       });
     }, 1000);
-  });
-  describe('NEGATIVE TESTS', () => {
-    let token2;
-    let userId2;
-    it('Should NOT be able to login with wrong username', (done) => {
-      request.post('/api/signin')
-        .send({ username: 'enet', password: 'azundu' })
-        .end((err, res) => {
-          expect(res.body.status).toBe('User not found');
-          done(err);
-        });
-    }, 10000);
-    it('Should NOT be able to login with wrong username', (done) => {
-      request.post('/api/signin')
-        .send({ username: 'enet', password: 'azundu' })
-        .end((err, res) => {
-          expect('User not found').toBe(res.body.status);
-          done(err);
-        });
-    }, 10000);
-    it('Should NOT be able to login with wrong password', (done) => {
-      request.post('/api/signin')
-        .send({ username: 'Kenet', password: 'zundu' })
-        .end((err, res) => {
-          expect('Invalid Password').toBe(res.body.status);
-          done(err);
-        });
-    }, 10000);
-    it('Should be able to login to account created', (done) => {
-      request.post('/api/signin')
-        .send({ username: 'Kenet', password: 'azundu' })
-        .expect(200)
-        .end((err, res) => {
-          token2 = res.body.token;
-          userId2 = res.body.data.id;
-          expect(res.body.status).toBe('Success');
-          expect(res.body.data.username).toBe('Kenet');
-          expect(res.body.message).toBe('Logged In');
-          done(err);
-        });
-    }, 10000);
-    it('Should NOT be able to create group without group name', (done) => {
-      request.post('/api/group')
-      .set('x-access-token', token2)
-      .send({ description: 'Full stack with js', userId2 })
-      .expect(200)
-      .end((err, res) => {
-        expect('groupName, description and userId fields are required').toBe(res.body.message);
-        done();
-      });
-    }, 16000);
-    it('Should NOT be able add user with invalid idsto others group', (done) => {
-      request.post('/api/group/4/user')
-      .set('x-access-token', token2)
-      .send({ admin: 1, userId: 1 })
-      .expect(200)
-      .end((err, res) => {
-        expect('Invalid input type. userId or groupId do not exist').toBe(res.body.status);
-        done();
-      });
-    }, 10000);
-    it('Should NOT be able to post message with wrong token', (done) => {
-      const token3 = 'hhgggUUjjkkkK';
-      request.post('/api/group/1/messages')
-      .set('x-access-token', token3)
-      .expect(200)
-      .send({ priority: 'Normal', userId: 1 })
-      .end((err, res) => {
-        expect('Failed to authenticate token.').toBe(res.body.message);
-        done();
-      });
-    }, 10000);
-    it('Should be denied access to route without token', (done) => {
-      request.post('/api/group/1/messages')
-      .expect(200)
-      .send({ priority: 'Normal', userId: 1 })
-      .end((err, res) => {
-        expect('Access denied. Login first').toBe(res.body.message);
-        done();
-      });
-    }, 10000);
-    it('Should NOT create account without submitting all form data', (done) => {
-      request.post('/api/signup')
-        .send({ name: 'Eze', email: 'jyyyu@gmail.com', password: 'azundu' })
-        .expect(200)
-        .end((err, res) => {
-          expect('name, username, email and password fields are required').toBe(res.body.message);
-          done(err);
-        });
-    }, 10000);
   });
 });

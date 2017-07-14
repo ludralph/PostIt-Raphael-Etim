@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node  server/index.js",
+    "start": "node  server/index.js",
     "test": "mocha --compilers js:babel-core/register server/test/test.js --timeout 50000",
     "lint": "esw server"
   },
