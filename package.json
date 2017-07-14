@@ -13,7 +13,10 @@
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
     "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.24.1",
     "bcrypt": "^1.0.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.15.0",
@@ -33,11 +36,8 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
     "babel-preset-react": "*",
     "babel-preset-stage-0": "*",
-    "babel-register": "*",
     "css-loader": "*",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.2",
