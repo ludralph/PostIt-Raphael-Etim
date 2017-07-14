@@ -1,4 +1,7 @@
 /* eslint linebreak-style: ['error', 'windows']*/
+
+'esversion: 6';
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import env from 'dotenv';
