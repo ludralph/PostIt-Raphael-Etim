@@ -23,7 +23,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api/', routes);
-app.listen(port, () => {
-  console.log('Listening on port 3000');
+app.listen(port, (req, res) => {
+  res.json({
+    message: 'Welcome'
+  });
 });
 export default app;
