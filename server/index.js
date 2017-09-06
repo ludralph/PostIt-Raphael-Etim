@@ -6,11 +6,18 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import env from 'dotenv';
 import routes from './routes/index';
+import path from 'path';
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import config from '../webpack.config.dev';
+
 
 
 env.config();
+let compiler = webpack(config)
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 
 // Middlewares used
@@ -21,11 +28,19 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(webpackMiddleware(compiler, {
+  hot: true,
+  publicPath: config.output.publicPath,
+  noInfo: true
+}));
+app.use(webpackHotMiddleware(compiler))
+app.get('/*',(req,res) =>{
+  res.sendFile(path.join(__dirname,'./index.html'));
+});
+
 
 app.use('/api/', routes);
-app.listen(port, (req, res) => {
-  res.json({
-    message: 'Welcome'
-  });
+app.listen(port, () => {
+  console.log("Listening at port 3000");
 });
 export default app;
