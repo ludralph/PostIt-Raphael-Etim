@@ -1,8 +1,8 @@
-import React,{Component} from 'react';                                                                                                                                               import React, {Component} from 'react'
+import React from 'react';                                                                                    
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-class SignUp extends Component {
+class SignUp extends React.Component {
   constructor(props) {
     super(props)
     this.state ={
@@ -68,7 +68,7 @@ class SignUp extends Component {
                         <p>Please fill out this form to register</p>
                         <form action="" onSubmit={this.onSubmit}>
                           <div className="form-group">
-                          <input
+                           <input
                               type="text"
                               className="form-control form-control-lg"
                               placeholder="Enter Full Name"
@@ -76,6 +76,8 @@ class SignUp extends Component {
                               value={this.state.fullname}
                               onChange={this.onChange} 
                               />
+                            </div>
+                          <div className="form-group">
                             <input
                               type="text"
                               className="form-control form-control-lg"
@@ -105,9 +107,10 @@ class SignUp extends Component {
                                   onChange ={this.onChange}
                                   />
                               </div>
-                                <input 
+                                <button 
                                 type="submit"
-                                 className="btn btn-outline-light btn-block" />
+                                 className="btn btn-outline-dark btn-block ">Sign Up </button>
+                                 <a className="btn btn-outline-primary btn-block">Click here to Login </a>
                               </form>
                               </div>
                             </div>
@@ -124,10 +127,12 @@ class SignUp extends Component {
    SignUp.propTypes ={
 
    }
-function mapStateToProps(state, ownProps){
-  return {
-    signup:state.data
-  }
-}
+// function mapStateToProps(state, ownProps){
+//   return {
+//     signup:state.data
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);t
+// export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+
+export default SignUp;
