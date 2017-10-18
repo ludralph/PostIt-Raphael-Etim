@@ -1,9 +1,10 @@
 import Sequelize from 'sequelize';
-import config from '../config/db_url.json';
-/* eslint linebreak-style: ['error', 'windows']*/
+import config from '../config/dbUrl.json';
+
+
 const sequelize = new Sequelize(config.url);
 
-const Messages = sequelize.define('Messages', {
+const Message = sequelize.define('Message', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -11,7 +12,7 @@ const Messages = sequelize.define('Messages', {
     type: Sequelize.INTEGER
   },
   message: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true
@@ -29,6 +30,10 @@ const Messages = sequelize.define('Messages', {
       as: 'userId'
     }
   },
+  username: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   groupId: {
     type: Sequelize.INTEGER,
     onDelete: 'CASCADE',
@@ -42,11 +47,11 @@ const Messages = sequelize.define('Messages', {
   classMethods: {
     associate: (models) => {
       // associations can be defined here
-      Messages.belongsTo(models.Users, {
+      Message.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
-      Messages.belongsTo(models.Groups, {
+      Message.belongsTo(models.Group, {
         foreignKey: 'groupId',
         onDelete: 'CASCADE',
       });
@@ -54,5 +59,5 @@ const Messages = sequelize.define('Messages', {
   }
 });
 
-export default Messages;
+export default Message;
 

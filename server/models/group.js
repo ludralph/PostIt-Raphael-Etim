@@ -1,8 +1,3 @@
-
-/* eslint linebreak-style: ['error', 'windows']*/
-
-'esversion: 6';
-
 import Sequelize from 'sequelize';
 import config from '../config/dbUrl.json';
 
@@ -26,7 +21,7 @@ const Group = sequelize.define('Groups', {
     type: Sequelize.INTEGER,
     onDelete: 'CASCADE',
     references: {
-      model: 'Users',
+      model: 'User',
       key: 'id',
       as: 'userId'
     }
@@ -35,11 +30,11 @@ const Group = sequelize.define('Groups', {
   classMethods: {
     associate: (models) => {
       // associations can be defined here
-      Group.hasMany(models.GroupMembers, {
+      Group.hasMany(models.UsersGroup, {
         foreignKey: 'groupId',
         as: 'groupId'
       });
-      Group.belongsTo(models.Users, {
+      Group.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
       });

@@ -1,12 +1,8 @@
-/* eslint linebreak-style: ['error', 'windows']*/
-
-'esversion: 6';
-
 import Sequelize from 'sequelize';
 import config from '../config/dbUrl.json';
 
 const sequelize = new Sequelize(config.url);
-const Groups = sequelize.define('GroupMembers', {
+const UsersGroup = sequelize.define('UsersGroup', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -40,11 +36,11 @@ const Groups = sequelize.define('GroupMembers', {
   classMethods: {
     associate: (models) => {
       // associations can be defined here
-      Groups.belongsTo(models.Users, {
+      UsersGroup.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
       });
-      Groups.belongsTo(models.Groups, {
+      UsersGroup.belongsTo(models.Group, {
         foreignKey: 'groupId',
         onDelete: 'CASCADE'
       });
@@ -52,5 +48,5 @@ const Groups = sequelize.define('GroupMembers', {
   }
 });
 
-export default Groups;
+export default UsersGroup;
 

@@ -1,13 +1,9 @@
-/* eslint linebreak-style: ['error', 'windows']*/
-
-'esversion: 6';
-
 import Sequelize from 'sequelize';
 import config from '../config/dbUrl.json';
 
 const sequelize = new Sequelize(config.url);
 
-const Users = sequelize.define('Users', {
+const User = sequelize.define('User', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -38,15 +34,15 @@ const Users = sequelize.define('Users', {
   classMethods: {
     associate: (models) => {
       // associations can be defined here
-      Users.hasMany(models.Groups, {
+      User.hasMany(models.Groups, {
         foreignKey: 'userId',
         as: 'userId'
       });
-      Users.hasMany(models.GroupMembers, {
+      User.belongsTo(models.UsersGroup, {
         foreignKey: 'userId',
         as: 'userId'
       });
-      Users.hasMany(models.Messages, {
+      User.hasMany(models.Message, {
         foreignKey: 'userId',
         as: 'userId'
       });
@@ -54,4 +50,4 @@ const Users = sequelize.define('Users', {
   }
 });
 
-export default Users;
+export default User;
