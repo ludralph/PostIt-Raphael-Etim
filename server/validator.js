@@ -1,7 +1,3 @@
-/* eslint linebreak-style: ['error', 'windows']*/
-
-'esversion: 6';
-
 /**
  * @class Validator
  */
@@ -70,12 +66,11 @@ export default class Validator {
      * @param {obj} next
      */
   static groupsInputs(req, res, next) {
-    const userId = req.body.userId,
-      admin = req.body.admin;
-    if (userId === '' || admin === '') {
-      res.json({ message: 'userId and admin fields should not be empty' });
-    } else if (!userId || !admin) {
-      res.json({ message: 'userId and admin fields are required' });
+    const username = req.body.username;
+    if (username === '') {
+      res.json({ message: 'username must not be empty' });
+    } else if (!username) {
+      res.json({ message: 'username field is required' });
     } else {
       next();
     }

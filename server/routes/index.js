@@ -1,7 +1,3 @@
-/* eslint linebreak-style: ['error', 'windows']*/
-
-'esversion: 6';
-
 import express from 'express';
 import controller from '../controllers/controller';
 import Validate from '../validator';
@@ -21,7 +17,7 @@ router.use(controller.ensureToken);
 router.post('/group', Validate.createGroupInputs, controller.createGroup);
 
 // Route to add users to group
-router.post('/group/:groupId/user', Validate.groupsInputs, controller.groups);
+router.post('/group/:groupId/user', Validate.groupsInputs, controller.addUser);
 
 // Route to post messages to groups
 router.post('/group/:groupId/messages', Validate.messagesInputs, controller.messages);

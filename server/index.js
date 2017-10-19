@@ -1,21 +1,15 @@
-/* eslint linebreak-style: ['error', 'windows']*/
-
-'esversion: 6';
-
 import express from 'express';
 import bodyParser from 'body-parser';
 import env from 'dotenv';
-import routes from './routes/index';
 import path from 'path';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../webpack.config.dev';
-
-
+import routes from './routes/index';
 
 env.config();
-let compiler = webpack(config)
+const compiler = webpack(config);
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -33,14 +27,12 @@ app.use(webpackMiddleware(compiler, {
   publicPath: config.output.publicPath,
   noInfo: true
 }));
-app.use(webpackHotMiddleware(compiler))
-app.get('/*',(req,res) =>{
-  res.sendFile(path.join(__dirname,'./index.html'));
+app.use(webpackHotMiddleware(compiler));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, './index.html'));
 });
-
-
 app.use('/api/', routes);
 app.listen(port, () => {
-  console.log("Listening at port 3000");
+  console.log(`Listening at port ${port}`);
 });
 export default app;
