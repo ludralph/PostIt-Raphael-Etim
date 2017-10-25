@@ -1,32 +1,39 @@
-/* eslint linebreak-style: ['error', 'windows']*/
 import path from 'path';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 export default {
-  devtool : "eval-source-map",
-  entry : [
+  devtool: 'eval-source-map',
+  entry: [
     'webpack-hot-middleware/client', path.join(__dirname, 'client/index.js')
   ],
-  output : {
+  output: {
     filename: 'bundle.js',
     publicPath: '/'
   },
-  plugins : [
+  plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('client/css/style.css', {
       allChunks: true
   })
   ],
-  module : {
+  module: {
     loaders: [
       {
         test: /\.js$/,
         include: path.join(__dirname, 'client'),
-        loaders: ['react-hot-loader', 'babel-loader']
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env'],
+            plugins: [require('babel-plugin-transform-object-rest-spread')]
+          }
+        }
+        // loaders: ['react-hot-loader', 'babel-loader'],
       },
-       {
+      {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('css-loader!sass-loader')  
       },
@@ -38,7 +45,8 @@ export default {
       }
     ]
   },
-  resolve : {
-    extensions: ['.js', '.json']
+  resolve: {
+    extensions: ['.js', '.jsx', '.json']
   }
-}
+};
+

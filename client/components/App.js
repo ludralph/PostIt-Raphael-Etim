@@ -1,29 +1,17 @@
-import React, {Component} from 'react';
-import NavigationBar from './NavigationBar';
-import SignUp from './SignUp';
-import Login from './Login';
-import Group from './Group';
-import AddMember from './AddMember';
-import MessageBoard from './MessageBoard';
-import '../sass/style.scss';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import React from 'react';
+import { Component } from 'react';
 
-class App extends Component {
+import Header from './header';
+import Footer from './footer';
+
+export default class App extends Component {
   render() {
     return (
-
-      <Router>
-        <div className="">
-          <NavigationBar/>
-          <Route exact path="/signup" component={SignUp}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/group" component={Group}/>
-          <Route path="/addMember" component={AddMember}/>
-          <Route path="/messageboard" component={MessageBoard}/>
-        </div>
-      </Router>
-    )
+      <div>
+        <Header />
+        {this.props.children}
+        <Footer />
+      </div>
+    );
   }
 }
-
-export default App;
