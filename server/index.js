@@ -5,7 +5,7 @@ import path from 'path';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import config from '../webpack.config.dev';
+import config from '../webpack.config';
 import routes from './routes/index';
 
 env.config();
