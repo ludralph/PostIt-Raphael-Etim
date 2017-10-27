@@ -28,10 +28,11 @@ app.use(webpackMiddleware(compiler, {
   noInfo: true
 }));
 app.use(webpackHotMiddleware(compiler));
+app.use('/api/', routes);
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './index.html'));
 });
-app.use('/api/', routes);
+
 app.listen(port, () => {
   console.log(`Listening at port ${port}`);
 });

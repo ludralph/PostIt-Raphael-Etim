@@ -5,7 +5,9 @@ import User from '../models/user';
 import Group from '../models/group';
 import UsersGroup from '../models/usersgroup';
 import Message from '../models/message';
+import env from 'dotenv';
 
+env.config();
 
 /**
  * @class ApiController
@@ -31,6 +33,14 @@ export default class ApiController {
           User.create({
             name, username, email, password: hash
           }).then((user) => {
+            const payload = { username: user.username,
+              userId: user.id,
+              email: user.email,
+              name: user.name
+            };
+            const token = jwt.sign(payload, process.env.JWT_SECRET, {
+              expiresIn: 60 * 60 * 24
+            });
             res.status(200).json({
               status: 'success',
               data: {
@@ -39,7 +49,8 @@ export default class ApiController {
                 username: user.username,
                 email: user.email
               },
-              message: 'Account created'
+              message: 'Account created',
+              token
             });
           }).catch((err) => {
             if (err) {
@@ -59,14 +70,14 @@ export default class ApiController {
  * @return {obj} Return success or failure message
  */
   static signin(req, res) {
-    const username = req.body.username,
+    const email = req.body.email,
       password = req.body.password;
-    User.findOne({ where: { username } }).then((user) => {
-      if (user && user.dataValues.username === username) {
+    User.findOne({ where: { email } }).then((user) => {
+      if (user && user.dataValues.email === email) {
         const check = bcrypt.compareSync(password, user.dataValues.password);
-        const payload = { username: user.dataValues.username };
+        const payload = { email: user.dataValues.email };
         if (check) {
-          const token = jwt.sign(payload, 'playf111@@@990', {
+          const token = jwt.sign(payload, process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24
           });
           res.status(200).json({
@@ -81,10 +92,10 @@ export default class ApiController {
             token
           });
         } else {
-          res.status(401).json({ status: 'Invalid Password' });
+          res.status(401).json({ message: 'Invalid Password' });
         }
       } else {
-        res.json({ status: 'User not found' });
+        res.json({ message: 'User not found' });
       }
     });
   }
@@ -281,7 +292,7 @@ static messages(req, res) {
     priority = req.body.priority,
     groupId = req.params.groupId,
     userId = req.body.userId,
-    username = req.decoded.username;
+    username = req.body.username;
   return Message.sync({ force: false }).then(() => {
     Message.create({ userId, groupId, message, priority, username }).then((content) => {
       res.status(200).json({
@@ -312,6 +323,7 @@ static messages(req, res) {
   static getMessages(req, res) {
     const groupId = req.params.groupId;
     const userId = req.decoded.userId;
+    console.log(req.decoded.userId);
     const isGroupId = Number.isInteger(parseInt(groupId, 10));
     if (isGroupId) {
       Group.findOne({ attributes: ['groupName', 'userId'], where: { id: groupId } }).then((groupCreator) => {
@@ -333,7 +345,7 @@ static messages(req, res) {
         } else {
           Message.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
             where: {
-              groupId, archived: false
+              groupId
             },
             order: [['createdAt', 'DESC']]
           }).then((data) => {
