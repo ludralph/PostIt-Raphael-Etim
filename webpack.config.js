@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-export default {
+module.exports = {
   devtool: 'eval-source-map',
   entry: [
     'webpack-hot-middleware/client', path.join(__dirname, 'client/index.js')
