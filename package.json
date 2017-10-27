@@ -1,6 +1,12 @@
 {
   "name": "postit",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.11.3"
+  },
+  "engines": {
+    "npm": "5.5.1"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
