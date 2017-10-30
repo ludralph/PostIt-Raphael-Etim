@@ -8,12 +8,20 @@ import {
 } from './types';
 
 const ROOT_URL = 'http://localhost:5000/api';
+const localStorage = '';
+
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  };
+}
 
 export function signinUser({ email, password }) {
   return function(dispatch) {
     // Submit email/password to the server
     axios.post(`${ROOT_URL}/signin`, { email, password })
-      .then(response => {
+      .then((response) => {
         // If request is good...
         // - Update state to indicate user is authenticated
         dispatch({ type: AUTH_USER });
@@ -30,24 +38,19 @@ export function signinUser({ email, password }) {
   }
 }
 
-export function signupUser({fullName, email, password }) {
+ 
+export function signupUser({ name, username, email, password }) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/signup`, {fullName, email, password })
-      .then(response => {
-        dispatch({ type: AUTH_USER });
-        localStorage.setItem('token', response.data.token);
-        browserHistory.push('/messageboard');
+    axios.post(`${ROOT_URL}/signup`, { name, username, email, password })
+      .then((response) => {
+        dispatch({ type: UNAUTH_USER });
+        //localStorage.setItem('token', response.data.token);
+        browserHistory.push('/signin');
       })
       .catch(response => dispatch(authError(response.data.error)));
   }
 }
 
-export function authError(error) {
-  return {
-    type: AUTH_ERROR,
-    payload: error
-  };
-}
 
 export function signoutUser() {
   localStorage.removeItem('token');
@@ -60,11 +63,11 @@ export function fetchMessage() {
     axios.get(ROOT_URL, {
       headers: { authorization: localStorage.getItem('token') }
     })
-      .then(response => {
+      .then((response) => {
         dispatch({
           type: FETCH_MESSAGE,
           payload: response.data.message
         });
       });
-  }
+  };
 }

@@ -19,7 +19,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { handleSubmit, fields: {fullName, email, password}} = this.props;
+    const { handleSubmit, fields: {name, username, email, password}} = this.props;
 
     return (
       <header id="home-section">
@@ -34,20 +34,21 @@ class Signup extends Component {
                     <div className="card-body">
                         <h3 className="text-center">Register</h3>
                       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                        <fieldset className="form-group">
-                          <label>Full Name</label>
-                          <input className="form-control" {...fullName} type="text" />
-                          {fullName.touched && fullName.error && <div className="error">{fullName.error}</div>}
+                        <fieldset className="md-form">
+                          <input className="form-control" placeholder="Your Name" {...name} type="text" />
                         </fieldset>
-                        <fieldset className="form-group">
-                          <label>Email:</label>
-                          <input className="form-control" {...email} type="email" />
-                          {email.touched && email.error && <div className="error">{email.error}</div>}
+                        {name.touched && name.error && <span className="error">{name.error}</span>}
+                        <fieldset className="md-form">
+                          <input className="form-control" {...username} placeholder="Username" type="text" />
+                          {username.touched && username.error && <span className="error">{username.error}</span>}
                         </fieldset>
-                        <fieldset className="form-group">
-                          <label>Password:</label>
-                          <input className="form-control" {...password} type="password" />
-                          {password.touched && password.error && <div className="error">{password.error}</div>}
+                        <fieldset className="md-form">
+                          <input className="form-control" placeholder="Email" id="form-1" {...email} type="email" />
+                          {email.touched && email.error && <span className="error">{email.error}</span>}
+                        </fieldset>
+                        <fieldset className="md-form">
+                          <input className="form-control" placeholder="Password" {...password} type="password" />
+                          {password.touched && password.error && <span className="error">{password.error}</span>}
                         </fieldset>
                         {this.renderAlert()}
                         <button action="submit" className="btn btn-primary">Sign up!</button>
@@ -70,10 +71,12 @@ class Signup extends Component {
 function validate(formProps) {
   const errors = {};
 
-  if (!formProps.fullName) {
+  if (!formProps.name) {
     errors.fullName = 'Please enter your Name';
   }
-
+  if (!formProps.username) {
+    errors.userName = 'Please enter your Username';
+  }
   if (!formProps.email) {
     errors.email = 'Please enter an email';
   }
@@ -91,7 +94,7 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   form: 'signup',
-  fields: ['fullName','email', 'password'],
+  fields: ['name','username','email', 'password'],
   validate
 }, mapStateToProps, actions)(Signup);
 

@@ -36,14 +36,12 @@ class Signin extends Component {
               <h3 className="text-center">Sign in</h3>
                   <p  className="text-center">Please fill your details to sign in</p>
               <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                <fieldset className="form-group">
-                  <label>Email:</label>
-                  <input {...email} type="email" className="form-control" />
+                <fieldset className="md-form">
+                  <input {...email} type="email" placeholder="email" className="form-control" />
                   {email.touched && email.error && <div className="error">{email.error}</div>}
                 </fieldset>
-                <fieldset className="form-group">
-                  <label>Password:</label>
-                  <input {...password} type="password" className="form-control" />
+                <fieldset className="md-form">
+                  <input {...password} type="password" placeholder="password" className="form-control" />
                   {password.touched && password.error && <div className="error">{password.error}</div>}
                 </fieldset>
                 {this.renderAlert()}
