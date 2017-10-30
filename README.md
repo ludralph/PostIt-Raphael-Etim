@@ -1,10 +1,13 @@
 
 <div>
-<a href="https://codeclimate.com/github/codeclimate/codeclimate"><img src="https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg" /></a>
+<a href=""><img src="" /></a>
 
-<a href="https://codeclimate.com/github/codeclimate/codeclimate/coverage"><img src="https://codeclimate.com/github/codeclimate/codeclimate/badges/coverage.svg" /></a>
+<a href=""><img src="" /></a>
 
 </div>
+[![Build Status](https://travis-ci.org/ludralph/PostIt-Raphael-Etim.svg?branch=develop)](https://travis-ci.org/ludralph/PostIt-Raphael-Etim)
+[![Coverage Status](https://codeclimate.com/github/codeclimate/codeclimate/coverage)](https://codeclimate.com/github/codeclimate/codeclimate/badges/coverage.svg)
+[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
 # PostIt App
 
 ## Introduction 
