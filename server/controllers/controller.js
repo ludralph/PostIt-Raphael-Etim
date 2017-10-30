@@ -111,7 +111,7 @@ export default class ApiController {
     // decode token
     if (token) {
     // verifies secret and checks exp
-      jwt.verify(token, 'playf111@@@990', (err, decoded) => {
+      jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
           return res.json({ success: false, message: 'Failed to authenticate token.' });
         }
@@ -145,7 +145,7 @@ export default class ApiController {
         });
       }).catch((err) => {
         if (err) {
-          res.status(409).json({ status: 'Invalid input. groupName exists already or userId does not exist' });
+          res.status(409).json({ message: 'Invalid input. groupName exists already or userId does not exist' });
         }
       });
     });
