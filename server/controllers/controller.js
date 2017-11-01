@@ -122,7 +122,7 @@ export default class ApiController {
     } else {
       return res.status(403).send({
         success: false,
-        message: 'Access denied. Login first'
+        message: 'Access denied. Either'
       });
     }
   }

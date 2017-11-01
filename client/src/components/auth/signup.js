@@ -34,22 +34,22 @@ class Signup extends Component {
                     <div className="card-body">
                         <h3 className="text-center">Register</h3>
                       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                        <fieldset className="md-form">
+                        <div className="md-form">
                           <input className="form-control" placeholder="Your Name" {...name} type="text" />
-                        </fieldset>
+                        </div>
                         {name.touched && name.error && <span className="error">{name.error}</span>}
-                        <fieldset className="md-form">
+                        <div className="md-form">
                           <input className="form-control" {...username} placeholder="Username" type="text" />
                           {username.touched && username.error && <span className="error">{username.error}</span>}
-                        </fieldset>
-                        <fieldset className="md-form">
+                        </div>
+                        <div className="md-form">
                           <input className="form-control" placeholder="Email" id="form-1" {...email} type="email" />
                           {email.touched && email.error && <span className="error">{email.error}</span>}
-                        </fieldset>
-                        <fieldset className="md-form">
+                        </div>
+                        <div className="md-form">
                           <input className="form-control" placeholder="Password" {...password} type="password" />
                           {password.touched && password.error && <span className="error">{password.error}</span>}
-                        </fieldset>
+                        </div>
                         {this.renderAlert()}
                         <button action="submit" className="btn btn-primary">Sign up!</button>
                     </form>
@@ -72,10 +72,10 @@ function validate(formProps) {
   const errors = {};
 
   if (!formProps.name) {
-    errors.fullName = 'Please enter your Name';
+    errors.name = 'Please enter your Name';
   }
   if (!formProps.username) {
-    errors.userName = 'Please enter your Username';
+    errors.username = 'Please enter your Username';
   }
   if (!formProps.email) {
     errors.email = 'Please enter an email';
