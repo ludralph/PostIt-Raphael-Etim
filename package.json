@@ -71,7 +71,8 @@
     "url-loader": "^0.5.9",
     "css-loader": "^0.28.7",
     "node-sass": "^4.5.3",
-    "file-loader": "^1.1.5"
+    "file-loader": "^1.1.5",
+    "loader-runner": "^2.1.1"
   },
   "devDependencies": {
     "babel-preset-react": "^6.24.1",
@@ -85,7 +86,6 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "expect": "*",
-    "loader-runner": "^2.1.1",
     "mocha": "*",
     "mocha-loader": "*",
     "nodemon": "^1.12.0",
