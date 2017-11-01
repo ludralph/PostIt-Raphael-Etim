@@ -1,10 +1,9 @@
 
-<div>
+
 <a href="https://codeclimate.com/github/codeclimate/codeclimate"><img src="https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg" /></a>
 
 <a href="https://codeclimate.com/github/codeclimate/codeclimate/coverage"><img src="https://codeclimate.com/github/codeclimate/codeclimate/badges/coverage.svg" /></a>
 
-[![Coverage Status](https://coveralls.io/repos/github/ludralph/PostIt-Raphael-Etim/badge.svg?branch=develop)](https://coveralls.io/github/ludralph/PostIt-Raphael-Etim?branch=develop)
 # PostIt App
 
 ## Introduction 
