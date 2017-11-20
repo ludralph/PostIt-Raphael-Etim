@@ -2,41 +2,26 @@ import Sequelize from 'sequelize';
 import config from '../config/dbUrl.json';
 
 const sequelize = new Sequelize(config.url);
-const Group = sequelize.define('Groups', {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER
-  },
-  groupName: {
+const Group = sequelize.define('Group', {
+  name: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true
-  },
-  description: {
-    type: Sequelize.STRING
-  },
-  userId: {
-    type: Sequelize.INTEGER,
-    onDelete: 'CASCADE',
-    references: {
-      model: 'Users',
-      key: 'id',
-      as: 'userId'
+    unique: {
+      args: true,
+      msg: 'Group name already exists. Use another name'
     }
   }
 }, {
   classMethods: {
     associate: (models) => {
-      // associations can be defined here
-      Group.hasMany(models.UsersGroup, {
+      Group.belongsToMany(models.User, {
+        through: 'UserGroup',
         foreignKey: 'groupId',
-        as: 'groupId'
+        otherKey: 'userId',
+        constraints: false,
       });
-      Group.belongsTo(models.User, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE',
+      Group.hasMany(models.Message, {
+        foreignKey: 'groupId'
       });
     }
   }
