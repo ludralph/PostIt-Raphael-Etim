@@ -1,4 +1,5 @@
-import { Group, User } from '../models';
+import User from '../models/user';
+import Group from '../models/group';
 
 const groupController = {
   create(req, res) {
