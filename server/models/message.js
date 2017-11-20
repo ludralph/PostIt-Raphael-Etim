@@ -5,59 +5,44 @@ import config from '../config/dbUrl.json';
 const sequelize = new Sequelize(config.url);
 
 const Message = sequelize.define('Message', {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER
-  },
-  message: {
+  content: {
     type: Sequelize.TEXT,
     allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   },
   priority: {
-    type: Sequelize.STRING
-  },
-  userId: {
-    type: Sequelize.INTEGER,
-    onDelete: 'CASCADE',
-    references: {
-      model: 'Users',
-      key: 'id',
-      as: 'userId'
-    }
-  },
-  username: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 'Normal',
+    validate: {
+      isIn: {
+        args: [
+          ['Normal', 'Urgent', 'Critical']
+        ],
+        msg: 'Normal, Urgent or Critical Required'
+      }
+    }
   },
   groupId: {
     type: Sequelize.INTEGER,
-    onDelete: 'CASCADE',
-    references: {
-      model: 'Groups',
-      key: 'id',
-      as: 'groupId'
-    }
+    allowNull: false,
+  },
+  senderId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
   }
 }, {
   classMethods: {
     associate: (models) => {
-      // associations can be defined here
-      Message.belongsTo(models.User, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE',
-      });
       Message.belongsTo(models.Group, {
         foreignKey: 'groupId',
         onDelete: 'CASCADE',
       });
-    }
+      Message.belongsTo(models.User, {
+        foreignKey: 'senderId',
+        onDelete: 'CASCADE',
+      });
+    },
   }
 });
-
 export default Message;
 

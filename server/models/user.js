@@ -1,51 +1,71 @@
 import Sequelize from 'sequelize';
+import bcrypt from 'bcrypt';
 import config from '../config/dbUrl.json';
 
 const sequelize = new Sequelize(config.url);
-
 const User = sequelize.define('User', {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER
-  },
-  name: {
+  email: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: {
+      args: true,
+      msg: 'This email already exists'
+    },
+    validate: {
+      isEmail: {
+        args: true,
+        msg: 'This email address is invalid'
+      }
+    }
   },
   username: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true
-  },
-  email: {
-    type: Sequelize.STRING,
-    unique: true,
-    validate: {
-      isEmail: true
+    unique: {
+      args: true,
+      msg: 'This username already exists'
     }
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false
-  }
+    allowNull: false,
+  },
+  resetPasswordToken: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  resetPasswordExpires: {
+    type: Sequelize.DATE,
+    allowNull: true,
+  },
 }, {
   classMethods: {
     associate: (models) => {
-      // associations can be defined here
-      User.hasMany(models.Groups, {
+      User.belongsToMany(models.Group, {
+        through: 'UserGroup',
         foreignKey: 'userId',
-        as: 'userId'
-      });
-      User.belongsTo(models.UsersGroup, {
-        foreignKey: 'userId',
-        as: 'userId'
+        otherKey: 'groupId',
+        constraints: false,
       });
       User.hasMany(models.Message, {
-        foreignKey: 'userId',
-        as: 'userId'
+        foreignKey: 'senderId',
+        as: 'messages',
       });
+    }
+  },
+  instanceMethods: {
+    hashPassword() {
+      this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
+    }
+  },
+  hooks: {
+    beforeCreate(user) {
+      user.hashPassword();
+    },
+    beforeUpdate(user) {
+      if (user.changed('password')) {
+        user.hashPassword();
+      }
     }
   }
 });
