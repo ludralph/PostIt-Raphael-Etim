@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User } from '../models/user';
+import { User } from '../models';
 
 require('dotenv').config();
 
@@ -14,9 +14,10 @@ const authenticate = {
           });
         }
         req.decoded = decoded;
+        console.log("decoded ", req.decoded);
         User.findOne({
           where: {
-            id: decoded.user.id
+            id: req.decoded.id
           },
           attributes: {
             exclude: ['password', 'resetPasswordToken', 'resetPasswordExpires']

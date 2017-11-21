@@ -1,7 +1,8 @@
 import validator from 'validator';
 import { isEmpty, trim } from 'lodash';
-import User from '../models/user';
-import Group from '../models/group'
+import { User } from '../models';
+import { Group } from '../models';
+
 
 const checkValidity = (input) => {
   let error = '';
@@ -41,7 +42,6 @@ const validateInput = {
         message: error
       });
     }
-
     User.findOne({
       where: {
         username: req.body.username
