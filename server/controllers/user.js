@@ -1,8 +1,9 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import randomstring from 'randomstring';
-import User from '../models/user';
+import { User } from '../models';
 import Group from '../models/group';
+
 
 import {
   transporter, mailOptions, forgotPasswordMail,
@@ -21,19 +22,19 @@ const userController = {
       })
       .then((user) => {
         const token = jwt.sign({
-          user: { id: user.id, name: user.username, email: user.email }
-        }, process.env.SECRET, {
+          id: user.id, name: user.username, email: user.email
+        }, req.app.get('SECRET'), {
           expiresIn: '24h'
         });
-
         res.status(201).send({
           message: 'Signup Successful!',
           user: { id: user.id, name: user.username, email: user.email },
           token
         });
       })
-      .catch(() => res.status(500).send({
-        message: 'Internal Server Error'
+      .catch(error => res.status(500).send({
+        message: 'Internal Server Error',
+        error
       }));
   },
 

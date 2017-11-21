@@ -1,6 +1,6 @@
-import User from '../models/user';
-import Group from '../models/group';
-import Message from '../models/message';
+import { User } from '../models';
+import { Group } from '../models';
+import { Message } from '../models';
 import {
   transporter, mailOptions,
   msgPriorityMail
@@ -9,7 +9,7 @@ import {
 const messageController = {
   create(req, res) {
     const groupId = req.params.groupId;
-    const userId = req.decoded.user.id;
+    const userId = req.decoded.id;
     Group.findById(groupId).then((group) => {
       if (!group) {
         res.status(404).send({ message: 'Group Does Not Exist' });
