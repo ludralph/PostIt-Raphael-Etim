@@ -6,7 +6,8 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../webpack.config.dev';
-import routes from './routes/index';
+import index from './routes/index';
+import models from './models';
 
 env.config();
 const compiler = webpack(config);
@@ -21,6 +22,10 @@ app.use((req, res, next) => {
   next();
 });
 app.use(bodyParser.json());
+const secret = process.env.SECRET;
+console.log(secret, '_+_+');
+app.set('SECRET', secret);
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(webpackMiddleware(compiler, {
   hot: true,
@@ -28,11 +33,14 @@ app.use(webpackMiddleware(compiler, {
   noInfo: true
 }));
 app.use(webpackHotMiddleware(compiler));
+app.use('/api', index);
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './index.html'));
 });
-app.use('/api/', routes);
-app.listen(port, () => {
-  console.log(`Listening at port ${port}`);
+
+models.sequelize.sync().then(() => {
+  app.listen(port, () => {
+    console.log(`Listening at port ${port}`);
+  });
 });
 export default app;
