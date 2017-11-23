@@ -1,0 +1,27 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "postit",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dialect": "postgres"
+  },
+  "local": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "slack",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "dialect": "postgres",
+    "logging": false
+  },
+  "test": {
+    "use_env_variable": "TEST_DB",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres"
+  }
+}
