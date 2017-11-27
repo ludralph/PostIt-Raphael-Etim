@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';
 import dotenv from 'dotenv';
-import * as DbConfig from '../config/config.json';
+import * as DbConfig from '../config/config';
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ const db = {};
 // Configure Sequelize
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], { logging: false });
+  sequelize = new Sequelize(process.env[config.url], { logging: false });
 } else {
   sequelize = new Sequelize(config.database, config.username,
     config.password, {
