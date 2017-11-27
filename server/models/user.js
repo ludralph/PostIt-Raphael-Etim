@@ -1,53 +1,73 @@
-import Sequelize from 'sequelize';
-import config from '../config/dbUrl.json';
+import bcrypt from 'bcrypt';
 
-const sequelize = new Sequelize(config.url);
 
-const User = sequelize.define('User', {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER
-  },
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  username: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
-  },
-  email: {
-    type: Sequelize.STRING,
-    unique: true,
-    validate: {
-      isEmail: true
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: {
+        args: true,
+        msg: 'This email already exists'
+      },
+      validate: {
+        isEmail: {
+          args: true,
+          msg: 'This email address is invalid'
+        }
+      }
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: {
+        args: true,
+        msg: 'This username already exists'
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    resetPasswordToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    resetPasswordExpires: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+  }, {
+    classMethods: {
+      associate: (models) => {
+        User.belongsToMany(models.Group, {
+          through: 'UserGroup',
+          foreignKey: 'userId',
+          otherKey: 'groupId',
+          constraints: false,
+        });
+        User.hasMany(models.Message, {
+          foreignKey: 'senderId',
+          as: 'messages',
+        });
+      }
+    },
+    instanceMethods: {
+      hashPassword() {
+        this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
+      }
+    },
+    hooks: {
+      beforeCreate(user) {
+        user.hashPassword();
+      },
+      beforeUpdate(user) {
+        if (user.changed('password')) {
+          user.hashPassword();
+        }
+      }
     }
-  },
-  password: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
-}, {
-  classMethods: {
-    associate: (models) => {
-      // associations can be defined here
-      User.hasMany(models.Groups, {
-        foreignKey: 'userId',
-        as: 'userId'
-      });
-      User.belongsTo(models.UsersGroup, {
-        foreignKey: 'userId',
-        as: 'userId'
-      });
-      User.hasMany(models.Message, {
-        foreignKey: 'userId',
-        as: 'userId'
-      });
-    }
-  }
-});
+  });
+  return User;
+};
 
-export default User;

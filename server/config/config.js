@@ -1,21 +1,24 @@
-import env from 'dotenv';
+const dotenv = require('dotenv');
 
-env.config();
+dotenv.config();
 
 const config = {
-  production: {
-    database: process.env.DB_URL_PRODUCTION,
+  development: {
+    url: process.env.DATABASE_URL,
+    dialect: 'postgres'
   },
   test: {
-    database: process.env.DB_URL_TEST
+    url: process.env.TEST_DATABASE_URL,
+    dialect: 'postgres',
+    logging: false
   },
-  default: {
-    database: process.env.DB_URL_DEVELOPMENT,
+  production: {
+    url: process.env.PRODUCTION_DATABASE_URL,
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: true
+    }
   }
 };
 
-function get(nodeEnv) {
-  return config[nodeEnv] || config.default;
-}
-
-module.exports = get;
+module.exports = config;
