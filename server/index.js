@@ -5,8 +5,8 @@ import path from 'path';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import config from '../webpack.config.dev';
-import index from './routes/index';
+import config from '../webpack.config';
+import routes from './routes/index';
 import models from './models';
 
 env.config();
@@ -33,9 +33,9 @@ app.use(webpackMiddleware(compiler, {
   noInfo: true
 }));
 app.use(webpackHotMiddleware(compiler));
-app.use('/api', index);
+app.use('/api/', routes);
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, './index.html'));
+  res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 models.sequelize.sync().then(() => {
