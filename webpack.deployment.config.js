@@ -45,6 +45,16 @@ module.exports = {
       }
     ]
   },
+  node: {
+    net: 'empty',
+    tls: 'empty',
+    dns: 'empty'
+  },
+  externals: {
+    // require("jquery") is external and available
+    //  on the global var jQuery
+    'jquery': 'jQuery'
+  },
   resolve: {
     extensions: ['.js', '.jsx']
   },
