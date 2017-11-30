@@ -1,77 +1,233 @@
-$bg-color:#333;
-$font-color:#fff;
-$primary-color:#008ed6;
-$dark-overlay: rgba(0,0,0,0.7);
-$icon-size:30px;
-$error-color:red;
+$primary-color: #FFFFFF;
+$font1: 'Roboto';
 
-body{
-  background:$bg-color;
-  color:$font-color;
+html {
+  
+  height: 100% !important;
+  box-sizing: border-box;
 }
 
-.navbar{
-  border-bottom:$primary-color 2px solid;
-  opacity:0.8;
+ body {
+  height: 100% !important;
 }
 
-#home-section{
-  background:url('../img/img2.jpg') no-repeat;
-  background-color: $primary-color;
-  background-size:cover;
-  background-attachment:fixed;
-  min-height:700px;
-  .dark-overlay{
-    background-color:$dark-overlay;
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    min-height:700px;
+.login {
+ min-height: 100% !important;
+ width:100% !important;
+ position: absolute;
+}
+
+.login-form {
+  margin-top: 6%;
+}
+
+.message-board {
+  height: 100% !important;
+} 
+
+.logo {
+  font-family: $font1;
+  color: $primary-color;
+  padding: 10px;
+  // border-radius: 5px 20px 5px;
+
+}
+
+.top-space {
+  padding-top: 3%;
+}
+
+.link {
+  padding:10px;
+}
+
+.nav-wrap {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.side-nav-bar {
+  top:64px !important;
+}
+
+.tabcontent {
+  padding: 5px 20px;
+  height: 100% !important;
+}
+.single-msg {
+  padding:5px;
+  border-bottom:1px solid #ddd;
+}
+.msg-wrap {
+  padding:10px;
+  height:calc(100vh - 315px) !important;
+  overflow: auto;
+  border: 3px groove #69B5AE;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.msg {
+  position: relative;
+}
+
+.msg-heading {
+  color:#e53935;
+  font-weight: 700;
+  font-size:1.3rem;
+}
+
+.time {
+  color:#bfbfbf;
+}
+
+textarea {
+  height:4rem !important;
+  padding:5px !important;
+  resize: none;
+}
+
+.send-msg {
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  margin-bottom: 0px;
+}
+
+.send-msg button {
+  margin:10px 30px 5px;
+}
+
+.priority {
+  margin-top:0.5rem !important;
+}  
+
+ .select-wrapper input.select-dropdown {
+  margin: 0 !important;
+} 
+
+.modal {
+  max-height:70%;
+  padding: 15px;
+}
+
+.errors {
+  margin-left: 40px;
+}
+
+ .input-field select {
+  position:relative;
+  width:100%;
+  height:40px;
+  opacity:1;
+  pointer-events: auto;
+} 
+
+.search {
+  margin-bottom: 5px;
+}
+
+input[type=search]:not(.browser-default) {
+  border-bottom: none !important;
+  margin: 0px !important;
+  padding: 3px !important;
+}
+
+.search-icon {
+  margin-top:10px;
+}
+
+.pagination {
+  margin-bottom: -1px;
+}
+
+.search-btn {
+  background: $primary-color !important;
+  color: #000 !important;
+  width: 100% !important;
+  padding: 0px !important;
+  box-shadow: none !important;
+}
+
+.search-btn i {
+  font-size: 24px !important;
+}
+
+.search-btn:hover {
+  background-color: #f4f4f4 !important;
+}
+
+.search-btn:focus {
+  background-color: $primary-color !important;
+} 
+
+.no-user {
+  margin-top: 50px;
+}
+
+.group-members {
+  ul {
+  max-height:500px;
+  overflow: auto;
   }
 
-  .home-inner{
-    padding-top:100px;
-  }
-
-  .card-form{
-    opacity:1;
-    color: $bg-color;
-  }
-
-  .fa{
-    color:$primary-color;
-    background:#fff;
-    padding:4px;
-    border-radius:5px;
-    font-size:$icon-size;
+  h5 {
+    margin-top: 10%;
   }
 }
 
-// #explore-section, #share-section{
-//   .fa{
-//     color:#fff;
-//     background:#333;
-//     padding:4px;
-//     border-radius:5px;
-//     font-size:$icon-size;
-//   }
-// }
-
-// #create-section{
-//   .fa{
-//     color:$primary-color;
-//     background:#fff;
-//     padding:4px;
-//     border-radius:5px;
-//     font-size:$icon-size;
-//   }
-//   
-// }
-
-.error{
-    color: $error-color;
+.group-action {
+  margin: 15px 20px 0px 0px;
 }
-.form-text{
-  color:$bg-color;
- }
+
+.fgt-pwd {
+  padding: 2% 14%;
+
+  form {
+    margin-top:20px;
+    padding:20px;
+  }
+
+  .success {
+    border-radius:10px;
+    padding: 10px;
+  }
+}
+
+.nav-row {
+  margin-bottom: 0px !important;
+  h5 {
+    margin-top: 17px !important;
+  }
+}
+
+.preloader-wrapper.active {
+  height: 150px;
+  width: 150px;
+  margin: 10% 35%; 
+}
+
+.welcome-page {
+  position: absolute;
+  padding: 10% 0% 0% 5%;
+  color: #325a56;
+}
+
+
+
+@media only screen and (max-width: 500px) {
+  .send-msg button {
+      padding: 0px;
+      margin:10px 0px 5px -15px;
+  }  
+}
+
+@media only screen and (max-width: 1140px) and (min-width: 993px) {
+  .search-user {
+    padding-left: 5vw !important;
+  }
+
+  .msg{
+    @extend .search-user
+  }
+}
