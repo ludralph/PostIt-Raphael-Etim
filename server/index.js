@@ -13,8 +13,6 @@ env.config();
 const compiler = webpack(config);
 const app = express();
 const port = process.env.PORT || 5000;
-
-
 // Middlewares used
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -23,7 +21,6 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 const secret = process.env.SECRET;
-console.log(secret, '_+_+');
 app.set('SECRET', secret);
 
 app.use(bodyParser.urlencoded({ extended: false }));
