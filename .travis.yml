@@ -14,6 +14,7 @@ services:
   - postgresql
 before_script:
   - createdb postit-test --username=postgres
+  
 after_success:
   - npm run coveralls
 env:
