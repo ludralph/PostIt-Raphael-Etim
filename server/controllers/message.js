@@ -9,7 +9,9 @@ import {
 const messageController = {
   create(req, res) {
     const groupId = req.params.groupId;
-    const userId = req.decoded.id;
+    console.log(req.decoded.user.id);
+    console.log(req);
+    const userId = req.decoded.user.id;
     Group.findById(groupId).then((group) => {
       if (!group) {
         res.status(404).send({ message: 'Group Does Not Exist' });
@@ -30,7 +32,7 @@ const messageController = {
               .then((msg) => {
                 const message = {
                   ...msg.dataValues,
-                  User: { username: req.userDetails.username }
+                  user: { name: req.decoded.user.name }
                 };
                 if (priority === 'Urgent' || priority === 'Critical') {
                   group.getUsers().then((users) => {
@@ -42,7 +44,7 @@ const messageController = {
                     const bcc = memberEmails;
                     const subject =
                       `${msg.priority} message from Group: ${group.name}`;
-                    const username = req.userDetails.username;
+                    const username = req.decoded.user.name;
                     if (bcc.length > 0) {
                       transporter.sendMail(mailOptions(to, bcc, subject,
                         msgPriorityMail(
