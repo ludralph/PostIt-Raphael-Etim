@@ -1,14 +1,24 @@
 language: node_js
 node_js:
-  - node
+  - "stable"
+branches:
+  only:
+    - /.*/
 install:
   - npm install
-script: 
+script:
   - npm test
+cache:
+  -npm install
+services:
+  - postgresql
+before_script:
+  - createdb postit-test --username=postgres
+  - npm run migrate
 after_success:
-  - codeclimate < ./coverage/lcov.info
-addons:
-  code_climate:
-    repo_token:
-      secure:93a4f79ded506e40b55a56d4bcb6acc992ae4555d145608d01fe52ce4da9931e
-      
+  - npm run coveralls
+env:
+  global:
+    - SECRET=play123
+    - DB_USER=postgres
+    - NODE_ENV=test
