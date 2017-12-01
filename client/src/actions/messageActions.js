@@ -42,7 +42,9 @@ const getMessages = groupId => (dispatch) => {
 const postMessage = (id, message) => dispatch => axios
   .post(`/api/group/${id}/message`, message)
   .then((response) => {
+    console.log("++++++ ", id);
     dispatch(postMessageSuccess(response.data.message));
+    dispatch(getMessages());
   })
   .catch((error) => {
     dispatch(postMessageFailure());

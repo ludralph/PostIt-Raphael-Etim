@@ -223,32 +223,33 @@ const userController = {
 
   listGroups(req, res) {
     const userId = req.params.userId;
-    User.findOne({
-      where: { id: userId },
-      attributes: [],
-      include: [{
-        model: Group,
-        through: { attributes: [] }
-      }]
-    })
-      .then((user) => {
-        if (!user) {
-          res.status(404).send({
-            message: 'User Does Not Exist'
-          });
-        } else {
-          if (user.Groups.length === 0) {
-            return res.status(404).send({
-              message: 'You don\'t belong to any group.'
-            });
-          }
-          res.status(200).send(user.Groups);
-        }
-      })
-      .catch(() => res.status(500).send({
-        message: 'Internal Server Error'
-      }));
+    User.findById(userId).then((user) => {
+      user.getGroups().then((userGroups) => {
+        res.status(200).send({ userGroups });
+      });
+    });
   }
 };
+  //     .then((user) => {
+  //       console.log(user);
+  //       if (!user) {
+  //         res.status(404).send({
+  //           message: 'User Does Not Exist'
+  //         });
+  //       } else {
+  //         console.log(user);
+  //         if (user.Groups.length === 0) {
+  //           return res.status(404).send({
+  //             message: 'You don\'t belong to any group.'
+  //           });
+  //         }
+  //         res.status(200).send(user.Groups);
+  //       }
+  //     })
+  //     .catch(() => res.status(500).send({
+  //       message: 'Internal Server Error'
+  //     }));
+  // }
+
 
 export default userController;

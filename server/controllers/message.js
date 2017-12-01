@@ -32,7 +32,7 @@ const messageController = {
               .then((msg) => {
                 const message = {
                   ...msg.dataValues,
-                  user: { name: req.decoded.user.name }
+                  sender: { name: req.decoded.user.name }
                 };
                 if (priority === 'Urgent' || priority === 'Critical') {
                   group.getUsers().then((users) => {
