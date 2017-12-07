@@ -12,7 +12,7 @@ const groupController = {
           name: groupName,
         })
         .then((group) => {
-          const user = req.decoded.user.id;
+          const user = req.decoded.id;
           group.addUser(user).then(() => {
             res.status(201).send({
               message: 'Group Created Successfully',
@@ -31,7 +31,7 @@ const groupController = {
 
   edit(req, res) {
     const groupId = req.params.groupId;
-    const userId = req.decoded.user.id;
+    const userId = req.decoded.id;
     const groupName = req.body.name;
 
     if (!groupName || groupName.trim().length === 0) {
