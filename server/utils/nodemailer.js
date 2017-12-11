@@ -2,16 +2,20 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const transporter = nodemailer.createTransport({
-  service: 'Gmail',
+  service: 'gmail',
   secure: false,
+  port: 25,
   auth: {
     user: process.env.EMAIL_ADDRESS,
     pass: process.env.EMAIL_PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 });
 
 const mailOptions = (to, bcc, subject, html) => ({
-  from: '"PostIt" <postitapp.ralph@gmail.com>',
+  from: ' PostIt <postitapp.ralph@gmail.com>',
   to,
   bcc,
   subject,

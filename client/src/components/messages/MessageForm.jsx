@@ -41,12 +41,10 @@ export class MessageForm extends React.Component {
       priority: this.state.priority
     }
     this.props.postMessage(id, message)
-      .then(() => {
-        this.setState({
-          content: '',
-          priority: ''
-        });
-      });
+    this.setState({
+      content: '',
+      priority: ''
+    });
   }
 
   render() {

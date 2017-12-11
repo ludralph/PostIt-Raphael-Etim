@@ -10,7 +10,8 @@ export class WelcomePage extends React.Component {
 
   render() {
     const { currentUser } = this.props;
-    const groupNo = this.props.groups.length;
+    const groupNo =  this.props.groups.length;
+
     return (
       <div className="white col s12 m12 l9">
         <div className="welcome-page">
