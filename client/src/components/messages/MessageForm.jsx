@@ -81,7 +81,7 @@ export class MessageForm extends React.Component {
 
         <div className="col s4 m6 l4">
           <Button
-            className="btn waves-effect waves-light red darken-1"
+            className="btn waves-effect waves-light blue darken-2"
             onClick={this.handleSubmit}
             disabled={!this.isValid()}
             text="send"
