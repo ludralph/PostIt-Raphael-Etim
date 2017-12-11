@@ -1,10 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import randomstring from 'randomstring';
-import { User } from '../models';
-import Group from '../models/group';
-
-
+import { User, Group } from '../models';
 import {
   transporter, mailOptions, forgotPasswordMail,
   resetPasswordMail
@@ -13,6 +10,13 @@ import {
 require('dotenv').config();
 
 const userController = {
+  /**
+   * Creates a new user
+   * ROUTE: POST: /api/user/signup
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} contains auth token and details of the newly created user
+   */
   signup(req, res) {
     return User
       .create({
@@ -22,22 +26,29 @@ const userController = {
       })
       .then((user) => {
         const token = jwt.sign({
-          id: user.id, name: user.username, email: user.email
-        }, req.app.get('SECRET'), {
+          user: { id: user.id, name: user.username, email: user.email }
+        }, process.env.SECRET, {
           expiresIn: '24h'
         });
+
         res.status(201).send({
           message: 'Signup Successful!',
           user: { id: user.id, name: user.username, email: user.email },
           token
         });
       })
-      .catch(error => res.status(500).send({
-        message: 'Internal Server Error',
-        error
+      .catch(() => res.status(500).send({
+        message: 'Internal Server Error'
       }));
   },
 
+  /**
+   * Authenticates and logs in a user
+   * ROUTE: POST: /api/user/signin
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} contains auth token and details of the user
+   */
   signin(req, res) {
     if (!req.body.username || !req.body.password) {
       return res.status(401).send({
@@ -74,6 +85,14 @@ const userController = {
       }));
   },
 
+  /**
+   * Generates a reset password token for users
+   * that have forgotten their password
+   * ROUTE: PUT: /api/user/forgotpassword
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} message object stating if user has been sent an email
+   */
   forgotPassword(req, res) {
     const passwordToken = randomstring.generate(50);
     User.findOne({
@@ -92,16 +111,17 @@ const userController = {
           .then(() => {
             const to = user.email;
             const bcc = null;
-            const subject = 'Password Reset from PostIt';
+            const subject = 'PostIT Password Reset';
             transporter.sendMail(mailOptions(to, bcc, subject,
               forgotPasswordMail(req.headers.host, passwordToken)))
               .then(() => {
                 res.status(200).send({
-                  message: 'An email has been sent to ' + user.email +
-                    ' with further instructions.'
+                  message: `An email has been sent to ${user.email
+                  } with further instructions.`
                 });
               })
-              .catch(() => {
+              .catch((err) => {
+                console.log('Error sending mail...', err);
                 res.status(500).send({
                   message: 'An error occured. Please try again.'
                 });
@@ -117,6 +137,13 @@ const userController = {
       }));
   },
 
+  /**
+   * Resets a user's password
+   * ROUTE: PUT: /api/user/resetpassword/:token
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} message object stating if password reset was successful
+   */
   resetPassword(req, res) {
     const passwordToken = req.params.token;
     if (!req.body.password) {
@@ -168,6 +195,13 @@ const userController = {
     }
   },
 
+  /**
+   * Searches for users that match the specified search query
+   * ROUTE: GET: /api/search/users
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} contains search results
+   */
   searchUser(req, res) {
     const limit = req.query.limit || null;
     const offset = req.query.offset || null;
@@ -221,35 +255,41 @@ const userController = {
     });
   },
 
+  /**
+   * Retrieves a list of group  a user belongs to
+   * ROUTE: GET: /api/user/:userId/groups
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {array} lsit of groups specified user belongs to
+   */
   listGroups(req, res) {
     const userId = req.params.userId;
-    User.findById(userId).then((user) => {
-      user.getGroups().then((userGroups) => {
-        res.status(200).send({ userGroups });
-      });
-    });
+    User.findOne({
+      where: { id: userId },
+      attributes: [],
+      include: [{
+        model: Group,
+        through: { attributes: [] }
+      }]
+    })
+      .then((user) => {
+        if (!user) {
+          res.status(404).send({
+            message: 'User Does Not Exist'
+          });
+        } else {
+          if (user.Groups.length === 0) {
+            return res.status(404).send({
+              message: 'You don\'t belong to any group.'
+            });
+          }
+          res.status(200).send(user.Groups);
+        }
+      })
+      .catch(() => res.status(500).send({
+        message: 'Internal Server Error'
+      }));
   }
 };
-  //     .then((user) => {
-  //       console.log(user);
-  //       if (!user) {
-  //         res.status(404).send({
-  //           message: 'User Does Not Exist'
-  //         });
-  //       } else {
-  //         console.log(user);
-  //         if (user.Groups.length === 0) {
-  //           return res.status(404).send({
-  //             message: 'You don\'t belong to any group.'
-  //           });
-  //         }
-  //         res.status(200).send(user.Groups);
-  //       }
-  //     })
-  //     .catch(() => res.status(500).send({
-  //       message: 'Internal Server Error'
-  //     }));
-  // }
-
 
 export default userController;

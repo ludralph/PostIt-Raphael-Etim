@@ -4,6 +4,7 @@ import Button from '../common/Button';
 import { Link } from 'react-router-dom'
 
 const MessagesList = ({ messages, edit, isLoading }) => {
+  console.log("My Messages=>", messages)
   const messageLength = messages.groupMessages.length;
   return (
     <div className="tabcontent s12">

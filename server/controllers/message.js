@@ -1,16 +1,19 @@
-import { User } from '../models';
-import { Group } from '../models';
-import { Message } from '../models';
+import { Group, Message, User } from '../models';
 import {
   transporter, mailOptions,
   msgPriorityMail
 } from '../utils/nodemailer';
 
 const messageController = {
+  /**
+   * Posts a new message to a group
+   * ROUTE: POST: /api/group/:groupId/message
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} contains details of the newly posted message
+   */
   create(req, res) {
     const groupId = req.params.groupId;
-    console.log(req.decoded.user.id);
-    console.log(req);
     const userId = req.decoded.user.id;
     Group.findById(groupId).then((group) => {
       if (!group) {
@@ -32,31 +35,28 @@ const messageController = {
               .then((msg) => {
                 const message = {
                   ...msg.dataValues,
-                  sender: { name: req.decoded.user.name }
+                  User: { username: req.decoded.user.name }
                 };
                 if (priority === 'Urgent' || priority === 'Critical') {
                   group.getUsers().then((users) => {
+                    console.log("USERS ++++==>>",users);
                     const groupMembers =
                       users.filter(user => user.id !== userId);
                     const memberEmails =
                       groupMembers.map(user => user.email);
-                    const to = null;
+                    const to = req.decoded.user.email;
                     const bcc = memberEmails;
                     const subject =
                       `${msg.priority} message from Group: ${group.name}`;
                     const username = req.decoded.user.name;
+                    ;
                     if (bcc.length > 0) {
                       transporter.sendMail(mailOptions(to, bcc, subject,
                         msgPriorityMail(
                           username, group.name, req.headers.host)
                       )).then(() => {
                         res.status(201).send({ message });
-                      }).catch(() => {
-                        res.status(400).send({
-                          message:
-                          'A network error occured. Please try again.'
-                        });
-                      });
+                      }).catch((err) => console.log(err));
                     } else {
                       res.status(201).send({ message });
                     }
@@ -80,6 +80,13 @@ const messageController = {
       }));
   },
 
+  /**
+   * Retrieves messages from a specified group
+   * ROUTE: GET: /api/group/:groupId/messages
+   * @param {object} req - request object
+   * @param {object} res -r esponse object
+   * @returns {array} contains messages retrieved from a group
+   */
   list(req, res) {
     const groupId = req.params.groupId;
     const userId = req.decoded.user.id;

@@ -66,7 +66,7 @@ export class ForgotPassword extends React.Component {
             />
             <div className="row  center-align">
               <Button
-                className="btn waves-effect waves-light red lighten-2"
+                className="btn waves-effect waves-light blue darken-2"
                 onClick={this.handleSubmit}
                 text="SEND INSTRUCTIONS"
                 disabled={(!this.isValid()) || this.props.isLoading > 0}

@@ -41,6 +41,8 @@ const editGroupOff = () => ({
 const getUserGroups = user => dispatch => axios
   .get(`/api/user/${user}/groups`)
   .then((response) => {
+    console.log('User Id=>', user)
+    console.log('RESPONSE ID=>', response)
     dispatch(getUserGroupsSuccess(response.data));
   })
   .catch(() => {
