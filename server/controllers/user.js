@@ -12,7 +12,7 @@ require('dotenv').config();
 const userController = {
   /**
    * Creates a new user
-   * ROUTE: POST: /api/user/signup
+   * ROUTE: POST: /api/signup
    * @param {object} req - request object
    * @param {object} res - response object
    * @returns {object} contains auth token and details of the newly created user
@@ -44,7 +44,7 @@ const userController = {
 
   /**
    * Authenticates and logs in a user
-   * ROUTE: POST: /api/user/signin
+   * ROUTE: POST: /api/signin
    * @param {object} req - request object
    * @param {object} res - response object
    * @returns {object} contains auth token and details of the user
@@ -88,7 +88,7 @@ const userController = {
   /**
    * Generates a reset password token for users
    * that have forgotten their password
-   * ROUTE: PUT: /api/user/forgotpassword
+   * ROUTE: PUT: /api/forgotpassword
    * @param {object} req - request object
    * @param {object} res - response object
    * @returns {object} message object stating if user has been sent an email
@@ -120,8 +120,7 @@ const userController = {
                   } with further instructions.`
                 });
               })
-              .catch((err) => {
-                console.log('Error sending mail...', err);
+              .catch(() => {
                 res.status(500).send({
                   message: 'An error occured. Please try again.'
                 });
@@ -139,7 +138,7 @@ const userController = {
 
   /**
    * Resets a user's password
-   * ROUTE: PUT: /api/user/resetpassword/:token
+   * ROUTE: PUT: /api/resetpassword/:token
    * @param {object} req - request object
    * @param {object} res - response object
    * @returns {object} message object stating if password reset was successful

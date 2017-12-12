@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch server --exec babel-node -- server/index.js",
-    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" &&  mocha --compilers js:babel-register server/test/**/*.test.js",
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" &&  mocha timeout 15000 --compilers js:babel-register server/test/**/*.test.js",
     "build": "webpack --config ./webpack.deployment.config.js --progress --colors",
     "dev": "nodemon --watch server --exec babel-node -- server/index.js",
     "prod:start": "export NODE_ENV=production || SET \"NODE_ENV=production\" && npm start",
