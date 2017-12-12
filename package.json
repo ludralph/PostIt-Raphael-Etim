@@ -18,7 +18,9 @@
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
     "lint": "esw server",
     "webpack": "webpack",
-    "heroku-postbuild": "webpack --config ./webpack.deployment.config.js --progress --colors"
+    "heroku-postbuild": "webpack --config ./webpack.deployment.config.js --progress --colors",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "keywords": [],
   "author": "",
