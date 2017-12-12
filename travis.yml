@@ -2,8 +2,10 @@ language: node_js
 node_js:
   - "iojs"
   - "6"
+ services:
+  - postgresql 
   before_script:
-  - npm install 
+  - psql -c 'create database travis_ci_test;' -U postgres
 script: 
   - npm install
   - npm run test
