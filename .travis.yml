@@ -13,7 +13,7 @@ cache:
 services:
   - postgresql
 before_script:
-  - createdb postit-test --username=postgres
+  - psql -c 'create database postit;' -U postgres
   
 after_success:
   - npm run coveralls
