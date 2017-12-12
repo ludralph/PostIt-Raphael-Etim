@@ -21,5 +21,5 @@ after_success:
 env:
   global:
     - SECRET=play123
-    - DB_USER=andeladeveloper
+    - DATABASE_USER=andeladeveloper
     - NODE_ENV=test
