@@ -5,7 +5,7 @@ node_js:
  services:
   - postgresql 
   before_script:
-  - psql -c "CREATE DATABASE andeladeveloper;" -U postgres
+  - psql -c "CREATE DATABASE andeladeveloper_test;" -U postgres
   - psql -c "CREATE USER andeladeveloper WITH PASSWORD 'postgres';" -U postgres
 script: 
   - npm install
