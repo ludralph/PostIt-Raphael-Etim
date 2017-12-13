@@ -3,7 +3,11 @@ import request from 'supertest';
 import app from '../../../server';
 import { insertSeedData, user1token, user2token } from '../helpers/seedData';
 
-
+describe('To do before running test', () => {
+  before((done) => {
+    insertSeedData();
+    done();
+  });
 
   describe('CREATE GROUP API - /api/group', () => {
     it('should allow registered user create a new group', (done) => {
@@ -20,7 +24,7 @@ import { insertSeedData, user1token, user2token } from '../helpers/seedData';
           expect(res.status).to.equal(201);
           expect(res.body).to.have.all.deep.keys('message', 'group');
           console.log("RES BODY",res.body);
-          expect(res.body.group.id).to.equal(4);
+          expect(res.body.group.id).to.equal(5);
           expect(res.body.group.name).to.equal('Awesome Rockstars');
           expect(res.body.message).to.equal('Group Created Successfully');
           done();
@@ -84,7 +88,7 @@ import { insertSeedData, user1token, user2token } from '../helpers/seedData';
   describe('EDIT GROUP NAME API - /api/group/:groupId', () => {
     it('should allow group name be changed', (done) => {
       request(app)
-        .put('/api/group/4')
+        .put('/api/group/5')
         .set('authorization', user1token)
         .send({
           name: 'Ravenclaw',
@@ -207,7 +211,7 @@ import { insertSeedData, user1token, user2token } from '../helpers/seedData';
   describe('ADD USER TO GROUP API - /api/group/:groupId/user', () => {
     it('should allow registered user in a group add another registered user to group', (done) => {
       request(app)
-        .post('/api/group/4/user')
+        .post('/api/group/5/user')
         .set('authorization', user1token)
         .send({
           userId: 4,
@@ -235,7 +239,7 @@ import { insertSeedData, user1token, user2token } from '../helpers/seedData';
 
     it('should not allow adding unregistered user to a group', (done) => {
       request(app)
-        .post('/api/group/4/user')
+        .post('/api/group/5/user')
         .set('authorization', user1token)
         .send({
           userId: 54,
@@ -249,7 +253,7 @@ import { insertSeedData, user1token, user2token } from '../helpers/seedData';
 
     it('should not allow a user to be added twice in a group', (done) => {
       request(app)
-        .post('/api/group/4/user')
+        .post('/api/group/5/user')
         .set('authorization', user1token)
         .send({
           userId: 4
@@ -265,7 +269,7 @@ import { insertSeedData, user1token, user2token } from '../helpers/seedData';
   describe('LIST GROUP\'S USERS API - /api/group/:groupId/users', () => {
     it('should list users of a group that exists', (done) => {
       request(app)
-        .get('/api/group/4/users')
+        .get('/api/group/5/users')
         .set('authorization', user1token)
         .end((err, res) => {
           expect(res.status).to.equal(200);
@@ -287,3 +291,4 @@ import { insertSeedData, user1token, user2token } from '../helpers/seedData';
         });
     });
   });
+});
