@@ -1,12 +1,16 @@
 import { expect } from 'chai';
 import request from 'supertest';
 import app from '../../../server';
+import db from '../../models';
 import { insertSeedData, user1token, user2token } from '../helpers/seedData';
 
 describe('To do before running test', () => {
   before((done) => {
-    insertSeedData();
-    done();
+    db.sequelize.sync({ force: true })
+    .then(() => {
+      insertSeedData();
+      done();
+    });
   });
 
   describe('CREATE GROUP API - /api/group', () => {
@@ -24,7 +28,7 @@ describe('To do before running test', () => {
           expect(res.status).to.equal(201);
           expect(res.body).to.have.all.deep.keys('message', 'group');
           console.log("RES BODY",res.body);
-          expect(res.body.group.id).to.equal(5);
+          expect(res.body.group.id).to.equal(2);
           expect(res.body.group.name).to.equal('Awesome Rockstars');
           expect(res.body.message).to.equal('Group Created Successfully');
           done();
@@ -88,7 +92,7 @@ describe('To do before running test', () => {
   describe('EDIT GROUP NAME API - /api/group/:groupId', () => {
     it('should allow group name be changed', (done) => {
       request(app)
-        .put('/api/group/5')
+        .put('/api/group/2')
         .set('authorization', user1token)
         .send({
           name: 'Ravenclaw',
@@ -211,7 +215,7 @@ describe('To do before running test', () => {
   describe('ADD USER TO GROUP API - /api/group/:groupId/user', () => {
     it('should allow registered user in a group add another registered user to group', (done) => {
       request(app)
-        .post('/api/group/5/user')
+        .post('/api/group/2/user')
         .set('authorization', user1token)
         .send({
           userId: 4,
@@ -239,7 +243,7 @@ describe('To do before running test', () => {
 
     it('should not allow adding unregistered user to a group', (done) => {
       request(app)
-        .post('/api/group/5/user')
+        .post('/api/group/2/user')
         .set('authorization', user1token)
         .send({
           userId: 54,
@@ -253,7 +257,7 @@ describe('To do before running test', () => {
 
     it('should not allow a user to be added twice in a group', (done) => {
       request(app)
-        .post('/api/group/5/user')
+        .post('/api/group/2/user')
         .set('authorization', user1token)
         .send({
           userId: 4
@@ -269,7 +273,7 @@ describe('To do before running test', () => {
   describe('LIST GROUP\'S USERS API - /api/group/:groupId/users', () => {
     it('should list users of a group that exists', (done) => {
       request(app)
-        .get('/api/group/5/users')
+        .get('/api/group/2/users')
         .set('authorization', user1token)
         .end((err, res) => {
           expect(res.status).to.equal(200);

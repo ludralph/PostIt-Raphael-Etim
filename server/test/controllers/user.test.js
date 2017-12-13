@@ -294,7 +294,7 @@ describe('SEARCH USER API - /api/search/users', () => {
         expect(res.body).to.have.all.deep.keys('users', 'pagination');
         expect(res.body.users).to.be.an('array');
         expect(res.body.users[0].username).to.equal('ludralph');
-        expect(res.body.pagination).to.deep.include({ page: 1, pageCount: 1, pageSize: 2, totalCount: 2 });
+        expect(res.body.pagination).to.deep.include({ page: 1, pageCount: 1, pageSize: 1, totalCount: 1 });
         done();
       });
   });
