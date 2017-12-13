@@ -1,8 +1,9 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import { user1token, user2token } from '../helpers/seedData';
+import { user1token, user2token, insertSeedData } from '../helpers/seedData';
 import app from '../../../server';
 import { transporter } from '../../../server/utils/nodemailer';
+
 
 describe('POST MESSAGE TO GROUP API - api/group/:groupId/message', () => {
   it('should allow user post normal message to a group', (done) => {
@@ -17,6 +18,7 @@ describe('POST MESSAGE TO GROUP API - api/group/:groupId/message', () => {
         expect(res.status).to.equal(201);
         expect(res.body).to.be.an('object');
         expect(res.body.message.id).to.equal(1);
+        console.log("RES MESSAGE", res.body);
         expect(res.body.message.groupId).to.equal(2);
         expect(res.body.message.content).to.equal('My first message with normal priority');
         expect(res.body.message.priority).to.equal('Normal');
@@ -26,7 +28,7 @@ describe('POST MESSAGE TO GROUP API - api/group/:groupId/message', () => {
 
   it('should not post message if priority is not Normal, Urgent or Critical', (done) => {
     request(app)
-      .post('/api/group/2/message')
+      .post('/api/group/4/message')
       .set('authorization', user1token)
       .send({
         content: 'Lorem Ipsum sample test',
@@ -68,8 +70,8 @@ describe('POST MESSAGE TO GROUP API - api/group/:groupId/message', () => {
         priority: 'Critical'
       })
       .end((err, res) => {
-        expect(res.status).to.equal(400);
-        expect(res.body.message).to.equal('A network error occured. Please try again.');
+        expect(res.status).to.equal(500);
+        expect(res.body.message).to.equal('Internal Server Error');
         done();
       });
   });
@@ -108,7 +110,7 @@ describe('POST MESSAGE TO GROUP API - api/group/:groupId/message', () => {
 
   it('should not allow user not in the group to post message', (done) => {
     request(app)
-      .post('/api/group/1/message')
+      .post('/api/group/2/message')
       .set('authorization', user2token)
       .send({
         content: 'Message from user not in this group',
@@ -138,7 +140,7 @@ describe('GET MESSAGES FROM GROUP API - /api/group/:groupId/messages', () => {
 
   it('should not allow user not in group to get messages', (done) => {
     request(app)
-      .get('/api/group/1/messages')
+      .get('/api/group/2/messages')
       .set('authorization', user2token)
       .end((err, res) => {
         expect(res.status).to.equal(403);

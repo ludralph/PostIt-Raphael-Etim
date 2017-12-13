@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch server --exec babel-node -- server/index.js",
-    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" &&  mocha --compilers js:babel-register server/test/**/*.test.js",
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && nyc --reporter=html --reporter=text mocha timeout 15000 --compilers js:babel-register server/test/**/*.test.js",
     "build": "webpack --config ./webpack.deployment.config.js --progress --colors",
     "dev": "nodemon --watch server --exec babel-node -- server/index.js",
     "prod:start": "export NODE_ENV=production || SET \"NODE_ENV=production\" && npm start",
@@ -18,7 +18,9 @@
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
     "lint": "esw server",
     "webpack": "webpack",
-    "heroku-postbuild": "webpack --config ./webpack.deployment.config.js --progress --colors"
+    "heroku-postbuild": "webpack --config ./webpack.deployment.config.js --progress --colors",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "keywords": [],
   "author": "",
@@ -99,6 +101,7 @@
     "mocha": "*",
     "mocha-loader": "*",
     "nodemon": "^1.12.0",
+    "nyc": "^11.3.0",
     "react-hot-loader": "^1.3.1"
   }
 }

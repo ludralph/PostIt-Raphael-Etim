@@ -39,7 +39,6 @@ const messageController = {
                 };
                 if (priority === 'Urgent' || priority === 'Critical') {
                   group.getUsers().then((users) => {
-                    console.log("USERS ++++==>>",users);
                     const groupMembers =
                       users.filter(user => user.id !== userId);
                     const memberEmails =
@@ -56,7 +55,9 @@ const messageController = {
                           username, group.name, req.headers.host)
                       )).then(() => {
                         res.status(201).send({ message });
-                      }).catch((err) => console.log(err));
+                      }).catch(() => res.status(500).send({
+                        message: 'Internal Server Error'
+                      }));
                     } else {
                       res.status(201).send({ message });
                     }

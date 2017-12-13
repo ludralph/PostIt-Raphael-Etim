@@ -1,12 +1,16 @@
 import { expect } from 'chai';
 import request from 'supertest';
 import app from '../../../server';
+import db from '../../models';
 import { insertSeedData, user1token, user2token } from '../helpers/seedData';
 
 describe('To do before running test', () => {
   before((done) => {
-    insertSeedData();
-    done();
+    db.sequelize.sync({ force: true })
+    .then(() => {
+      insertSeedData();
+      done();
+    });
   });
 
   describe('CREATE GROUP API - /api/group', () => {
@@ -18,8 +22,12 @@ describe('To do before running test', () => {
           name: 'Awesome Rockstars',
         })
         .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
           expect(res.status).to.equal(201);
           expect(res.body).to.have.all.deep.keys('message', 'group');
+          console.log("RES BODY",res.body);
           expect(res.body.group.id).to.equal(2);
           expect(res.body.group.name).to.equal('Awesome Rockstars');
           expect(res.body.message).to.equal('Group Created Successfully');
@@ -52,14 +60,17 @@ describe('To do before running test', () => {
     });
 
     it('should add user creating the group to the group member\'s list', (done) => {
+      
+
       request(app)
-        .get('/api/group/2/users')
+        .get('/api/group/1/users')
         .set('authorization', user1token)
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body[0].email).to.equal('abigail@gmail.com');
-          expect(res.body[0].username).to.equal('abigail');
-          done();
+          console.log("RES BODY USER", res.body[0])
+          expect(res.body[0].email).to.equal('raphaelumoh@gmail.com');
+          expect(res.body[0].username).to.equal('raphael');
+          setTimeout(done, 8000);
         });
     });
 
@@ -90,14 +101,15 @@ describe('To do before running test', () => {
           expect(res.status).to.equal(200);
           expect(res.body).to.have.all.deep.keys('message', 'group');
           expect(res.body.group.name).to.equal('Ravenclaw');
-          expect(res.body.message).to.equal('Group updated sucessfully');
+          console.log("RES BODY", res.body.message);
+          expect(res.body.message).to.equal('Group updated successfully');
           done();
         });
     });
 
     it('should not allow group name be changed to a name that already exists', (done) => {
       request(app)
-        .put('/api/group/2')
+        .put('/api/group/1')
         .set('authorization', user1token)
         .send({
           name: 'Gryffindor',
@@ -111,7 +123,7 @@ describe('To do before running test', () => {
 
     it('should not allow unregistered user to change group name', (done) => {
       request(app)
-        .put('/api/group/2')
+        .put('/api/group/4')
         .set('Accept', 'application/json')
         .send({
           name: 'Imagine Dragons',
@@ -125,7 +137,7 @@ describe('To do before running test', () => {
 
     it('should ensure new name is provided for the group', (done) => {
       request(app)
-        .put('/api/group/2')
+        .put('/api/group/4')
         .set('authorization', user1token)
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -190,7 +202,7 @@ describe('To do before running test', () => {
 
     it('should not allow unregistered user to get group details', (done) => {
       request(app)
-        .get('/api/group/1')
+        .get('/api/group/5')
         .set('Accept', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(401);
@@ -266,7 +278,7 @@ describe('To do before running test', () => {
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body).to.be.an('array');
-          expect(res.body[0].email).to.equal('abigail@gmail.com');
+          expect(res.body[0].email).to.equal('raphaelumoh@gmail.com');
           expect(res.body[1].username).to.equal('recover2');
           done();
         });
