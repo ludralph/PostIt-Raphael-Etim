@@ -9,7 +9,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch server --exec babel-node -- server/index.js",
-    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && nyc --reporter=html --reporter=text mocha timeout 15000 --compilers js:babel-register server/test/**/*.test.js",
+    "test:server": "export NODE_ENV=test || SET \"NODE_ENV=test\" && nyc --reporter=html --reporter=text mocha timeout 15000 --compilers js:babel-register server/test/**/*.test.js",
+    "test:client": "jest /client",
     "build": "webpack --config ./webpack.deployment.config.js --progress --colors",
     "dev": "nodemon --watch server --exec babel-node -- server/index.js",
     "prod:start": "export NODE_ENV=production || SET \"NODE_ENV=production\" && npm start",
@@ -105,6 +106,7 @@
     "jest-localstorage-mock": "^2.1.0",
     "mocha": "*",
     "mocha-loader": "*",
+    "moxios": "^0.4.0",
     "nodemon": "^1.12.0",
     "nyc": "^11.3.0",
     "react-addons-test-utils": "^15.6.2",
