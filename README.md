@@ -45,17 +45,31 @@ To test out the endpoints, follow the following steps
 The app link for the hosted app on heroku is "https://postit-app-ralph.herokuapp.com/#/".
 
 ## How to contribute
-To contribute to the development of PostIt, Check out the [issues](https://github.com/ludralph/PostIt-Raphael-Etim/issues) page, and let us know in the comments.
+
+Contributions are welcome and appreciated
+
+- Fork this repository
+- Open a terminal and execute the following command to make a local copy $ git clone git@github.com:your-username/Postit-Raphael-Etim
+- Run cd Postit-Raphael-Etim to navigate into the folder
+- Make your contributions to your local repo
+- Add a connection to the original repo using $ git remote add repo_nickname git://github.com/ludralph/Postit-Raphael-Etim.git. Note: repo_nickname is a nickname you choose
+- Run git $ remote -v to verify that the connection is established
+- Make your contributions to your local copy of the project
+- Run $ git add filename git commit -m "commit message" to add and commit your contributions
+- Run $ git push origin proposed-feature-name to push your changes to your copy of the repository
+- If you feel you've made a contribution that will improve the project, raise a Pull Request against develop branch.
+- Be descriptive enough about your contributions so other contributors will understand what you've done
 
 Pull Requests should:
 
 - Contain code written in ES6 for Javascript files.
 - Lint and adhere to the [Airbnb javascript style guide](https://github.com/airbnb/javascript).
-- Pass existing tests, and tests you include for your contribution.
+- Ensure test cases are written for the feature being developed
 
-## Tests
-Test can be run on the terminal with the command  **npm test**
-If you discover a bug, please [create an issue](https://github.com/ludralph/PostIt-Raphael-Etim/issues/new)
+##License
+
+This project is available for use and modification under the ISC License. See the LICENSE file for more details.
+
 
 ## The DEV Team
 - Raphael Etim
