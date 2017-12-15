@@ -29,7 +29,7 @@ const TopNav = ({ logout }) => {
                     <Link to="/">Register</Link>
                   </li>
 		  <li>
-                    <a href="https://ludralph.github.io/slate/" target="_blank">API DOCS</Link>
+                    <a href="https://ludralph.github.io/slate/" target="_blank">API DOCS</a>
                   </li>
                 </div>
               )}
