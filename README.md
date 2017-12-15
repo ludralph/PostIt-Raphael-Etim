@@ -8,7 +8,7 @@ PostIt is a simple application that allows friends and colleagues create groups 
 
 
 ## API Documentation
-The documentation for the Postit API can be found here
+The documentation for the Postit API can be found here [PostIt API Docs](https://ludralph.github.io/slate/)
 
 ## Features
 
