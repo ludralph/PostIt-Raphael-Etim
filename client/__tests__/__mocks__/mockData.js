@@ -102,8 +102,8 @@ export default ({
         }
       ],
       currentUser: {
-        name: 'Mike',
-        email: 'mike@gmail.com'
+        name: 'Raphael',
+        email: 'raphaelumoh@gmail.com'
       }
     },
     resetPassword: {
