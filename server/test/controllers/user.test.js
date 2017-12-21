@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import request from 'supertest';
 import app from '../../../server';
-import { user1token } from '../helpers/seedData';
+import { firstUserToken } from '../helpers/seedData';
 import { transporter } from '../../../server/utils/nodemailer';
 
-describe('SIGNUP API - /api/signup', () => {
+describe('SIGNUP', () => {
   it('should create a new user and return a token if signup is successful', (done) => {
     request(app)
       .post('/api/signup')
@@ -117,7 +117,7 @@ describe('SIGNUP API - /api/signup', () => {
   });
 });
 
-describe('SIGNIN API - /api/signin', () => {
+describe('SIGNIN ', () => {
   it('should allow existing user to sign in and return a token', (done) => {
     request(app)
       .post('/api/signin')
@@ -181,7 +181,7 @@ describe('SIGNIN API - /api/signin', () => {
   });
 });
 
-describe('FORGET PASSWORD API -/api/forgotpassword', () => {
+describe('FORGOT PASSWORD ', () => {
   it('should send forgot password email if email address exists in the database', (done) => {
     transporter.sendMail = () => Promise.resolve(1);
     request(app)
@@ -227,7 +227,7 @@ describe('FORGET PASSWORD API -/api/forgotpassword', () => {
   });
 });
 
-describe('RESET PASSWORD API - /api/resetpassword/:token', () => {
+describe('RESET PASSWORD ', () => {
   it('should reset user password if password token is associated with a user id', (done) => {
     transporter.sendMail = () => Promise.resolve(1);
     request(app)
@@ -284,11 +284,11 @@ describe('RESET PASSWORD API - /api/resetpassword/:token', () => {
   });
 });
 
-describe('SEARCH USER API - /api/search/users', () => {
+describe('SEARCH USER', () => {
   it('should return array of users if any is found', (done) => {
     request(app)
       .get('/api/search/users?searchTerm=ra&group=1&limit=3&offset=0')
-      .set('authorization', user1token)
+      .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body).to.have.all.deep.keys('users', 'pagination');
@@ -302,7 +302,7 @@ describe('SEARCH USER API - /api/search/users', () => {
   it('should search even if limit and offset not included in query', (done) => {
     request(app)
       .get('/api/search/users?searchTerm=a&group=1')
-      .set('authorization', user1token)
+      .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body).to.have.all.deep.keys('users', 'pagination');
@@ -324,7 +324,7 @@ describe('SEARCH USER API - /api/search/users', () => {
   it('should not find any user if search query doesn\'t match any user', (done) => {
     request(app)
       .get('/api/search/users?q=blah&group=1&limit=1&offset=0')
-      .set('authorization', user1token)
+      .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(404);
         expect(res.body.message).to.equal('No users found');
@@ -335,7 +335,7 @@ describe('SEARCH USER API - /api/search/users', () => {
   it('should not search if group is not specified', (done) => {
     request(app)
       .get('/api/search/users?q=t&limit=1&offset=0')
-      .set('authorization', user1token)
+      .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(400);
         expect(res.body.message).to.equal('Group Not Specified');
@@ -344,11 +344,11 @@ describe('SEARCH USER API - /api/search/users', () => {
   });
 });
 
-describe('LIST USER\'S GROUPS API - /api/user/:userId/groups', () => {
+describe('LIST USER\'S GROUPS ', () => {
   it('should list group user belongs to', (done) => {
     request(app)
       .get('/api/user/1/groups')
-      .set('authorization', user1token)
+      .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body).to.be.an('array');
@@ -359,7 +359,7 @@ describe('LIST USER\'S GROUPS API - /api/user/:userId/groups', () => {
   it('should not list if user doesn\'t exist', (done) => {
     request(app)
       .get('/api/user/54/groups')
-      .set('authorization', user1token)
+      .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(404);
         expect(res.body.message).to.equal('User Does Not Exist');
@@ -370,7 +370,7 @@ describe('LIST USER\'S GROUPS API - /api/user/:userId/groups', () => {
   it('should return 404 if user does not belong to any group', (done) => {
     request(app)
       .get('/api/user/3/groups')
-      .set('authorization', user1token)
+      .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(404);
         expect(res.body.message).to.equal('You don\'t belong to any group.');

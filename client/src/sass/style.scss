@@ -29,8 +29,17 @@ html {
   font-family: $font1;
   color: $primary-color;
   padding: 10px;
-  // border-radius: 5px 20px 5px;
 
+}
+
+.msg-wrap{
+  padding:10px;
+  height:calc(100vh - 315px) !important;
+  overflow: auto;
+  border: 3px groove #1565c0;
+  border-radius: 1px;
+  margin-bottom: 10px;
+  
 }
 
 .top-space {
@@ -65,7 +74,7 @@ html {
 }
 
 .msg-heading {
-  color:#e53935;
+  color:#1e88e5;
   font-weight: 700;
   font-size:1.3rem;
 }

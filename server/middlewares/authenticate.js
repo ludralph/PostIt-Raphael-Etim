@@ -14,7 +14,6 @@ const authenticate = {
           });
         }
         req.decoded = decoded;
-        console.log("decoded ", req.decoded);
         User.findOne({
           where: {
             id: req.decoded.id

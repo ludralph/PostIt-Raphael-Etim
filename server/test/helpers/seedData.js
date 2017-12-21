@@ -67,9 +67,9 @@ export const generateToken = (id, user) => {
   return token;
 };
 
-export const user1token = generateToken(1, users[0]);
+export const firstUserToken = generateToken(1, users[0]);
 
-export const user2token = generateToken(2, users[1]);
+export const secondUserToken = generateToken(2, users[1]);
 
 export const newGroup = {
   name: 'Europeans'

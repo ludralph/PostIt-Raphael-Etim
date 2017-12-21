@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+/**
+ * TopNav component
+ * @param {object} props
+ * @returns {JSX} jsx representation of the component
+ */
 const TopNav = ({ logout }) => {
   return (
     <div>
@@ -9,7 +14,7 @@ const TopNav = ({ logout }) => {
         <div className="nav-wrapper nav-wrap">
           <Link to="/messageboard" className="brand-logo">
             <h6 className="logo">
-              POST-it App
+              PostIt
 						</h6>
           </Link>
           <a href="#" data-activates="mobile-demo" className="button-collapse">

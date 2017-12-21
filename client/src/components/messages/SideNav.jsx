@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+/**
+ * SideNav component
+ * @param {object} props
+ * @returns {JSX} jsx representation of the element
+ */
 const SideNav = ({ groups, edit }) => {
   return (
     <div className="col s12 m12 l3 pull-l2 blue darken-3">
@@ -10,7 +15,6 @@ const SideNav = ({ groups, edit }) => {
           <a className="modal-trigger" href="#group" onClick={edit}>
             <i className="material-icons">loupe</i>
             Create New Group
-
 					</a>
         </li>
         <li>
