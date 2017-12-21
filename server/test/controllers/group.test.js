@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import request from 'supertest';
 import app from '../../../server';
 import db from '../../models';
-import { insertSeedData, user1token, user2token } from '../helpers/seedData';
+import { insertSeedData, firstUserToken, secondUserToken } from '../helpers/seedData';
 
 describe('To do before running test', () => {
   before((done) => {
@@ -13,11 +13,11 @@ describe('To do before running test', () => {
     });
   });
 
-  describe('CREATE GROUP API - /api/group', () => {
+  describe('CREATE GROUP', () => {
     it('should allow registered user create a new group', (done) => {
       request(app)
         .post('/api/group')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .send({
           name: 'Awesome Rockstars',
         })
@@ -27,7 +27,6 @@ describe('To do before running test', () => {
           }
           expect(res.status).to.equal(201);
           expect(res.body).to.have.all.deep.keys('message', 'group');
-          console.log("RES BODY",res.body);
           expect(res.body.group.id).to.equal(2);
           expect(res.body.group.name).to.equal('Awesome Rockstars');
           expect(res.body.message).to.equal('Group Created Successfully');
@@ -38,7 +37,7 @@ describe('To do before running test', () => {
     it('should not create group with the same name', (done) => {
       request(app)
         .post('/api/group')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .send({
           name: 'Awesome Rockstars',
         })
@@ -51,7 +50,7 @@ describe('To do before running test', () => {
     it('should not create group if group name is not provided', (done) => {
       request(app)
         .post('/api/group')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('Group name is required');
@@ -64,10 +63,9 @@ describe('To do before running test', () => {
 
       request(app)
         .get('/api/group/1/users')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          console.log("RES BODY USER", res.body[0])
           expect(res.body[0].email).to.equal('raphaelumoh@gmail.com');
           expect(res.body[0].username).to.equal('raphael');
           setTimeout(done, 8000);
@@ -93,7 +91,7 @@ describe('To do before running test', () => {
     it('should allow group name be changed', (done) => {
       request(app)
         .put('/api/group/2')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .send({
           name: 'Ravenclaw',
         })
@@ -101,7 +99,6 @@ describe('To do before running test', () => {
           expect(res.status).to.equal(200);
           expect(res.body).to.have.all.deep.keys('message', 'group');
           expect(res.body.group.name).to.equal('Ravenclaw');
-          console.log("RES BODY", res.body.message);
           expect(res.body.message).to.equal('Group updated successfully');
           done();
         });
@@ -110,7 +107,7 @@ describe('To do before running test', () => {
     it('should not allow group name be changed to a name that already exists', (done) => {
       request(app)
         .put('/api/group/1')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .send({
           name: 'Gryffindor',
         })
@@ -138,7 +135,7 @@ describe('To do before running test', () => {
     it('should ensure new name is provided for the group', (done) => {
       request(app)
         .put('/api/group/4')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('Group name not provided');
@@ -149,7 +146,7 @@ describe('To do before running test', () => {
     it('should not change name of group that doesn\'t exist', (done) => {
       request(app)
         .put('/api/group/167')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .send({
           name: 'Imagine Dragons',
         })
@@ -163,7 +160,7 @@ describe('To do before running test', () => {
     it('should not allow user not in the group to edit the group\'s name', (done) => {
       request(app)
         .put('/api/group/1')
-        .set('authorization', user2token)
+        .set('authorization', secondUserToken)
         .send({
           name: 'Imagine Dragons',
         })
@@ -179,7 +176,7 @@ describe('To do before running test', () => {
     it('should get group details', (done) => {
       request(app)
         .get('/api/group/1')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body).to.be.an('object');
@@ -192,7 +189,7 @@ describe('To do before running test', () => {
     it('should not get details of group that doesn\'t exist', (done) => {
       request(app)
         .get('/api/group/500')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body.message).to.equal('Group Does Not Exist');
@@ -216,7 +213,7 @@ describe('To do before running test', () => {
     it('should allow registered user in a group add another registered user to group', (done) => {
       request(app)
         .post('/api/group/2/user')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .send({
           userId: 4,
         })
@@ -230,7 +227,7 @@ describe('To do before running test', () => {
     it('should not allow adding a new user to a group that doesn\'t exist', (done) => {
       request(app)
         .post('/api/group/88/user')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .send({
           userId: 2,
         })
@@ -244,7 +241,7 @@ describe('To do before running test', () => {
     it('should not allow adding unregistered user to a group', (done) => {
       request(app)
         .post('/api/group/2/user')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .send({
           userId: 54,
         })
@@ -258,7 +255,7 @@ describe('To do before running test', () => {
     it('should not allow a user to be added twice in a group', (done) => {
       request(app)
         .post('/api/group/2/user')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .send({
           userId: 4
         })
@@ -274,7 +271,7 @@ describe('To do before running test', () => {
     it('should list users of a group that exists', (done) => {
       request(app)
         .get('/api/group/2/users')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body).to.be.an('array');
@@ -287,7 +284,7 @@ describe('To do before running test', () => {
     it('should not list users of group that doesn\'t exist', (done) => {
       request(app)
         .get('/api/group/56/users')
-        .set('authorization', user1token)
+        .set('authorization', firstUserToken)
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body.message).to.equal('Group Does Not Exist');

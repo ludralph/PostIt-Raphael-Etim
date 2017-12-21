@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import Button from '../common/Button';
 import { Link } from 'react-router-dom'
 
+/**
+ * MessageList component
+ * @param {object} props
+ * @returns {JSX} jsx representation of the component
+ */
 const MessagesList = ({ messages, edit, isLoading }) => {
-  console.log("My Messages=>", messages)
   const messageLength = messages.groupMessages.length;
   return (
     <div className="tabcontent s12">
@@ -16,16 +20,19 @@ const MessagesList = ({ messages, edit, isLoading }) => {
           <div className="col s12 m12 l4">
             <a
               id="edit-group"
-              className="group-action btn-floating blue waves-effect waves-light modal-trigger"
+              className="group-action btn-floating  blue waves-effect waves-light modal-trigger"
+              
               style= { {bottom: -620, right: -300} }
               href="#group"
               onClick={edit}
-            ><i className="material-icons right">edit</i>
+            >
+            <i
+             className="material-icons right">edit</i>
             </a>
             <Link
               id="add-user"
               to={`/messageboard/group/${messages.groupId}/members`}
-              className="group-action btn-floating waves-effect waves-light">
+              className="group-action btn-floating blue waves-effect waves-light">
               <i className="material-icons right">person_add</i>
             </Link>
           </div>
