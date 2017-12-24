@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import { firstUserToken, secondUserToken } from '../helpers/seedData';
+import { firstUserToken, secondUserToken, insertSeedData } from '../helpers/seedData';
 import app from '../../../server';
 import { transporter } from '../../../server/utils/nodemailer';
 
