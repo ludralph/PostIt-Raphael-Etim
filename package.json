@@ -19,7 +19,7 @@
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
     "lint": "esw server",
     "webpack": "webpack",
-    "heroku-postbuild": "NODE_ENV='production' webpack -p --config ./webpack.deployment.config.js --progress --colors",
+    "heroku-postbuild": "NODE_ENV='production' webpack --config ./webpack.deployment.config.js --progress --colors",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "e2e-setup": "selenium-standalone install",
