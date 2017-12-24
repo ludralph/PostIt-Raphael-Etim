@@ -1,67 +1,61 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const GLOBALS = {
+  'process.env.NODE_ENV': JSON.stringify('production')
+};
 
 module.exports = {
   devtool: 'source-map',
-
-  entry: './client/src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'client/public'),
-    filename: 'bundle.min.js',
-    publicPath: '/'
-  },
-  module: {
-    loaders: [
-      { test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
-        exclude: /node_modules\//,
-        query: {
-          presets: ['react', 'es2015'],
-          plugins: [
-            'react-html-attrs',
-            'transform-decorators-legacy',
-            'transform-class-properties'
-          ],
-        }
-      },
-      { test: /\.css$/,
-        loader: [
-          'style-loader',
-          'css-loader?importLoaders=1',
-          'font-loader?format[]=truetype&format[]=woff&format[]=embedded-opentype'
-        ]
-      },
-      { test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader'
-      },
-      { test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file-loader?name=/fonts/[name].[ext]'
-      },
-      {
-        test: /\.(png|jpg)$/,
-        use: {
-          loader: 'url-loader'
-        },
-      }
-    ]
-  },
-  node: {
-    net: 'empty',
-    tls: 'empty',
-    dns: 'empty'
-  },
-  externals: {
-    // require("jquery") is external and available
-    //  on the global var jQuery
-    'jquery': 'jQuery'
-  },
+  entry: path.resolve(__dirname, 'client/src/index.js'),
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  target: 'web',
+  output: {
+    path: `${__dirname}/client/public`,
+    publicPath: '/',
+    filename: 'bundle.js',
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, 'dist')
+  },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin(GLOBALS),
+    new ExtractTextPlugin('styles.css'),
     new webpack.optimize.UglifyJsPlugin()
+
   ],
+  module: {
+    loaders: [
+      {
+        test: /(\.css)$/,
+        use: ExtractTextPlugin.extract({
+          use: 'css-loader'
+        })
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader', 'sass-loader']
+        })
+      },
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        loader: 'url?prefix=font/&limit=5000'
+      },
+    ],
+  },
+  node: {
+    dns: 'empty',
+    net: 'empty',
+    fs: 'empty'
+  }
 };
