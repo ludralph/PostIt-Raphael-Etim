@@ -7,7 +7,7 @@ import { transporter } from '../../../server/utils/nodemailer';
 describe('SIGNUP', () => {
   it('should create a new user and return a token if signup is successful', (done) => {
     request(app)
-      .post('/api/signup')
+      .post('/api/v1/signup')
       .set('Accept', 'application/json')
       .send({
         username: 'ludralph',
@@ -25,7 +25,7 @@ describe('SIGNUP', () => {
 
   it('should require username before signup.', (done) => {
     request(app)
-      .post('/api/signup')
+      .post('/api/v1/signup')
       .set('Accept', 'application/json')
       .send({
         email: 'raphaelumoh@gmail.com',
@@ -40,7 +40,7 @@ describe('SIGNUP', () => {
 
   it('should require password before signup.', (done) => {
     request(app)
-      .post('/api/signup')
+      .post('/api/v1/signup')
       .set('Accept', 'application/json')
       .send({
         username: 'raphael',
@@ -55,7 +55,7 @@ describe('SIGNUP', () => {
 
   it('should require email before signup.', (done) => {
     request(app)
-      .post('/api/signup')
+      .post('/api/v1/signup')
       .set('Accept', 'application/json')
       .send({
         username: 'raphael',
@@ -70,7 +70,7 @@ describe('SIGNUP', () => {
 
   it('should not create user with the same username.', (done) => {
     request(app)
-      .post('/api/signup')
+      .post('/api/v1/signup')
       .set('Accept', 'application/json')
       .send({
         username: 'raphael123',
@@ -86,7 +86,7 @@ describe('SIGNUP', () => {
 
   it('should not create user with the same email address.', (done) => {
     request(app)
-      .post('/api/signup')
+      .post('/api/v1/signup')
       .set('Accept', 'application/json')
       .send({
         username: 'raphael',
@@ -102,7 +102,7 @@ describe('SIGNUP', () => {
 
   it('should not create user with an invalid email address.', (done) => {
     request(app)
-      .post('/api/signup')
+      .post('/api/v1/signup')
       .set('Accept', 'application/json')
       .send({
         username: 'user123',
@@ -120,7 +120,7 @@ describe('SIGNUP', () => {
 describe('SIGNIN ', () => {
   it('should allow existing user to sign in and return a token', (done) => {
     request(app)
-      .post('/api/signin')
+      .post('/api/v1/signin')
       .set('Accept', 'application/json')
       .send({
         username: 'raphael',
@@ -137,7 +137,7 @@ describe('SIGNIN ', () => {
 
   it('should require username and password before signin', (done) => {
     request(app)
-      .post('/api/signin')
+      .post('/api/v1/signin')
       .set('Accept', 'application/json')
       .send({
         username: '',
@@ -152,7 +152,7 @@ describe('SIGNIN ', () => {
 
   it('should not signin if username does not exist', (done) => {
     request(app)
-      .post('/api/signin')
+      .post('/api/v1/signin')
       .set('Accept', 'application/json')
       .send({
         username: 'anonymous',
@@ -167,7 +167,7 @@ describe('SIGNIN ', () => {
 
   it('should not signin if password is incorrect', (done) => {
     request(app)
-      .post('/api/signin')
+      .post('/api/v1/signin')
       .set('Accept', 'application/json')
       .send({
         username: 'raphael',
@@ -185,7 +185,7 @@ describe('FORGOT PASSWORD ', () => {
   it('should send forgot password email if email address exists in the database', (done) => {
     transporter.sendMail = () => Promise.resolve(1);
     request(app)
-      .put('/api/forgotpassword')
+      .put('/api/v1/forgotpassword')
       .set('Accept', 'application/json')
       .send({
         email: 'raphaelumoh@gmail.com',
@@ -200,7 +200,7 @@ describe('FORGOT PASSWORD ', () => {
   it('should  not send forgot password email if a network error occurs', (done) => {
     transporter.sendMail = () => Promise.reject(1);
     request(app)
-      .put('/api/forgotpassword')
+      .put('/api/v1/forgotpassword')
       .set('Accept', 'application/json')
       .send({
         email: 'raphaelumoh@gmail.com',
@@ -214,7 +214,7 @@ describe('FORGOT PASSWORD ', () => {
 
   it('should  not send forgot password email if email address does not exist in the database', (done) => {
     request(app)
-      .put('/api/forgotpassword')
+      .put('/api/v1/forgotpassword')
       .set('Accept', 'application/json')
       .send({
         email: 'randomuser@gmail.com',
@@ -231,7 +231,7 @@ describe('RESET PASSWORD ', () => {
   it('should reset user password if password token is associated with a user id', (done) => {
     transporter.sendMail = () => Promise.resolve(1);
     request(app)
-      .put('/api/resetpassword/0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G')
+      .put('/api/v1/resetpassword/0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G')
       .set('Accept', 'application/json')
       .send({
         password: 'goodrecover',
@@ -246,7 +246,7 @@ describe('RESET PASSWORD ', () => {
   it('should not reset user password if a network error occurs', (done) => {
     transporter.sendMail = () => Promise.reject(1);
     request(app)
-      .put('/api/resetpassword/2QVwcHW9OyX6SAKsJhXEgemhgqA7qHjaRCmhJ3gf0re8tSBM3X')
+      .put('/api/v1/resetpassword/2QVwcHW9OyX6SAKsJhXEgemhgqA7qHjaRCmhJ3gf0re8tSBM3X')
       .set('Accept', 'application/json')
       .send({
         password: 'networkunrecover',
@@ -260,7 +260,7 @@ describe('RESET PASSWORD ', () => {
 
   it('should not reset user password if password token is not associated with a user id', (done) => {
     request(app)
-      .put('/api/resetpassword/justareallyreallyrandomstring')
+      .put('/api/v1/resetpassword/justareallyreallyrandomstring')
       .set('Accept', 'application/json')
       .send({
         password: 'goodluck101',
@@ -274,7 +274,7 @@ describe('RESET PASSWORD ', () => {
 
   it('should not reset user password if a new password is not provided', (done) => {
     request(app)
-      .put('/api/resetpassword/0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G')
+      .put('/api/v1/resetpassword/0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G')
       .set('Accept', 'application/json')
       .end((err, res) => {
         expect(res.status).to.equal(400);
@@ -287,7 +287,7 @@ describe('RESET PASSWORD ', () => {
 describe('SEARCH USER', () => {
   it('should return array of users if any is found', (done) => {
     request(app)
-      .get('/api/search/users?searchTerm=ra&group=1&limit=3&offset=0')
+      .get('/api/v1/search/users?searchTerm=ra&group=1&limit=3&offset=0')
       .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(200);
@@ -301,7 +301,7 @@ describe('SEARCH USER', () => {
 
   it('should search even if limit and offset not included in query', (done) => {
     request(app)
-      .get('/api/search/users?searchTerm=a&group=1')
+      .get('/api/v1/search/users?searchTerm=a&group=1')
       .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(200);
@@ -312,7 +312,7 @@ describe('SEARCH USER', () => {
 
   it('should not allow unregistered user to search for other users', (done) => {
     request(app)
-      .get('/api/search/users?q=a&group=2&limit=1&offset=0')
+      .get('/api/v1/search/users?q=a&group=2&limit=1&offset=0')
       .set('Accept', 'application/json')
       .end((err, res) => {
         expect(res.status).to.equal(401);
@@ -323,7 +323,7 @@ describe('SEARCH USER', () => {
 
   it('should not find any user if search query doesn\'t match any user', (done) => {
     request(app)
-      .get('/api/search/users?q=blah&group=1&limit=1&offset=0')
+      .get('/api/v1/search/users?q=blah&group=1&limit=1&offset=0')
       .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(404);
@@ -334,7 +334,7 @@ describe('SEARCH USER', () => {
 
   it('should not search if group is not specified', (done) => {
     request(app)
-      .get('/api/search/users?q=t&limit=1&offset=0')
+      .get('/api/v1/search/users?q=t&limit=1&offset=0')
       .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(400);
@@ -347,7 +347,7 @@ describe('SEARCH USER', () => {
 describe('LIST USER\'S GROUPS ', () => {
   it('should list group user belongs to', (done) => {
     request(app)
-      .get('/api/user/1/groups')
+      .get('/api/v1/user/1/groups')
       .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(200);
@@ -358,7 +358,7 @@ describe('LIST USER\'S GROUPS ', () => {
 
   it('should not list if user doesn\'t exist', (done) => {
     request(app)
-      .get('/api/user/54/groups')
+      .get('/api/v1/user/54/groups')
       .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(404);
@@ -369,7 +369,7 @@ describe('LIST USER\'S GROUPS ', () => {
 
   it('should return 404 if user does not belong to any group', (done) => {
     request(app)
-      .get('/api/user/3/groups')
+      .get('/api/v1/user/3/groups')
       .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(404);

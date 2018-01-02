@@ -17,7 +17,7 @@ describe('User Actions', () => {
   it(`creates GET_GROUP_MEMBERS_SUCCESS when getGroupMembers action
     is successful`, () => {
       const { members } = mockData;
-      moxios.stubRequest('/api/group/1/users', {
+      moxios.stubRequest('/api/v1/group/1/users', {
         status: 200,
         response: members
       });
@@ -34,7 +34,7 @@ describe('User Actions', () => {
 
   it(`creates GET_GROUP_MEMBERS_FAILURE when getGroupMembers action
     fails`, () => {
-      moxios.stubRequest('/api/group/1/users', {
+      moxios.stubRequest('/api/v1/group/1/users', {
         status: 400,
         response: 'An error occured'
       });
@@ -54,7 +54,7 @@ describe('User Actions', () => {
       const { search, nonMembers } = mockData;
       const { searchTerm, group, limit, offset } = search;
       const queryString =
-        '/api/search/users?searchTerm=a&group=1&limit=1&offset=1';
+        '/api/v1/search/users?searchTerm=a&group=1&limit=1&offset=1';
       moxios.stubRequest(`${queryString}`, {
         status: 200,
         response: nonMembers
@@ -75,7 +75,7 @@ describe('User Actions', () => {
     const { search } = mockData;
     const { searchTerm, group, limit, offset } = search;
     const queryString =
-      '/api/search/users?searchTerm=a&group=1&limit=1&offset=1';
+      '/api/v1/search/users?searchTerm=a&group=1&limit=1&offset=1';
     moxios.stubRequest(`${queryString}`, {
       status: 400,
       response: 'An error occured'
@@ -94,7 +94,7 @@ describe('User Actions', () => {
 
   it('creates no action when addUser action is successful', () => {
     const { group, userDetail } = mockData;
-    moxios.stubRequest('/api/group/1/user', {
+    moxios.stubRequest('/api/v1/group/1/user', {
       status: 200,
       response: { message: 'User Added Successfully' }
     });

@@ -7,6 +7,13 @@ import message from '../controllers/message';
 
 const router = express.Router();
 
+// home route
+router.get('/', (req, res) => {
+  res.json({
+    message: 'Welcome to PostIT API'
+  });
+});
+
 // route for user sign up
 router.post('/signup', validateInput.validateSignupInput, user.signup);
 

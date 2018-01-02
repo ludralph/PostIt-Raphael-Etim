@@ -30,7 +30,7 @@ app.use(webpackMiddleware(compiler, {
   noInfo: true
 }));
 app.use(webpackHotMiddleware(compiler));
-app.use('/api/', routes);
+app.use('/api/v1', routes);
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });

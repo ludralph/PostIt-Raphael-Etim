@@ -92,7 +92,7 @@ const editGroupOff = () => ({
  * @returns {Promise} dispatches an action
  */
 const getUserGroups = user => dispatch => axios
-  .get(`/api/user/${user}/groups`)
+  .get(`/api/v1/user/${user}/groups`)
   .then((response) => {
     dispatch(getUserGroupsSuccess(response.data));
   })
@@ -106,7 +106,7 @@ const getUserGroups = user => dispatch => axios
  * @returns {Promise} dispatches an action
  */
 const getGroup = id => dispatch => axios
-  .get(`/api/group/${id}`)
+  .get(`/api/v1/group/${id}`)
   .then((response) => {
     dispatch(getGroupSuccess(response.data));
   })
@@ -120,7 +120,7 @@ const getGroup = id => dispatch => axios
  * @returns {Promise} dispatches an action
  */
 const createGroup = groupName => dispatch => axios
-  .post('/api/group', groupName)
+  .post('/api/v1/group', groupName)
   .then((response) => {
     dispatch(createGroupSuccess(response.data.group));
   })
@@ -137,10 +137,10 @@ const createGroup = groupName => dispatch => axios
  * @returns {Promise} dispatches an action
  */
 const updateGroup = (groupName, groupId, user) => dispatch => axios
-  .put(`/api/group/${groupId}`, groupName)
+  .put(`/api/v1/group/${groupId}`, groupName)
   .then((response) => {
     toastr.success(response.data.message);
-    return axios.get(`/api/user/${user}/groups`);
+    return axios.get(`/api/v1/user/${user}/groups`);
   })
   .then((result) => {
     dispatch(getUserGroupsSuccess(result.data));

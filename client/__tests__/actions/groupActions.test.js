@@ -16,7 +16,7 @@ describe('Group Actions', () => {
 
   it('creates GET_GROUP_SUCCESS when getGroup action is successful', () => {
     const { group } = mockData;
-    moxios.stubRequest('/api/group/1', {
+    moxios.stubRequest('/api/v1/group/1', {
       status: 200,
       response: group
     });
@@ -32,7 +32,7 @@ describe('Group Actions', () => {
   });
 
   it('creates GET_GROUP_FAILURE when getGroup action fails', () => {
-    moxios.stubRequest('/api/group/1', {
+    moxios.stubRequest('/api/v1/group/1', {
       status: 400,
       response: 'An error occured'
     });
@@ -50,7 +50,7 @@ describe('Group Actions', () => {
   it(`creates GET_USER_GROUPS_SUCCESS when getUserGroups action
     is successful`, () => {
       const { groups } = mockData;
-      moxios.stubRequest('/api/user/1/groups', {
+      moxios.stubRequest('/api/v1/user/1/groups', {
         status: 200,
         response: groups
       });
@@ -66,7 +66,7 @@ describe('Group Actions', () => {
     });
 
   it('creates GET_USER_GROUPS_FAILURE when getUserGroups action fails', () => {
-    moxios.stubRequest('/api/user/1/groups', {
+    moxios.stubRequest('/api/v1/user/1/groups', {
       status: 400,
       response: 'An error occured'
     });
@@ -84,7 +84,7 @@ describe('Group Actions', () => {
   it(`creates CREATE_GROUP_SUCCESS when createGroup action
     is successful`, () => {
       const { group } = mockData;
-      moxios.stubRequest('/api/group', {
+      moxios.stubRequest('/api/v1/group', {
         status: 200,
         response: { group }
       });
@@ -101,7 +101,7 @@ describe('Group Actions', () => {
     });
 
   it('creates CREATE_GROUP_FAILURE when createGroup action fails', () => {
-    moxios.stubRequest('/api/group', {
+    moxios.stubRequest('/api/v1/group', {
       status: 400,
       response: 'An error occured'
     });
@@ -121,12 +121,12 @@ describe('Group Actions', () => {
     updateGroup action is successful`, () => {
       const { group, groups, userDetail } = mockData;
       const { id, name } = group;
-      moxios.stubRequest('/api/group/1', {
+      moxios.stubRequest('/api/v1/group/1', {
         status: 200,
         response: 'Group updated successfully'
       });
 
-      moxios.stubRequest('/api/user/2/groups', {
+      moxios.stubRequest('/api/v1/user/2/groups', {
         status: 200,
         response: groups
       });
@@ -146,7 +146,7 @@ describe('Group Actions', () => {
   it('creates GET_USER_GROUPS_FAILURE when updateGroup action fails', () => {
     const { group, userDetail } = mockData;
     const { id, name } = group;
-    moxios.stubRequest('/api/group/1', {
+    moxios.stubRequest('/api/v1/group/1', {
       status: 400,
       response: 'Group updated successfully'
     });

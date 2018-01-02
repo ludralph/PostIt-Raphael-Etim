@@ -53,7 +53,7 @@ const postMessageFailure = () => ({
 const getMessages = groupId => (dispatch) => {
   dispatch(beginAjaxCall());
   return axios
-    .get(`/api/group/${groupId}/messages`)
+    .get(`/api/v1/group/${groupId}/messages`)
     .then((response) => {
       const data = response.data;
       dispatch(getMessagesSuccess(groupId, data));
@@ -73,7 +73,7 @@ const getMessages = groupId => (dispatch) => {
  * @returns {Promise} dispatches an action
  */
 const postMessage = (id, message) => dispatch => axios
-  .post(`/api/group/${id}/message`, message)
+  .post(`/api/v1/group/${id}/message`, message)
   .then((response) => {
     dispatch(postMessageSuccess(response.data.message));
     dispatch(getMessages(id));
