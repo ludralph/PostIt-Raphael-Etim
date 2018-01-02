@@ -18,9 +18,6 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js',
   },
-  devServer: {
-    contentBase: path.resolve(__dirname, 'dist')
-  },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin(GLOBALS),
