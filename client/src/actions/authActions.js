@@ -45,7 +45,7 @@ const loginFailure = () => ({
  * @returns {Promise} dispatches an action
  */
 const signup = userDetails => dispatch => axios
-  .post('/api/signup', userDetails)
+  .post('/api/v1/signup', userDetails)
   .then((response) => {
     const token = response.data.token;
     localStorage.setItem('jwtToken', token);
@@ -63,7 +63,7 @@ const signup = userDetails => dispatch => axios
  * @returns {Promise} dispatches an action
  */
 const login = userDetails => dispatch => axios
-  .post('/api/signin', userDetails)
+  .post('/api/v1/signin', userDetails)
   .then((response) => {
     const token = response.data.token;
     localStorage.setItem('jwtToken', token);

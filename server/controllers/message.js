@@ -39,8 +39,7 @@ const messageController = {
                 };
                 if (priority === 'Urgent' || priority === 'Critical') {
                   group.getUsers().then((users) => {
-                    const groupMembers =
-                      users.filter(user => user.id !== userId);
+                    const groupMembers = users;
                     const memberEmails =
                       groupMembers.map(user => user.email);
                     const to = req.decoded.user.email;
@@ -48,7 +47,6 @@ const messageController = {
                     const subject =
                       `${msg.priority} message from Group: ${group.name}`;
                     const username = req.decoded.user.name;
-                    ;
                     if (bcc.length > 0) {
                       transporter.sendMail(mailOptions(to, bcc, subject,
                         msgPriorityMail(

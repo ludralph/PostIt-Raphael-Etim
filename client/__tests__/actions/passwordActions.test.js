@@ -17,7 +17,7 @@ describe('Password Actions', () => {
   it(`creates BEGIN_AJAX_CALL and AJAX_CALL_SUCCESS when forgotPassword action
    is successful`, () => {
       const { email } = passwordActions;
-      moxios.stubRequest('/api/forgotpassword', {
+      moxios.stubRequest('/api/v1/forgotpassword', {
         status: 200,
         response: {
           message: 'An email has been sent'
@@ -39,7 +39,7 @@ describe('Password Actions', () => {
   it(`creates BEGIN_AJAX_CALL and AJAX_CALL_ERROR when forgotPassword action
     fails`, () => {
       const { email } = passwordActions;
-      moxios.stubRequest('/api/forgotpassword', {
+      moxios.stubRequest('/api/v1/forgotpassword', {
         status: 400,
         response: {
           message: 'An error occured'
@@ -61,7 +61,7 @@ describe('Password Actions', () => {
   it(`creates BEGIN_AJAX_CALL and AJAX_CALL_SUCCESS when resetPassword action
     is successful`, () => {
       const { resetToken, password } = passwordActions;
-      moxios.stubRequest('/api/resetpassword/TjDkmRh3mYTayaN2NKBWUrtmG4', {
+      moxios.stubRequest('/api/v1/resetpassword/TjDkmRh3mYTayaN2NKBWUrtmG4', {
         status: 200,
         response: {
           message: 'Password Reset Successful'
@@ -83,7 +83,7 @@ describe('Password Actions', () => {
   it(`creates BEGIN_AJAX_CALL and AJAX_CALL_ERROR when resetPassword action
     fails`, () => {
       const { resetToken, password } = passwordActions;
-      moxios.stubRequest('/api/resetpassword/TjDkmRh3mYTayaN2NKBWUrtmG4', {
+      moxios.stubRequest('/api/v1/resetpassword/TjDkmRh3mYTayaN2NKBWUrtmG4', {
         status: 400,
         response: {
           message: 'An error occured'

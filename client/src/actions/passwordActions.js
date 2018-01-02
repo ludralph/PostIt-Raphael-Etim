@@ -13,7 +13,7 @@ import {
 const forgotPassword = email => (dispatch) => {
   dispatch(beginAjaxCall());
   return axios
-    .put('/api/forgotpassword', email)
+    .put('/api/v1/forgotpassword', email)
     .then((response) => {
       dispatch(ajaxCallSuccess());
       toastr.info(response.data.message);
@@ -33,7 +33,7 @@ const forgotPassword = email => (dispatch) => {
 const resetPassword = (resetToken, password) => (dispatch) => {
   dispatch(beginAjaxCall());
   return axios
-    .put(`/api/resetpassword/${resetToken}`, password)
+    .put(`/api/v1/resetpassword/${resetToken}`, password)
     .then((response) => {
       dispatch(ajaxCallSuccess());
       toastr.success(response.data.message);

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import { firstUserToken, secondUserToken, insertSeedData } from '../helpers/seedData';
+import { firstUserToken, secondUserToken } from '../helpers/seedData';
 import app from '../../../server';
 import { transporter } from '../../../server/utils/nodemailer';
 
@@ -8,7 +8,7 @@ import { transporter } from '../../../server/utils/nodemailer';
 describe('POST MESSAGE TO GROUP ', () => {
   it('should allow user post normal message to a group', (done) => {
     request(app)
-      .post('/api/group/2/message')
+      .post('/api/v1/group/2/message')
       .set('authorization', firstUserToken)
       .send({
         content: 'My first message with normal priority',
@@ -27,7 +27,7 @@ describe('POST MESSAGE TO GROUP ', () => {
 
   it('should not post message if priority is not Normal, Urgent or Critical', (done) => {
     request(app)
-      .post('/api/group/4/message')
+      .post('/api/v1/group/4/message')
       .set('authorization', firstUserToken)
       .send({
         content: 'Lorem Ipsum sample test',
@@ -43,7 +43,7 @@ describe('POST MESSAGE TO GROUP ', () => {
   it('should send email notifications to group members if message priority is urgent', (done) => {
     transporter.sendMail = () => Promise.resolve(1);
     request(app)
-      .post('/api/group/2/message')
+      .post('/api/v1/group/2/message')
       .set('authorization', firstUserToken)
       .send({
         content: 'My second message with urgent priority',
@@ -62,7 +62,7 @@ describe('POST MESSAGE TO GROUP ', () => {
   it('should not send email notification if a network error occurs', (done) => {
     transporter.sendMail = () => Promise.reject(1);
     request(app)
-      .post('/api/group/2/message')
+      .post('/api/v1/group/2/message')
       .set('authorization', firstUserToken)
       .send({
         content: 'My third message with critical priority',
@@ -75,26 +75,9 @@ describe('POST MESSAGE TO GROUP ', () => {
       });
   });
 
-  it('should not send email notification but only post message if message sender is the only group member', (done) => {
-    request(app)
-      .post('/api/group/1/message')
-      .set('authorization', firstUserToken)
-      .send({
-        content: 'Hey me, I am the only one in this group',
-        priority: 'Critical'
-      })
-      .end((err, res) => {
-        expect(res.status).to.equal(201);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message.content).to.equal('Hey me, I am the only one in this group');
-        expect(res.body.message.priority).to.equal('Critical');
-        done();
-      });
-  });
-
   it('should not allow user post message in group that does not exist', (done) => {
     request(app)
-      .post('/api/group/50/message')
+      .post('/api/v1/group/50/message')
       .set('authorization', firstUserToken)
       .send({
         content: 'Another message again for group that doesn\'t exist',
@@ -109,7 +92,7 @@ describe('POST MESSAGE TO GROUP ', () => {
 
   it('should not allow user not in the group to post message', (done) => {
     request(app)
-      .post('/api/group/2/message')
+      .post('/api/v1/group/2/message')
       .set('authorization', secondUserToken)
       .send({
         content: 'Message from user not in this group',
@@ -126,7 +109,7 @@ describe('POST MESSAGE TO GROUP ', () => {
 describe('GET MESSAGES FROM GROUP API - /api/group/:groupId/messages', () => {
   it('should allow user in group to get messages', (done) => {
     request(app)
-      .get('/api/group/2/messages')
+      .get('/api/v1/group/2/messages')
       .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(200);
@@ -139,7 +122,7 @@ describe('GET MESSAGES FROM GROUP API - /api/group/:groupId/messages', () => {
 
   it('should not allow user not in group to get messages', (done) => {
     request(app)
-      .get('/api/group/2/messages')
+      .get('/api/v1/group/2/messages')
       .set('authorization', secondUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(403);
@@ -150,7 +133,7 @@ describe('GET MESSAGES FROM GROUP API - /api/group/:groupId/messages', () => {
 
   it('should not allow getting messages from unexisting group', (done) => {
     request(app)
-      .get('/api/group/55/messages')
+      .get('/api/v1/group/55/messages')
       .set('authorization', firstUserToken)
       .end((err, res) => {
         expect(res.status).to.equal(404);

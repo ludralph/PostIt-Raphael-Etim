@@ -45,7 +45,8 @@ const MessagesList = ({ messages, edit, isLoading }) => {
                   <div className="single-msg" key={message.id}>
                     <div>
                       <small className="right time">{message.createdAt.slice(0, 10)}</small>
-                      <h6 className="msg-heading">{message.User.username}</h6>
+                      <h6 className="msg-heading">sender name: {message.User.username}</h6>
+                      <small className="">priority:{message.priority}</small>
                       <h6>{message.content}</h6>
                     </div>
                   </div>

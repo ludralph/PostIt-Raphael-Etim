@@ -18,7 +18,7 @@ describe('Auth Actions', () => {
 
   it('creates SIGNUP_SUCCESS when signup action is successful', () => {
     const { authResponse } = mockData;
-    moxios.stubRequest('/api/signup', {
+    moxios.stubRequest('/api/v1/signup', {
       status: 200,
       response: authResponse
     });
@@ -34,7 +34,7 @@ describe('Auth Actions', () => {
   });
 
   it('creates SIGNUP_FAILURE when signup action fails', () => {
-    moxios.stubRequest('/api/signup', {
+    moxios.stubRequest('/api/v1/signup', {
       status: 400,
       response: 'An error occured'
     });
@@ -51,7 +51,7 @@ describe('Auth Actions', () => {
 
   it('creates LOGIN_SUCCESS when login action is successful', () => {
     const { authResponse } = mockData;
-    moxios.stubRequest('/api/signin', {
+    moxios.stubRequest('/api/v1/signin', {
       status: 200,
       response: authResponse
     });
@@ -67,7 +67,7 @@ describe('Auth Actions', () => {
   });
 
   it('creates LOGIN_FAILURE when login action fails', () => {
-    moxios.stubRequest('/api/signin', {
+    moxios.stubRequest('/api/v1/signin', {
       status: 400,
       response: 'An error occured'
     });
