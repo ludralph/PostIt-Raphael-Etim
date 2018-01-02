@@ -33,22 +33,6 @@ describe('Auth Actions', () => {
     });
   });
 
-  it('creates SIGNUP_FAILURE when signup action fails', () => {
-    moxios.stubRequest('/api/v1/signup', {
-      status: 400,
-      response: 'An error occured'
-    });
-
-    const expectedActions = [
-      { type: types.SIGNUP_FAILURE }
-    ];
-
-    const store = mockStore({});
-    return store.dispatch(signup({})).then(() => {
-      expect(store.getActions()).to.eql(expectedActions);
-    });
-  });
-
   it('creates LOGIN_SUCCESS when login action is successful', () => {
     const { authResponse } = mockData;
     moxios.stubRequest('/api/v1/signin', {
