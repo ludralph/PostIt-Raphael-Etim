@@ -21,8 +21,6 @@ const MessagesList = ({ messages, edit, isLoading }) => {
             <a
               id="edit-group"
               className="group-action btn-floating  blue waves-effect waves-light modal-trigger"
-              
-              style= { {bottom: -620, right: -300} }
               href="#group"
               onClick={edit}
             >
