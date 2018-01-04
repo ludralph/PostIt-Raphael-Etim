@@ -51,10 +51,6 @@ const signup = userDetails => dispatch => axios
     localStorage.setItem('jwtToken', token);
     setAuthorizationToken(token);
     dispatch(signupSuccess(response.data.user));
-  })
-  .catch((error) => {
-    dispatch(signupFailure());
-    toastr.error(error.response.data.message);
   });
 
 /**

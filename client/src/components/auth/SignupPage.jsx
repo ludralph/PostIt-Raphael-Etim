@@ -30,6 +30,7 @@ export class SignupPage extends React.Component {
       password: '',
       confirmpassword: '',
       errors: {},
+      disabled: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -67,11 +68,15 @@ export class SignupPage extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.isValid()) {
-      this.setState({ errors: {} });
+      this.setState({ errors: {}, disabled: true });
       this.props.signup(this.state).then(() => {
         if (this.props.isAuthenticated) {
           toastr.success('Welcome to PostIt');
         }
+      })
+      .catch((error) => {
+        toastr.error(error.response.data.message);
+        return this.setState({ disabled: false });
       });
     }
   }
@@ -144,6 +149,7 @@ export class SignupPage extends React.Component {
                     "btn waves-effect waves-light blue darken-2 signup-button"
                     onClick={this.handleSubmit}
                     text="create account"
+                    disabled={this.state.disabled}
                   />
                 </div>
               </form>
@@ -170,7 +176,8 @@ SignupPage.propTypes = {
  * @returns {object} contains sections of the redux store
  */
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  isLoading: state.ajaxCallsInProgress
 });
 
 /**
