@@ -24,7 +24,7 @@
     "webpack": "webpack",
     "heroku-postbuild": "NODE_ENV=production && webpack --config ./webpack.deployment.config.js --progress --colors",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test | coveralls",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc  --reporter=text-lcov | coveralls",
     "e2e-setup": "selenium-standalone install",
     "e2e-server": "selenium-standalone start",
     "test:e2e": "nightwatch"

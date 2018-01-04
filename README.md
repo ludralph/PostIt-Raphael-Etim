@@ -1,6 +1,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/b688742eac0ce874e8cb/maintainability)](https://codeclimate.com/github/ludralph/PostIt-Raphael-Etim/maintainability)
 [![Build Status](https://travis-ci.org/ludralph/PostIt-Raphael-Etim.svg?branch=develop)](https://travis-ci.org/ludralph/PostIt-Raphael-Etim)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/b688742eac0ce874e8cb/test_coverage)](https://codeclimate.com/github/ludralph/PostIt-Raphael-Etim/test_coverage)
+[![Coverage Status](https://coveralls.io/repos/github/ludralph/PostIt-Raphael-Etim/badge.svg?branch=develop)](https://coveralls.io/github/ludralph/PostIt-Raphael-Etim?branch=develop)
 
 # PostIt App
 
