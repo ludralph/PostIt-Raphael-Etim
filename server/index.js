@@ -16,7 +16,8 @@ const port = process.env.PORT || 5000;
 // Middlewares used
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Headers',
+   'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 app.use(bodyParser.json());
@@ -35,9 +36,9 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
-models.sequelize.sync({force: true }).then(() => {
+models.sequelize.sync({ force: true }).then(() => {
   app.listen(port, () => {
-    console.log(`Listening at port ${port}`);
+    // console.log(`Listening at port ${port}`);
   });
 });
 export default app;

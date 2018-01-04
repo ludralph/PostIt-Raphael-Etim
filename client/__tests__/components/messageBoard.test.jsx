@@ -2,7 +2,6 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-import MockData from '../__mocks__/mockData';
 import ConnectedMessageBoard, { MessageBoard } from
   '../../src/components/messages/MessageBoard';
 
@@ -48,8 +47,8 @@ describe('MessageBoard component', () => {
     event = {
       preventDefault: jest.fn()
     };
-    wrapper.instance().editGroupOff(event)
-    expect(editGroupOffSpy).toHaveBeenCalledTimes(1)
+    wrapper.instance().editGroupOff(event);
+    expect(editGroupOffSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should call the logout method', () => {
@@ -59,14 +58,14 @@ describe('MessageBoard component', () => {
       wrapper.instance(), 'logout'
     );
 
-    wrapper.instance().logout(event)
-    expect(logoutSpy).toHaveBeenCalledTimes(1)
+    wrapper.instance().logout(event);
+    expect(logoutSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should render the connected component', () => {
     const connectedComponent = shallow(
       <ConnectedMessageBoard {...props} store={store} />
-    )
+    );
     expect(connectedComponent.length).toBe(1);
   });
 });

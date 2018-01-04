@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link, Redirect } from 'react-router-dom';
-import TopNav from '../messages/TopNav'
+import TopNav from '../messages/TopNav';
 import Button from '../common/Button';
 import TextInput from '../common/TextInput';
 import { login } from '../../actions/authActions';
@@ -18,7 +18,7 @@ export class LoginPage extends React.Component {
 
   /**
    * Creates an instance of LoginPage
-   * @param {object} props 
+   * @param {object} props
    */
   constructor(props) {
     super(props);
@@ -76,7 +76,6 @@ export class LoginPage extends React.Component {
           <div className="container">
             <div className="row top-space">
               <div className="col s12 m3 l3">
-      
               </div>
               <div className="col s12 m6 l6 login-form">
                 <form className="white col s12 z-depth-5">
@@ -117,7 +116,7 @@ export class LoginPage extends React.Component {
                   </div>
                 </form>
               </div>
-              <div className="col s12 m3 l3"> 
+              <div className="col s12 m3 l3">
               </div>
             </div>
           </div>
@@ -145,7 +144,7 @@ const mapStateToProps = state => ({
 /**
  * Maps dispatch to props
  * @param {function} dispatch
- * @returns {object} actions to be dispatched 
+ * @returns {object} actions to be dispatched
  */
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ login },

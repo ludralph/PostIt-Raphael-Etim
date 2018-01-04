@@ -16,7 +16,7 @@ export class Messages extends React.Component {
 
   /**
    * Creates an instance of Messages
-   * @param {object} props 
+   * @param {object} props
    */
   constructor(props) {
     super(props);
@@ -51,7 +51,6 @@ export class Messages extends React.Component {
    * changes edit group status to true
    * @returns {void} no return value
    */
-
   editGroupOn() {
     this.props.editGroupOn();
   }
@@ -85,10 +84,10 @@ Messages.propTypes = {
 
 /**
  * Maps state to props
- * @param {object} state 
+ * @param {object} state
  * @returns {object} contains sections of the redux store
  */
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   messages: state.messages,
   isLoading: state.ajaxCallsInProgress
 });
@@ -102,6 +101,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getMessages,
   editGroupOn,
   getGroup
-}, dispatch)
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Messages);

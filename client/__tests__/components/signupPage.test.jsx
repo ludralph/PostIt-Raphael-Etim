@@ -2,7 +2,7 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-import mockData from '../__mocks__/mockData'
+import mockData from '../__mocks__/mockData';
 import ConnectedSignupPage, { SignupPage } from
   '../../src/components/auth/SignupPage';
 
@@ -10,13 +10,13 @@ let props;
 let event;
 let handleSubmitSpy;
 
-const { signup } = mockData.componentData
+const { signup } = mockData.componentData;
 
 const setup = (isAuthenticated) => {
   props = {
-    isAuthenticated: isAuthenticated,
+    isAuthenticated,
     signup: jest.fn(() => Promise.resolve())
-  }
+  };
   return shallow(<SignupPage {...props} />);
 };
 
@@ -59,7 +59,7 @@ describe('Signup Page Component', () => {
       username,
       password,
       confirmpassword: password
-    })
+    });
     wrapper.instance().handleSubmit(event);
     expect(handleSubmitSpy).toHaveBeenCalled();
   });

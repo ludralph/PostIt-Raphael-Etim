@@ -1,8 +1,7 @@
 import React from 'react';
-import toastr from 'toastr';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { isEmpty, trim } from 'lodash';
+import { trim } from 'lodash';
 import { bindActionCreators } from 'redux';
 import Button from '../common/Button';
 import { validateMessageInput } from '../../utils/validateInput';
@@ -17,7 +16,7 @@ export class MessageForm extends React.Component {
 
   /**
    * Creates an instance of MessageForm
-   * @param {object} props 
+   * @param {object} props
    */
   constructor(props) {
     super(props);
@@ -39,7 +38,7 @@ export class MessageForm extends React.Component {
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
-    })
+    });
   }
 
   /**
@@ -58,13 +57,13 @@ export class MessageForm extends React.Component {
    */
   handleSubmit(event) {
     event.preventDefault();
-    const id = this.props.groupId
-    const content = trim(this.state.content)
+    const id = this.props.groupId;
+    const content = trim(this.state.content);
     const message = {
       content,
       priority: this.state.priority
-    }
-    this.props.postMessage(id, message)
+    };
+    this.props.postMessage(id, message);
     this.setState({
       content: '',
       priority: ''
@@ -100,9 +99,9 @@ export class MessageForm extends React.Component {
               value={this.state.priority}
               onChange={this.handleChange}>
               <option value="" disabled>Choose Your Priority</option>
-              {options.map((option) => {
-                return <option key={option} value={option}>{option}</option>;
-              })}
+              {options.map(option =>
+                <option key={option} value={option}>{option}</option>
+              )}
             </select>
           </div>
         </div>
@@ -135,6 +134,6 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({
     postMessage,
     postMessageSuccess
-  }, dispatch)
+  }, dispatch);
 
 export default connect(null, mapDispatchToProps)(MessageForm);

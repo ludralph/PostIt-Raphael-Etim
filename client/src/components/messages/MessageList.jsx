@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../common/Button';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 /**
  * MessageList component
@@ -76,7 +75,6 @@ const MessagesList = ({ messages, edit, isLoading }) => {
       </div>
     </div>
   );
-
 };
 
 MessagesList.propTypes = {

@@ -7,15 +7,14 @@ import { Link } from 'react-router-dom';
  * @param {object} props
  * @returns {JSX} jsx representation of the component
  */
-const TopNav = ({ logout }) => {
-  return (
+const TopNav = ({ logout }) => (
     <div>
       <nav className=" blue darken-3">
         <div className="nav-wrapper nav-wrap">
           <Link to="/messageboard" className="brand-logo">
             <h6 className="logo">
               PostIt
-						</h6>
+            </h6>
           </Link>
           <a href="#" data-activates="mobile-demo" className="button-collapse">
             <i className="material-icons">menu</i>
@@ -33,7 +32,7 @@ const TopNav = ({ logout }) => {
                   <li>
                     <Link to="/">Register</Link>
                   </li>
-		  <li>
+                  <li>
                     <a href="https://ludralph.github.io/slate/" target="_blank">API DOCS</a>
                   </li>
                 </div>
@@ -59,7 +58,6 @@ const TopNav = ({ logout }) => {
       </nav>
     </div>
   );
-};
 
 TopNav.propTypes = {
   logout: PropTypes.func

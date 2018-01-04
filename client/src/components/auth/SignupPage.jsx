@@ -3,10 +3,10 @@ import toastr from 'toastr';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link, Redirect } from 'react-router-dom';
 import Button from '../common/Button';
 import TextInput from '../common/TextInput';
-import TopNav from '../messages/TopNav'
-import { Link, Redirect } from 'react-router-dom';
+import TopNav from '../messages/TopNav';
 import { signup } from '../../actions/authActions';
 import { validateSignupInput } from '../../utils/validateInput';
 
@@ -19,7 +19,7 @@ export class SignupPage extends React.Component {
 
    /**
    * Creates an instance of SignupPage
-   * @param {object} props 
+   * @param {object} props
    */
   constructor(props) {
     super(props);
@@ -38,7 +38,7 @@ export class SignupPage extends React.Component {
 
   /**
    * Handles change event for input fields
-   * @param {object} event 
+   * @param {object} event
    * @returns {void} no return value
    */
   handleChange(event) {
@@ -61,13 +61,13 @@ export class SignupPage extends React.Component {
 
    /**
    * Handles signup form submission
-   * @param {object} event 
+   * @param {object} event
    * @returns {void} no return value
    */
   handleSubmit(event) {
     event.preventDefault();
     if (this.isValid()) {
-      this.setState({ errors: {} })
+      this.setState({ errors: {} });
       this.props.signup(this.state).then(() => {
         if (this.props.isAuthenticated) {
           toastr.success('Welcome to PostIt');
@@ -80,7 +80,6 @@ export class SignupPage extends React.Component {
    * Renders the component
    * @returns {JSX} jsx representation of the component
    */
-
   render() {
     if (this.props.isAuthenticated) {
       return (
@@ -176,7 +175,7 @@ const mapStateToProps = state => ({
 
 /**
  * Maps dispatch to props
- * @param {function} dispatch 
+ * @param {function} dispatch
  * @returns {object} actions to be dispatched
  */
 const mapDispatchToProps = dispatch =>

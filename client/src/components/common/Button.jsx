@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 
 /**
  * Button Component
- * @param {object} props 
+ * @param {object} props
  * @returns {JSX} jsx representation of the component
  */
-const Button = ({ onClick, className, text, icon, disabled }) => {
-  return (
+const Button = ({ onClick, className, text, icon, disabled }) => (
     <button
       id={text.split(' ').join('-')}
       onClick={onClick}
@@ -19,7 +18,6 @@ const Button = ({ onClick, className, text, icon, disabled }) => {
       {icon && <i className="material-icons right">{icon}</i>}
     </button>
   );
-};
 
 Button.PropTypes = {
   onClick: PropTypes.func,
@@ -27,5 +25,7 @@ Button.PropTypes = {
   text: PropTypes.string.isRequired,
   icon: PropTypes.string,
   disabled: PropTypes.bool
-}
+};
+
 export default Button;
+

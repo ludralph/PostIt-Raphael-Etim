@@ -16,7 +16,7 @@ export class GroupMember extends React.Component {
 
   /**
    * Creates an instance of GroupMember
-   * @param {object} props 
+   * @param {object} props
    */
   constructor(props) {
     super(props);
@@ -50,7 +50,7 @@ export class GroupMember extends React.Component {
 
   /**
    * Handles change event for the input field
-   * @param {object} event 
+   * @param {object} event
    * @returns {void} no return value
    */
   handleChange(event) {
@@ -89,12 +89,12 @@ export class GroupMember extends React.Component {
    */
   addUserToGroup(user) {
     const group = this.props.match.params.id;
-    const userDetail = { userId: user }
+    const userDetail = { userId: user };
     this.props.addUser(group, userDetail)
       .then(() => {
         this.props.getGroupMembers(group);
         this.searchUser();
-      })
+      });
   }
 
   /**
@@ -167,14 +167,14 @@ export class GroupMember extends React.Component {
                 previousLabel={<i className="material-icons">chevron_left</i>}
                 nextLabel={<i className="material-icons">chevron_right</i>}
                 breakLabel={<a href="">...</a>}
-                breakClassName={"break-me"}
+                breakClassName={'break-me'}
                 pageCount={pagination.pageCount}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
                 forcePage={pagination.pageNumber - 1}
                 onPageChange={this.handlePageClick}
-                containerClassName={"pagination center-align"}
-                activeClassName={"active"}
+                containerClassName={'pagination center-align'}
+                activeClassName={'active'}
               />}
           </div>
 
@@ -218,13 +218,13 @@ const mapStateToProps = state => ({
 /**
  * Maps dispatch to props
  * @param {function} dispatch
- * @returns {object} actions to be dispatched 
+ * @returns {object} actions to be dispatched
  */
 const mapDispatchToProps = dispatch => bindActionCreators({
   getGroupMembers,
   searchUsers,
   searchUsersFailure,
   addUser
-}, dispatch)
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupMember);

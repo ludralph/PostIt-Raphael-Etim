@@ -4,8 +4,7 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import * as types from '../../src/actions/actionTypes';
 import mockData from '../__mocks__/mockData';
-import { getGroupMembers, searchUsers, addUser }
-  from '../../src/actions/userActions';
+import { getGroupMembers, searchUsers, addUser } from '../../src/actions/userActions';
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
@@ -16,79 +15,101 @@ describe('User Actions', () => {
 
   it(`creates GET_GROUP_MEMBERS_SUCCESS when getGroupMembers action
     is successful`, () => {
-      const { members } = mockData;
-      moxios.stubRequest('/api/v1/group/1/users', {
-        status: 200,
-        response: members
-      });
-
-      const expectedActions = [
-        { type: types.GET_GROUP_MEMBERS_SUCCESS, members }
-      ];
-
-      const store = mockStore({});
-      return store.dispatch(getGroupMembers(1)).then(() => {
-        expect(store.getActions()).to.eql(expectedActions);
-      });
+    const { members } = mockData;
+    moxios.stubRequest('/api/v1/group/1/users', {
+      status: 200,
+      response: members
     });
+
+    const expectedActions = [
+      {
+        type: types.GET_GROUP_MEMBERS_SUCCESS,
+        members
+      }
+    ];
+
+    const store = mockStore({});
+    return store
+      .dispatch(getGroupMembers(1))
+      .then(() => {
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
+      });
+  });
 
   it(`creates GET_GROUP_MEMBERS_FAILURE when getGroupMembers action
     fails`, () => {
-      moxios.stubRequest('/api/v1/group/1/users', {
-        status: 400,
-        response: 'An error occured'
-      });
-
-      const expectedActions = [
-        { type: types.GET_GROUP_MEMBERS_FAILURE }
-      ];
-
-      const store = mockStore({});
-      return store.dispatch(getGroupMembers(1)).then(() => {
-        expect(store.getActions()).to.eql(expectedActions);
-      });
+    moxios.stubRequest('/api/v1/group/1/users', {
+      status: 400,
+      response: 'An error occured'
     });
+
+    const expectedActions = [
+      {
+        type: types.GET_GROUP_MEMBERS_FAILURE
+      }
+    ];
+
+    const store = mockStore({});
+    return store
+      .dispatch(getGroupMembers(1))
+      .then(() => {
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
+      });
+  });
 
   it(`creates SEARCH_USERS_SUCCESS when searchUsers action
     is successful`, () => {
-      const { search, nonMembers } = mockData;
-      const { searchTerm, group, limit, offset } = search;
-      const queryString =
-        '/api/v1/search/users?searchTerm=a&group=1&limit=1&offset=1';
-      moxios.stubRequest(`${queryString}`, {
-        status: 200,
-        response: nonMembers
-      });
-
-      const expectedActions = [
-        { type: types.SEARCH_USERS_SUCCESS, users: nonMembers }
-      ];
-
-      const store = mockStore({});
-      return store.dispatch(searchUsers(searchTerm, group, limit, offset))
-        .then(() => {
-          expect(store.getActions()).to.eql(expectedActions);
-        });
+    const { search, nonMembers } = mockData;
+    const { searchTerm, group, limit, offset } = search;
+    const queryString = '/api/v1/search/users?searchTerm=a&group=1&limit=1&offset=1';
+    moxios.stubRequest(`${queryString}`, {
+      status: 200,
+      response: nonMembers
     });
+
+    const expectedActions = [
+      {
+        type: types.SEARCH_USERS_SUCCESS,
+        users: nonMembers
+      }
+    ];
+
+    const store = mockStore({});
+    return store
+      .dispatch(searchUsers(searchTerm, group, limit, offset))
+      .then(() => {
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
+      });
+  });
 
   it('creates SEARCH_USERS_FAILURE when searchUsers action fails', () => {
     const { search } = mockData;
     const { searchTerm, group, limit, offset } = search;
-    const queryString =
-      '/api/v1/search/users?searchTerm=a&group=1&limit=1&offset=1';
+    const queryString = '/api/v1/search/users?searchTerm=a&group=1&limit=1&offset=1';
     moxios.stubRequest(`${queryString}`, {
       status: 400,
       response: 'An error occured'
     });
 
     const expectedActions = [
-      { type: types.SEARCH_USERS_FAILURE }
+      {
+        type: types.SEARCH_USERS_FAILURE
+      }
     ];
 
     const store = mockStore({});
-    return store.dispatch(searchUsers(searchTerm, group, limit, offset))
+    return store
+      .dispatch(searchUsers(searchTerm, group, limit, offset))
       .then(() => {
-        expect(store.getActions()).to.eql(expectedActions);
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
       });
   });
 
@@ -96,14 +117,20 @@ describe('User Actions', () => {
     const { group, userDetail } = mockData;
     moxios.stubRequest('/api/v1/group/1/user', {
       status: 200,
-      response: { message: 'User Added Successfully' }
+      response: {
+        message: 'User Added Successfully'
+      }
     });
 
     const expectedActions = [];
 
     const store = mockStore({});
-    return store.dispatch(addUser(group.id, userDetail)).then(() => {
-      expect(store.getActions()).to.eql(expectedActions);
-    });
+    return store
+      .dispatch(addUser(group.id, userDetail))
+      .then(() => {
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
+      });
   });
 });

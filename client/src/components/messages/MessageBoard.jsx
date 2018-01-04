@@ -10,7 +10,6 @@ import GroupMember from './GroupMember';
 import WelcomePage from './WelcomePage';
 import CreateGroupModal from './CreateGroupModal';
 import { logout } from '../../actions/authActions';
-import { getMessages } from '../../actions/messageActions';
 import { getUserGroups, editGroupOff } from '../../actions/groupActions';
 
 /**
@@ -22,19 +21,18 @@ export class MessageBoard extends React.Component {
 
   /**
    * Creates an instance of MessageBoard
-   * @param {object} props 
+   * @param {object} props
    */
   constructor(props) {
     super(props);
 
     this.logout = this.logout.bind(this);
     this.editGroupOff = this.editGroupOff.bind(this);
-
   }
 
   /**
    * lifecycle method invoked before component mounts
-   * @returns {void} no return value 
+   * @returns {void} no return value
    */
   componentWillMount() {
     if (this.props.auth.isAuthenticated) {
@@ -128,7 +126,7 @@ MessageBoard.propTypes = {
  * @param {object} state
  * @returns {object} contains sections of the redux store
  */
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth,
   groups: state.groups
 });
@@ -142,6 +140,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   logout,
   getUserGroups,
   editGroupOff
-}, dispatch)
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageBoard);

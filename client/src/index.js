@@ -1,11 +1,11 @@
 import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { HashRouter as Router } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
+import configureStore from './store/configureStore';
 import routes from './routes';
 import { loginSuccess } from './actions/authActions';
 import setAuthorizationToken from './utils/setAuthorizationToken';
@@ -24,4 +24,5 @@ render(
     </Router>
   </Provider>,
   document.getElementById('app')
-)
+);
+

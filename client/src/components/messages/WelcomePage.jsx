@@ -10,21 +10,12 @@ import { connect } from 'react-redux';
 export class WelcomePage extends React.Component {
 
   /**
-   * Creates an instance of WelcomePage
-   * @param {object} props 
-   */
-  constructor(props) {
-    super(props);
-
-  }
-
-  /**
    * Renders the component
    * @returns {JSX} jsx representation of the element
    */
   render() {
     const { currentUser } = this.props;
-    const groupNo =  this.props.groups.length;
+    const groupNo = this.props.groups.length;
 
     return (
       <div className="white col s12 m12 l9">

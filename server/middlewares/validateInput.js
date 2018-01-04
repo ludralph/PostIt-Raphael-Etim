@@ -1,8 +1,6 @@
 import validator from 'validator';
 import { isEmpty, trim } from 'lodash';
-import { User } from '../models';
-import { Group } from '../models';
-
+import { User, Group } from '../models';
 
 const checkValidity = (input) => {
   let error = '';

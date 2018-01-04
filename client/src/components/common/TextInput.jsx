@@ -7,8 +7,7 @@ import PropTypes from 'prop-types';
  * @returns {JSX} jsx representation of the component
  */
 const TextInput = ({ icon, type, name, value, label, placeholder,
-  onChange, error, onBlur, onFocus }) => {
-  return (
+  onChange, error, onBlur, onFocus }) => (
     <div className="row">
       <div className="input-field col s12">
         {icon && <i className="material-icons prefix">{icon}</i>}
@@ -23,11 +22,10 @@ const TextInput = ({ icon, type, name, value, label, placeholder,
           onFocus={onFocus}
         />
         <label htmlFor={name}>{label}</label>
-        {error && <span className="red-text errors" id={name + "-error"} >{error}</span>}
+        {error && <span className="red-text errors" id={ `${name} -error`} >{error}</span>}
       </div>
     </div>
-  )
-};
+  );
 
 TextInput.propTypes = {
   icon: PropTypes.string,

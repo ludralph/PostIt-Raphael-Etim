@@ -32,10 +32,12 @@ router.get('/search/users', authenticate.verifyUser, user.searchUser);
 router.get('/user/:userId/groups', authenticate.verifyUser, user.listGroups);
 
 // route to create groups
-router.post('/group', authenticate.verifyUser, validateInput.validateGroupname, group.create);
+router.post('/group', authenticate.verifyUser, validateInput.validateGroupname,
+ group.create);
 
 // route to update a group
-router.put('/group/:groupId', authenticate.verifyUser, validateInput.validateGroupname, group.edit);
+router.put('/group/:groupId', authenticate.verifyUser,
+  validateInput.validateGroupname, group.edit);
 
 // route to get a group by id
 router.get('/group/:groupId', authenticate.verifyUser, group.get);
@@ -47,7 +49,8 @@ router.post('/group/:groupId/user', authenticate.verifyUser, group.addUser);
 router.get('/group/:groupId/users', authenticate.verifyUser, group.listUsers);
 
 // route to post message to a group
-router.post('/group/:groupId/message', authenticate.verifyUser, validateInput.validateMessageInput, message.create);
+router.post('/group/:groupId/message', authenticate.verifyUser,
+  validateInput.validateMessageInput, message.create);
 
 // route to retrieve messages from a particular group
 router.get('/group/:groupId/messages', authenticate.verifyUser, message.list);

@@ -17,7 +17,7 @@ import { validateForgotPasswordEmail } from '../../utils/validateInput';
  */
 export class ForgotPassword extends React.Component {
 
-   /**
+  /**
    * Creates an instance of ForgotPassword
    * @param {object} props
    */
@@ -27,8 +27,12 @@ export class ForgotPassword extends React.Component {
     this.state = {
       email: ''
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this
+      .handleChange
+      .bind(this);
+    this.handleSubmit = this
+      .handleSubmit
+      .bind(this);
   }
 
   /**
@@ -40,7 +44,7 @@ export class ForgotPassword extends React.Component {
     return isValid;
   }
 
-   /**
+  /**
    * Handles change event for input fields
    * @param {object} event
    * @returns {void} no return value
@@ -59,7 +63,9 @@ export class ForgotPassword extends React.Component {
    */
   handleSubmit(event) {
     event.preventDefault();
-    this.props.forgotPassword(this.state)
+    this
+      .props
+      .forgotPassword(this.state);
   }
 
   /**
@@ -68,21 +74,19 @@ export class ForgotPassword extends React.Component {
   */
   render() {
     if (this.props.isAuthenticated) {
-      return (
-        <Redirect to='/messageboard' />
-      );
+      return (<Redirect to='/messageboard'/>);
     }
 
     return (
       <div>
-        <TopNav />
+        <TopNav/>
         <div className="container  fgt-pwd">
           <h4 className="center-align">
             Forgot your password?
-					</h4>
+          </h4>
           <h6 className="center-align grey-text text-darken-3">
             Enter your email below to receive your password reset instructions
-					</h6>
+          </h6>
           <form className="col s12 z-depth-5">
 
             <TextInput
@@ -90,15 +94,13 @@ export class ForgotPassword extends React.Component {
               name="email"
               value={this.state.email}
               onChange={this.handleChange}
-              label="Email Address"
-            />
+              label="Email Address"/>
             <div className="row  center-align">
               <Button
                 className="btn waves-effect waves-light blue darken-2"
                 onClick={this.handleSubmit}
                 text="SEND INSTRUCTIONS"
-                disabled={(!this.isValid()) || this.props.isLoading > 0}
-              />
+                disabled={(!this.isValid()) || this.props.isLoading > 0}/>
             </div>
 
           </form>
@@ -108,11 +110,10 @@ export class ForgotPassword extends React.Component {
   }
 }
 
-
 ForgotPassword.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   forgotPassword: PropTypes.func.isRequired,
-  isLoading: PropTypes.number.isRequired,
+  isLoading: PropTypes.number.isRequired
 };
 
 /**
@@ -120,18 +121,20 @@ ForgotPassword.propTypes = {
  * @param {object} state
  * @returns {object} contains sections of the redux store
  */
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  isLoading: state.ajaxCallsInProgress,
-});
+const mapStateToProps = state => (
+  {
+    isAuthenticated: state.auth.isAuthenticated,
+    isLoading: state.ajaxCallsInProgress
+  }
+);
 
 /**
  * Maps dispatch to props
  * @param {function} dispatch
- * @returns {object} actions to be dispatched 
+ * @returns {object} actions to be dispatched
  */
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ forgotPassword },
-    dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  forgotPassword
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);

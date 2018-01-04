@@ -46,8 +46,8 @@ const searchUsersFailure = () => ({
  * @param {number} groupId - id of the group to get its members
  * @returns {Promise} dispatches an action
  */
-const getGroupMembers = group => dispatch => axios
-  .get(`/api/v1/group/${group}/users`)
+const getGroupMembers = groupId => dispatch => axios
+  .get(`/api/v1/group/${groupId}/users`)
   .then((response) => {
     dispatch(getGroupMembersSuccess(response.data));
   })

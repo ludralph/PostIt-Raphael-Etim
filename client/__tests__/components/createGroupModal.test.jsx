@@ -89,7 +89,7 @@ describe('Create Group Modal Component', () => {
         groupName: 'group b'
       }
     };
-    wrapper.instance().componentWillReceiveProps(nextProps)
+    wrapper.instance().componentWillReceiveProps(nextProps);
     expect(componentWillReceivePropsSpy).toHaveBeenCalledTimes(1);
   });
 

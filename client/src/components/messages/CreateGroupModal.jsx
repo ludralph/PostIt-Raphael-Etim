@@ -16,7 +16,7 @@ export class CreateGroupModal extends React.Component {
 
   /**
    * Creates an instance of CreateGroupModal
-   * @param {object} props 
+   * @param {object} props
    */
   constructor(props) {
     super(props);
@@ -42,23 +42,23 @@ export class CreateGroupModal extends React.Component {
 
   /**
    * lifecycle method invoked before component receives new props
-   * @param {object} nextProps 
+   * @param {object} nextProps
    * @returns {void} no return value
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.editGroupStatus) {
       const group = this.state.name;
       if (group !== nextProps.selectedGroup.groupName) {
-        this.setState({ name: nextProps.selectedGroup.groupName })
+        this.setState({ name: nextProps.selectedGroup.groupName });
       }
     } else {
-      this.setState({ name: '' })
+      this.setState({ name: '' });
     }
   }
 
   /**
    * Handles change event for the input field
-   * @param {object} event 
+   * @param {object} event
    * @returns {void} no return value
    */
   handleChange(event) {
@@ -66,7 +66,7 @@ export class CreateGroupModal extends React.Component {
     this.setState({
       name: event.target.value
     });
-  };
+  }
 
    /**
    * Handles input validation
@@ -75,10 +75,10 @@ export class CreateGroupModal extends React.Component {
   isValid() {
     const { isValid } = validateGroupInput(this.state);
     return isValid;
-  };
+  }
 
   /**
-   * Sets error state if input values are invalid 
+   * Sets error state if input values are invalid
    * @returns {void} no return value
    */
   hasErrors() {
@@ -101,7 +101,7 @@ export class CreateGroupModal extends React.Component {
    * @returns {void} no return value
    */
   handleFocus() {
-    this.setState({ errors: {} })
+    this.setState({ errors: {} });
   }
 
    /**
@@ -116,7 +116,7 @@ export class CreateGroupModal extends React.Component {
     const userId = this.props.currentUserId;
 
     if (this.props.editGroupStatus) {
-      this.props.updateGroup(groupName, groupId, userId)
+      this.props.updateGroup(groupName, groupId, userId);
     } else {
       this.props.createGroup(groupName);
     }
@@ -163,14 +163,14 @@ CreateGroupModal.propTypes = {
   editGroupStatus: PropTypes.bool.isRequired,
   selectedGroup: PropTypes.object.isRequired,
   currentUserId: PropTypes.number.isRequired
-}
+};
 
 /**
  * Maps state to props
- * @param {object} state 
+ * @param {object} state
  * @returns {object} contains sections of the redux store
  */
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   selectedGroup: state.messages,
   editGroupStatus: state.editGroupStatus,
   currentUserId: state.auth.currentUser.id
@@ -184,6 +184,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   createGroup,
   updateGroup
-}, dispatch)
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateGroupModal);

@@ -5,12 +5,12 @@ import Button from '../../src/components/common/Button.jsx';
 describe('Button Component', () => {
   it('should render without crashing', () => {
     const props = {
-      className: "btn waves-effect waves-light red darken-1",
-      icon: "send",
+      className: 'btn waves-effect waves-light red darken-1',
+      icon: 'send',
       onClick: jest.fn(),
-      text: "send"
+      text: 'send'
     };
-    const wrapper = shallow(<Button {...props} />);
+    const wrapper = shallow(<Button {...props}/>);
     expect(wrapper.getElement().type).toBe('button');
     expect(wrapper.find('button').length).toBe(1);
   });

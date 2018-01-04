@@ -2,7 +2,6 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-import mockData from '../__mocks__/mockData';
 import ConnectedMessages, { Messages } from
   '../../src/components/messages/Messages';
 
@@ -41,7 +40,7 @@ describe('Messages component', () => {
         params: { id: 3 }
       }
     };
-    wrapper.instance().componentWillReceiveProps(nextProps)
+    wrapper.instance().componentWillReceiveProps(nextProps);
     expect(componentWillReceivePropsSpy).toHaveBeenCalledTimes(1);
   });
 

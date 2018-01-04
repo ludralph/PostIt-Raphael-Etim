@@ -6,14 +6,14 @@ let props;
 
 const setup = (icon, error) => {
   props = {
-    icon: icon,
+    icon,
     onChange: jest.fn(),
     text: 'send',
     type: 'email',
     name: 'email',
     value: 'email',
-    error: error
-  }
+    error
+  };
 
   return shallow(<TextInput {...props } />);
 };

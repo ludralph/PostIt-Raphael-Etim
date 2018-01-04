@@ -8,24 +8,24 @@ const { messageList } = mockData.componentData;
 
 const setup = (messages, isLoading) => {
   props = {
-    messages: messages,
+    messages,
     edit: jest.fn(),
     isLoading
-  }
-  return shallow(<MessageList {...props} />)
-}
+  };
+  return shallow(<MessageList {...props} />);
+};
 
 describe('Message List Component', () => {
   it('should render without crashing', () => {
     const wrapper = setup({ groupMessages: [] }, 0);
-    expect(wrapper.getElement().type).toBe('div')
+    expect(wrapper.getElement().type).toBe('div');
     expect(wrapper.find('div').length).toBeGreaterThan(0);
   });
 
   it('should call edit function when edit group link is clicked', () => {
     const wrapper = setup({ groupMessages: [] }, 0);
     const editLink = wrapper.find('a').first();
-    editLink.simulate('click')
+    editLink.simulate('click');
     expect(props.edit).toHaveBeenCalledTimes(1);
   });
 

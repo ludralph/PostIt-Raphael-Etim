@@ -2,7 +2,7 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-import mockData from '../__mocks__/mockData'
+import mockData from '../__mocks__/mockData';
 import ConnectedWelcomePage, { WelcomePage } from
   '../../src/components/messages/WelcomePage';
 
@@ -14,7 +14,7 @@ const setup = (groups, currentUser) => {
   props = {
     groups,
     currentUser
-  }
+  };
   return shallow(<WelcomePage {...props} />);
 };
 

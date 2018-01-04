@@ -4,9 +4,10 @@ import app from '../../../server';
 import { firstUserToken } from '../helpers/seedData';
 import { transporter } from '../../../server/utils/nodemailer';
 
-describe('SIGNUP', () => {
-  it('should create a new user and return a token if signup is successful', (done) => {
-    request(app)
+describe('Signup Endpoint', () => {
+  it('should create a new user and return a token if signup is successful',
+    (done) => {
+      request(app)
       .post('/api/v1/signup')
       .set('Accept', 'application/json')
       .send({
@@ -21,7 +22,7 @@ describe('SIGNUP', () => {
         expect(res.body.user.email).to.equal('ludralph@gmail.com');
         done();
       });
-  });
+    });
 
   it('should require username before signup.', (done) => {
     request(app)
@@ -79,7 +80,8 @@ describe('SIGNUP', () => {
       })
       .end((err, res) => {
         expect(res.status).to.equal(409);
-        expect(res.body.message).to.equal('Email taken already. Please use another one.');
+        expect(res.body.message).to
+        .equal('Email taken already. Please use another one.');
         done();
       });
   });
@@ -95,7 +97,8 @@ describe('SIGNUP', () => {
       })
       .end((err, res) => {
         expect(res.status).to.equal(409);
-        expect(res.body.message).to.equal('Username taken already. Please use another one.');
+        expect(res.body.message).to
+        .equal('Username taken already. Please use another one.');
         done();
       });
   });
@@ -117,7 +120,7 @@ describe('SIGNUP', () => {
   });
 });
 
-describe('SIGNIN ', () => {
+describe('Signin Endpoint ', () => {
   it('should allow existing user to sign in and return a token', (done) => {
     request(app)
       .post('/api/v1/signin')
@@ -145,7 +148,8 @@ describe('SIGNIN ', () => {
       })
       .end((err, res) => {
         expect(res.status).to.equal(401);
-        expect(res.body.message).to.equal('Please provide a username and password');
+        expect(res.body.message).to
+        .equal('Please provide a username and password');
         done();
       });
   });
@@ -182,7 +186,7 @@ describe('SIGNIN ', () => {
 });
 
 describe('FORGOT PASSWORD ', () => {
-  it('should send forgot password email if email address exists in the database', (done) => {
+  it('should send a mail if email address exists in the database', (done) => {
     transporter.sendMail = () => Promise.resolve(1);
     request(app)
       .put('/api/v1/forgotpassword')
@@ -192,14 +196,16 @@ describe('FORGOT PASSWORD ', () => {
       })
       .end((err, res) => {
         expect(res.status).to.equal(200);
-        expect(res.body.message).to.equal('An email has been sent to raphaelumoh@gmail.com with further instructions.');
+        expect(res.body.message)
+        .to.equal('An email has been sent to raphaelumoh@gmail.com with further instructions.');
         done();
       });
   });
 
-  it('should  not send forgot password email if a network error occurs', (done) => {
-    transporter.sendMail = () => Promise.reject(1);
-    request(app)
+  it('should  not send forgot password email if a network error occurs',
+   (done) => {
+     transporter.sendMail = () => Promise.reject(1);
+     request(app)
       .put('/api/v1/forgotpassword')
       .set('Accept', 'application/json')
       .send({
@@ -207,13 +213,15 @@ describe('FORGOT PASSWORD ', () => {
       })
       .end((err, res) => {
         expect(res.status).to.equal(500);
-        expect(res.body.message).to.equal('An error occured. Please try again.');
+        expect(res.body.message).to
+        .equal('An error occured. Please try again.');
         done();
       });
-  });
+   });
 
-  it('should  not send forgot password email if email address does not exist in the database', (done) => {
-    request(app)
+  it('should not send a mail if email address does not exist in the database',
+   (done) => {
+     request(app)
       .put('/api/v1/forgotpassword')
       .set('Accept', 'application/json')
       .send({
@@ -224,14 +232,16 @@ describe('FORGOT PASSWORD ', () => {
         expect(res.body.message).to.equal('This email does not exist');
         done();
       });
-  });
+   });
 });
 
-describe('RESET PASSWORD ', () => {
-  it('should reset user password if password token is associated with a user id', (done) => {
-    transporter.sendMail = () => Promise.resolve(1);
-    request(app)
-      .put('/api/v1/resetpassword/0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G')
+describe('Reset Password Endpoint ', () => {
+  it('should reset password if password token is associated with a user id',
+   (done) => {
+     transporter.sendMail = () => Promise.resolve(1);
+     request(app)
+      .put(`/api/v1/resetpassword/
+        0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G`)
       .set('Accept', 'application/json')
       .send({
         password: 'goodrecover',
@@ -241,25 +251,29 @@ describe('RESET PASSWORD ', () => {
         expect(res.body.message).to.equal('Password Reset Successful');
         done();
       });
-  });
+   });
 
   it('should not reset user password if a network error occurs', (done) => {
     transporter.sendMail = () => Promise.reject(1);
     request(app)
-      .put('/api/v1/resetpassword/2QVwcHW9OyX6SAKsJhXEgemhgqA7qHjaRCmhJ3gf0re8tSBM3X')
+      .put(`/api/v1/resetpassword/
+        2QVwcHW9OyX6SAKsJhXEgemhgqA7qHjaRCmhJ3gf0re8tSBM3X`)
       .set('Accept', 'application/json')
       .send({
         password: 'networkunrecover',
       })
       .end((err, res) => {
         expect(res.status).to.equal(500);
-        expect(res.body.message).to.equal('An error occured. Please try again.');
+        expect(res.body.message).to
+        .equal('An error occured. Please try again.');
         done();
       });
   });
 
-  it('should not reset user password if password token is not associated with a user id', (done) => {
-    request(app)
+  it(`should not reset password if password token is not associated 
+    with a user id`,
+    (done) => {
+      request(app)
       .put('/api/v1/resetpassword/justareallyreallyrandomstring')
       .set('Accept', 'application/json')
       .send({
@@ -267,21 +281,25 @@ describe('RESET PASSWORD ', () => {
       })
       .end((err, res) => {
         expect(res.status).to.equal(400);
-        expect(res.body.message).to.equal('Password Reset Token is Invalid or has Expired');
+        expect(res.body.message).to
+        .equal('Password Reset Token is Invalid or has Expired');
         done();
       });
-  });
+    });
 
-  it('should not reset user password if a new password is not provided', (done) => {
-    request(app)
-      .put('/api/v1/resetpassword/0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G')
+  it('should not reset user password if a new password is not provided',
+   (done) => {
+     request(app)
+      .put(`/api/v1/resetpassword/
+        0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G`)
       .set('Accept', 'application/json')
       .end((err, res) => {
         expect(res.status).to.equal(400);
-        expect(res.body.message).to.equal('Please provide a new password for your account');
+        expect(res.body.message).to
+        .equal('Please provide a new password for your account');
         done();
       });
-  });
+   });
 });
 
 describe('SEARCH USER', () => {
@@ -294,7 +312,8 @@ describe('SEARCH USER', () => {
         expect(res.body).to.have.all.deep.keys('users', 'pagination');
         expect(res.body.users).to.be.an('array');
         expect(res.body.users[0].username).to.equal('ludralph');
-        expect(res.body.pagination).to.deep.include({ page: 1, pageCount: 1, pageSize: 1, totalCount: 1 });
+        expect(res.body.pagination).to.deep
+        .include({ page: 1, pageCount: 1, pageSize: 1, totalCount: 1 });
         done();
       });
   });
@@ -316,13 +335,15 @@ describe('SEARCH USER', () => {
       .set('Accept', 'application/json')
       .end((err, res) => {
         expect(res.status).to.equal(401);
-        expect(res.body.message).to.equal('No token provided so we can\'t authenticate you.');
+        expect(res.body.message).to
+        .equal('No token provided so we can\'t authenticate you.');
         done();
       });
   });
 
-  it('should not find any user if search query doesn\'t match any user', (done) => {
-    request(app)
+  it('should not find any user if search query doesn\'t match any user',
+   (done) => {
+     request(app)
       .get('/api/v1/search/users?q=blah&group=1&limit=1&offset=0')
       .set('authorization', firstUserToken)
       .end((err, res) => {
@@ -330,7 +351,7 @@ describe('SEARCH USER', () => {
         expect(res.body.message).to.equal('No users found');
         done();
       });
-  });
+   });
 
   it('should not search if group is not specified', (done) => {
     request(app)
@@ -344,7 +365,7 @@ describe('SEARCH USER', () => {
   });
 });
 
-describe('LIST USER\'S GROUPS ', () => {
+describe('List user\'s groups endpoint ', () => {
   it('should list group user belongs to', (done) => {
     request(app)
       .get('/api/v1/user/1/groups')

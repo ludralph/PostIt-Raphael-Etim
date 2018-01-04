@@ -88,11 +88,11 @@ const editGroupOff = () => ({
 /**
  * Async action creator to get the
  * list of groups a user belongs to
- * @param {number} id - id of the current user
+ * @param {number} userId - id of the current user
  * @returns {Promise} dispatches an action
  */
-const getUserGroups = user => dispatch => axios
-  .get(`/api/v1/user/${user}/groups`)
+const getUserGroups = userId => dispatch => axios
+  .get(`/api/v1/user/${userId}/groups`)
   .then((response) => {
     dispatch(getUserGroupsSuccess(response.data));
   })
@@ -136,11 +136,11 @@ const createGroup = groupName => dispatch => axios
  * @param {number} userId - the id of the user changing the group's name
  * @returns {Promise} dispatches an action
  */
-const updateGroup = (groupName, groupId, user) => dispatch => axios
+const updateGroup = (groupName, groupId, userId) => dispatch => axios
   .put(`/api/v1/group/${groupId}`, groupName)
   .then((response) => {
     toastr.success(response.data.message);
-    return axios.get(`/api/v1/user/${user}/groups`);
+    return axios.get(`/api/v1/user/${userId}/groups`);
   })
   .then((result) => {
     dispatch(getUserGroupsSuccess(result.data));

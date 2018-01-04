@@ -2,7 +2,8 @@ import { expect } from 'chai';
 import request from 'supertest';
 import app from '../../../server';
 import db from '../../models';
-import { insertSeedData, firstUserToken, secondUserToken } from '../helpers/seedData';
+import { insertSeedData, firstUserToken, secondUserToken }
+  from '../helpers/seedData';
 
 describe('To do before running test', () => {
   before((done) => {
@@ -13,7 +14,7 @@ describe('To do before running test', () => {
     });
   });
 
-  describe('CREATE GROUP', () => {
+  describe('Create Group Endpoint', () => {
     it('should allow registered user create a new group', (done) => {
       request(app)
         .post('/api/v1/group')
@@ -42,7 +43,8 @@ describe('To do before running test', () => {
           name: 'Awesome Rockstars',
         })
         .end((err, res) => {
-          expect(res.body.message).to.equal('Group name exists already. Please use another one.');
+          expect(res.body.message)
+          .to.equal('Group name exists already. Please use another one.');
           done();
         });
     });
@@ -58,10 +60,9 @@ describe('To do before running test', () => {
         });
     });
 
-    it('should add user creating the group to the group member\'s list', (done) => {
-      
-
-      request(app)
+    it('should add user creating the group to the group member\'s list',
+     (done) => {
+       request(app)
         .get('/api/v1/group/1/users')
         .set('authorization', firstUserToken)
         .end((err, res) => {
@@ -70,7 +71,7 @@ describe('To do before running test', () => {
           expect(res.body[0].username).to.equal('raphael');
           setTimeout(done, 8000);
         });
-    });
+     });
 
     it('should not allow unregistered user to create new group', (done) => {
       request(app)
@@ -81,7 +82,8 @@ describe('To do before running test', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(401);
-          expect(res.body.message).to.equal('No token provided so we can\'t authenticate you.');
+          expect(res.body.message).to
+            .equal('No token provided so we can\'t authenticate you.');
           done();
         });
     });
@@ -104,8 +106,9 @@ describe('To do before running test', () => {
         });
     });
 
-    it('should not allow group name be changed to a name that already exists', (done) => {
-      request(app)
+    it('should not allow group name be changed to a name that already exists',
+     (done) => {
+       request(app)
         .put('/api/v1/group/1')
         .set('authorization', firstUserToken)
         .send({
@@ -113,10 +116,11 @@ describe('To do before running test', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(409);
-          expect(res.body.message).to.equal('Group name exists already. Please use another one.');
+          expect(res.body.message).to
+            .equal('Group name exists already. Please use another one.');
           done();
         });
-    });
+     });
 
     it('should not allow unregistered user to change group name', (done) => {
       request(app)
@@ -127,7 +131,8 @@ describe('To do before running test', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(401);
-          expect(res.body.message).to.equal('No token provided so we can\'t authenticate you.');
+          expect(res.body.message).to
+            .equal('No token provided so we can\'t authenticate you.');
           done();
         });
     });
@@ -157,8 +162,9 @@ describe('To do before running test', () => {
         });
     });
 
-    it('should not allow user not in the group to edit the group\'s name', (done) => {
-      request(app)
+    it('should not allow user not in the group to edit the group\'s name',
+     (done) => {
+       request(app)
         .put('/api/v1/group/1')
         .set('authorization', secondUserToken)
         .send({
@@ -169,7 +175,7 @@ describe('To do before running test', () => {
           expect(res.body.message).to.equal('You don\'t belong to this group');
           done();
         });
-    });
+     });
   });
 
   describe('GET GROUP', () => {
@@ -203,15 +209,17 @@ describe('To do before running test', () => {
         .set('Accept', 'application/json')
         .end((err, res) => {
           expect(res.status).to.equal(401);
-          expect(res.body.message).to.equal('No token provided so we can\'t authenticate you.');
+          expect(res.body.message).to
+            .equal('No token provided so we can\'t authenticate you.');
           done();
         });
     });
   });
 
   describe('ADD USER TO GROUP API ', () => {
-    it('should allow registered user in a group add another registered user to group', (done) => {
-      request(app)
+    it('allows registered user in a group add another user to the group',
+     (done) => {
+       request(app)
         .post('/api/v1/group/2/user')
         .set('authorization', firstUserToken)
         .send({
@@ -222,10 +230,11 @@ describe('To do before running test', () => {
           expect(res.body.message).to.equal('User Added Successfully');
           done();
         });
-    });
+     });
 
-    it('should not allow adding a new user to a group that doesn\'t exist', (done) => {
-      request(app)
+    it('should not allow adding a new user to a group that doesn\'t exist',
+     (done) => {
+       request(app)
         .post('/api/v1/group/88/user')
         .set('authorization', firstUserToken)
         .send({
@@ -236,7 +245,7 @@ describe('To do before running test', () => {
           expect(res.body.message).to.equal('Group Does Not Exist');
           done();
         });
-    });
+     });
 
     it('should not allow adding unregistered user to a group', (done) => {
       request(app)
@@ -261,7 +270,8 @@ describe('To do before running test', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(409);
-          expect(res.body.message).to.equal('User Already Exists In This Group');
+          expect(res.body.message).to
+            .equal('User Already Exists In This Group');
           done();
         });
     });

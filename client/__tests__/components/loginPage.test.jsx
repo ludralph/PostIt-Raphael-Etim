@@ -10,9 +10,9 @@ let event;
 
 const setup = (isAuthenticated) => {
   props = {
-    isAuthenticated: isAuthenticated,
+    isAuthenticated,
     login: jest.fn(() => Promise.resolve())
-  }
+  };
   return shallow(<LoginPage {...props} />);
 };
 

@@ -7,15 +7,14 @@ import { Link } from 'react-router-dom';
  * @param {object} props
  * @returns {JSX} jsx representation of the element
  */
-const SideNav = ({ groups, edit }) => {
-  return (
+const SideNav = ({ groups, edit }) => (
     <div className="col s12 m12 l3 pull-l2 blue darken-3">
       <ul id="slide-out" className="side-nav side-nav-bar z-depth-3 fixed">
         <li className="hide-on-medium">
           <a className="modal-trigger" href="#group" onClick={edit}>
             <i className="material-icons">loupe</i>
             Create New Group
-					</a>
+          </a>
         </li>
         <li>
           <div className="divider"></div>
@@ -41,11 +40,11 @@ const SideNav = ({ groups, edit }) => {
       </a>
     </div>
   );
-};
+
 
 SideNav.propTypes = {
   groups: PropTypes.array.isRequired,
   edit: PropTypes.func.isRequired
-}
+};
 
 export default SideNav;

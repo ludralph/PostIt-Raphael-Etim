@@ -13,7 +13,7 @@ const setup = (isAuthenticated) => {
     isAuthenticated,
     isLoading: 0,
     forgotPassword: jest.fn()
-  }
+  };
   return shallow(<ForgotPassword {...props} />);
 };
 
@@ -27,7 +27,7 @@ const store = mockStore({
 describe('Forgot Password Component', () => {
   it('should render without crashing', () => {
     const wrapper = setup(false);
-    expect(wrapper.getElement().type).toBe('div')
+    expect(wrapper.getElement().type).toBe('div');
     expect(wrapper.find('div').length).toBeGreaterThan(0);
   });
 
@@ -47,13 +47,13 @@ describe('Forgot Password Component', () => {
   });
 
   it('should call the handleSubmit method', () => {
-    const wrapper = setup(false);;
+    const wrapper = setup(false);
     const handleSubmitSpy = jest.spyOn(
       wrapper.instance(), 'handleSubmit'
     );
     wrapper.instance().handleSubmit(event);
     expect(handleSubmitSpy).toHaveBeenCalledTimes(1);
-    expect(props.forgotPassword).toHaveBeenCalledTimes(1)
+    expect(props.forgotPassword).toHaveBeenCalledTimes(1);
   });
 
   it('should not render if user is unauthenticated', () => {

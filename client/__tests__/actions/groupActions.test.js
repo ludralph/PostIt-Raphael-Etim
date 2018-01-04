@@ -4,8 +4,8 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import mockData from '../__mocks__/mockData';
 import * as types from '../../src/actions/actionTypes';
-import { getGroup, getUserGroups, createGroup, updateGroup }
-  from '../../src/actions/groupActions';
+import { getGroup, getUserGroups, createGroup, updateGroup } from
+ '../../src/actions/groupActions';
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
@@ -22,13 +22,20 @@ describe('Group Actions', () => {
     });
 
     const expectedActions = [
-      { type: types.GET_GROUP_SUCCESS, group }
+      {
+        type: types.GET_GROUP_SUCCESS,
+        group
+      }
     ];
 
     const store = mockStore({});
-    return store.dispatch(getGroup(1)).then(() => {
-      expect(store.getActions()).to.eql(expectedActions);
-    });
+    return store
+      .dispatch(getGroup(1))
+      .then(() => {
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
+      });
   });
 
   it('creates GET_GROUP_FAILURE when getGroup action fails', () => {
@@ -38,32 +45,45 @@ describe('Group Actions', () => {
     });
 
     const expectedActions = [
-      { type: types.GET_GROUP_FAILURE }
+      {
+        type: types.GET_GROUP_FAILURE
+      }
     ];
 
     const store = mockStore({});
-    return store.dispatch(getGroup(1)).then(() => {
-      expect(store.getActions()).to.eql(expectedActions);
-    });
+    return store
+      .dispatch(getGroup(1))
+      .then(() => {
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
+      });
   });
 
   it(`creates GET_USER_GROUPS_SUCCESS when getUserGroups action
     is successful`, () => {
-      const { groups } = mockData;
-      moxios.stubRequest('/api/v1/user/1/groups', {
-        status: 200,
-        response: groups
-      });
-
-      const expectedActions = [
-        { type: types.GET_USER_GROUPS_SUCCESS, groups }
-      ];
-
-      const store = mockStore({});
-      return store.dispatch(getUserGroups(1)).then(() => {
-        expect(store.getActions()).to.eql(expectedActions);
-      });
+    const { groups } = mockData;
+    moxios.stubRequest('/api/v1/user/1/groups', {
+      status: 200,
+      response: groups
     });
+
+    const expectedActions = [
+      {
+        type: types.GET_USER_GROUPS_SUCCESS,
+        groups
+      }
+    ];
+
+    const store = mockStore({});
+    return store
+      .dispatch(getUserGroups(1))
+      .then(() => {
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
+      });
+  });
 
   it('creates GET_USER_GROUPS_FAILURE when getUserGroups action fails', () => {
     moxios.stubRequest('/api/v1/user/1/groups', {
@@ -72,33 +92,47 @@ describe('Group Actions', () => {
     });
 
     const expectedActions = [
-      { type: types.GET_USER_GROUPS_FAILURE }
+      {
+        type: types.GET_USER_GROUPS_FAILURE
+      }
     ];
 
     const store = mockStore({});
-    return store.dispatch(getUserGroups(1)).then(() => {
-      expect(store.getActions()).to.eql(expectedActions);
-    });
+    return store
+      .dispatch(getUserGroups(1))
+      .then(() => {
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
+      });
   });
 
   it(`creates CREATE_GROUP_SUCCESS when createGroup action
     is successful`, () => {
-      const { group } = mockData;
-      moxios.stubRequest('/api/v1/group', {
-        status: 200,
-        response: { group }
-      });
-
-      const expectedActions = [
-        { type: types.CREATE_GROUP_SUCCESS, group }
-      ];
-
-      const store = mockStore({});
-      return store.dispatch(createGroup({ name: 'group E' }))
-        .then(() => {
-          expect(store.getActions()).to.eql(expectedActions);
-        });
+    const { group } = mockData;
+    moxios.stubRequest('/api/v1/group', {
+      status: 200,
+      response: {
+        group
+      }
     });
+
+    const expectedActions = [
+      {
+        type: types.CREATE_GROUP_SUCCESS,
+        group
+      }
+    ];
+
+    const store = mockStore({});
+    return store
+      .dispatch(createGroup({ name: 'group E' }))
+      .then(() => {
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
+      });
+  });
 
   it('creates CREATE_GROUP_FAILURE when createGroup action fails', () => {
     moxios.stubRequest('/api/v1/group', {
@@ -107,41 +141,54 @@ describe('Group Actions', () => {
     });
 
     const expectedActions = [
-      { type: types.CREATE_GROUP_FAILURE }
+      {
+        type: types.CREATE_GROUP_FAILURE
+      }
     ];
 
     const store = mockStore({});
-    return store.dispatch(createGroup({ name: 'group E' }))
+    return store
+      .dispatch(createGroup({ name: 'group E' }))
       .then(() => {
-        expect(store.getActions()).to.eql(expectedActions);
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
       });
   });
 
   it(`creates GET_USER_GROUPS_SUCCESS and UPDATE_GROUP_INFO when
     updateGroup action is successful`, () => {
-      const { group, groups, userDetail } = mockData;
-      const { id, name } = group;
-      moxios.stubRequest('/api/v1/group/1', {
-        status: 200,
-        response: 'Group updated successfully'
-      });
-
-      moxios.stubRequest('/api/v1/user/2/groups', {
-        status: 200,
-        response: groups
-      });
-
-      const expectedActions = [
-        { type: types.GET_USER_GROUPS_SUCCESS, groups },
-        { type: types.UPDATE_GROUP_INFO, group: group.name }
-      ];
-
-      const store = mockStore({});
-      return store.dispatch(updateGroup(name, id, userDetail.userId))
-        .then(() => {
-          expect(store.getActions()).to.eql(expectedActions);
-        });
+    const { group, groups, userDetail } = mockData;
+    const { id, name } = group;
+    moxios.stubRequest('/api/v1/group/1', {
+      status: 200,
+      response: 'Group updated successfully'
     });
+
+    moxios.stubRequest('/api/v1/user/2/groups', {
+      status: 200,
+      response: groups
+    });
+
+    const expectedActions = [
+      {
+        type: types.GET_USER_GROUPS_SUCCESS,
+        groups
+      }, {
+        type: types.UPDATE_GROUP_INFO,
+        group: group.name
+      }
+    ];
+
+    const store = mockStore({});
+    return store
+      .dispatch(updateGroup(name, id, userDetail.userId))
+      .then(() => {
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
+      });
+  });
 
   it('creates GET_USER_GROUPS_FAILURE when updateGroup action fails', () => {
     const { group, userDetail } = mockData;
@@ -152,13 +199,18 @@ describe('Group Actions', () => {
     });
 
     const expectedActions = [
-      { type: types.GET_USER_GROUPS_FAILURE }
+      {
+        type: types.GET_USER_GROUPS_FAILURE
+      }
     ];
 
     const store = mockStore({});
-    return store.dispatch(updateGroup(name, id, userDetail.userId))
+    return store
+      .dispatch(updateGroup(name, id, userDetail.userId))
       .then(() => {
-        expect(store.getActions()).to.eql(expectedActions);
+        expect(store.getActions())
+          .to
+          .eql(expectedActions);
       });
   });
 });
