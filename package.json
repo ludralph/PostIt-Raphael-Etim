@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch server --exec babel-node -- server/index.js",
-    "test:server": "export NODE_ENV=test || SET \"NODE_ENV=test\" && nyc --reporter=html --reporter=text mocha timeout 15000 --compilers js:babel-register server/test/**/*.test.js",
+    "test:server": "export NODE_ENV=test || SET \"NODE_ENV=test\" && nyc --reporter=html --reporter=text mocha --compilers js:babel-register server/test/**/*.test.js --timeout 15000 ",
     "test:client": "jest /client --coverage",
     "test": "npm run test:server",
     "build": "NODE_ENV=production webpack -p",
