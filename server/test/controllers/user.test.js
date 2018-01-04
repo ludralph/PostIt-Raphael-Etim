@@ -240,8 +240,7 @@ describe('Reset Password Endpoint ', () => {
    (done) => {
      transporter.sendMail = () => Promise.resolve(1);
      request(app)
-      .put(`/api/v1/resetpassword/
-        0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G`)
+      .put('/api/v1/resetpassword/0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G')
       .set('Accept', 'application/json')
       .send({
         password: 'goodrecover',
@@ -256,8 +255,7 @@ describe('Reset Password Endpoint ', () => {
   it('should not reset user password if a network error occurs', (done) => {
     transporter.sendMail = () => Promise.reject(1);
     request(app)
-      .put(`/api/v1/resetpassword/
-        2QVwcHW9OyX6SAKsJhXEgemhgqA7qHjaRCmhJ3gf0re8tSBM3X`)
+      .put('/api/v1/resetpassword/2QVwcHW9OyX6SAKsJhXEgemhgqA7qHjaRCmhJ3gf0re8tSBM3X')
       .set('Accept', 'application/json')
       .send({
         password: 'networkunrecover',
@@ -290,8 +288,7 @@ describe('Reset Password Endpoint ', () => {
   it('should not reset user password if a new password is not provided',
    (done) => {
      request(app)
-      .put(`/api/v1/resetpassword/
-        0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G`)
+      .put(`/api/v1/resetpassword/0agwAvILWEVS5xDlaTODlIImxZ5NpHBUxzDiwa2kExG7AnzK6G`)
       .set('Accept', 'application/json')
       .end((err, res) => {
         expect(res.status).to.equal(400);
