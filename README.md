@@ -1,6 +1,7 @@
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b688742eac0ce874e8cb/maintainability)](https://codeclimate.com/github/ludralph/PostIt-Raphael-Etim/maintainability)
 [![Build Status](https://travis-ci.org/ludralph/PostIt-Raphael-Etim.svg?branch=develop)](https://travis-ci.org/ludralph/PostIt-Raphael-Etim)
-[![Test Coverage](https://codeclimate.com/github/codeclimate/codeclimate/badges/coverage.svg)](https://codeclimate.com/github/codeclimate/codeclimate/coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b688742eac0ce874e8cb/test_coverage)](https://codeclimate.com/github/ludralph/PostIt-Raphael-Etim/test_coverage)
+
 # PostIt App
 
 ## Introduction 
@@ -35,7 +36,7 @@ The steps outline will provide a walkthrough on how to install the app on your l
 - From the terminal, change directory to postit app folder
 - Ensure that you are on the **develop** branch. If on any other branch, run **git checkout develop** on the terminal.
 -  Run **npm install** from your terminal in your project directory to install all dependencies
--  Then run the app with the command ** npm start**
+-  Then run the app with the command **npm start**
 
 
 ## Usage
