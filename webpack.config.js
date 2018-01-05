@@ -13,7 +13,7 @@ module.exports = {
   },
   target: 'web',
   output: {
-    path: `${__dirname}/client/public`,
+    path: `${__dirname}/client/dist`,
     publicPath: '/',
     filename: 'bundle.min.js',
   },
