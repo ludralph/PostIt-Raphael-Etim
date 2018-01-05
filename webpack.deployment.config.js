@@ -14,41 +14,40 @@ module.exports = {
   },
   target: 'web',
   output: {
-    path: `${__dirname}/client/public`,
+    path: path.resolve(__dirname, 'client/dist'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: 'bundle.min.js'
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack
+      .optimize
+      .OccurrenceOrderPlugin(),
     new webpack.DefinePlugin(GLOBALS),
     new ExtractTextPlugin('styles.css'),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack
+      .optimize
+      .UglifyJsPlugin({ sourceMap: true, minimize: true })
 
   ],
   module: {
     loaders: [
       {
         test: /(\.css)$/,
-        use: ExtractTextPlugin.extract({
-          use: 'css-loader'
-        })
-      },
-      {
+        use: ExtractTextPlugin.extract({ use: 'css-loader' })
+      }, {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           use: ['css-loader', 'sass-loader']
         })
-      },
-      {
+      }, {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/
-      },
-      {
+      }, {
         test: /\.(woff|woff2)$/,
         loader: 'url?prefix=font/&limit=5000'
-      },
-    ],
+      }
+    ]
   },
   node: {
     dns: 'empty',

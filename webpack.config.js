@@ -13,9 +13,9 @@ module.exports = {
   },
   target: 'web',
   output: {
-    path: `${__dirname}/client/public`,
+    path: `${__dirname}/client/dist`,
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: 'bundle.min.js',
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'src')

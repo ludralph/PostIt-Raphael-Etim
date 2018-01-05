@@ -2,6 +2,13 @@ import validator from 'validator';
 import { isEmpty, trim } from 'lodash';
 import { User, Group } from '../models';
 
+/**
+ * Checks validity of input supplied
+ *
+ * @param {Object} input
+ *
+ * @returns {Object} returns errors if any and validity status of the input
+ */
 const checkValidity = (input) => {
   let error = '';
 
@@ -33,6 +40,15 @@ const checkValidity = (input) => {
 };
 
 const validateInput = {
+  /**
+   * Checks if username or email exist already in the database
+   *
+   * @param {Object} req - request object
+   * @param {Object} res -response object
+   * @param {function} next - calls the next function
+   *
+   * @returns {(function|object)} calls next function or returns response object
+   */
   validateSignupInput(req, res, next) {
     const { error, isValid } = checkValidity(req.body);
     if (!isValid) {
@@ -66,6 +82,15 @@ const validateInput = {
     });
   },
 
+  /**
+   * checks if group name exists already in the database
+   *
+   * @param {Object} req - request object
+   * @param {Object} res -response object
+   * @param {function} next - calls the next function
+   *
+   * @returns {(function|object)} calls next function or returns response object
+   */
   validateGroupname(req, res, next) {
     Group.findOne({
       where: {
@@ -81,6 +106,15 @@ const validateInput = {
     });
   },
 
+   /**
+   * Checks if message input is valid
+   *
+   * @param {Object} req - request object
+   * @param {Object} res -response object
+   * @param {function} next - calls the next function
+   *
+   * @returns {(function|object)} calls next function or returns response object
+   */
   validateMessageInput(req, res, next) {
     const { content, priority } = req.body;
 
