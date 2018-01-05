@@ -24,7 +24,6 @@ module.exports = {
       .OccurrenceOrderPlugin(),
     new webpack.DefinePlugin(GLOBALS),
     new ExtractTextPlugin('styles.css'),
-    new webpack.optimize.DedupePlugin(),
     new webpack
       .optimize
       .UglifyJsPlugin()
@@ -34,7 +33,7 @@ module.exports = {
     loaders: [
       {
         test: /(\.css)$/,
-        use: ExtractTextPlugin.extract({ use: 'css-loader' })
+        use: ExtractTextPlugin.extract({use: 'css-loader'})
       }, {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
