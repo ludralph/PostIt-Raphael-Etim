@@ -25,7 +25,7 @@ Based on project requirement, the features covered for the endpoints are:
 To install Postit, you will need the following:
 - Node
 - PostgreSQL
-- Other dependencies required are listed in the package.json file. Use **npm install** on the command line
+- Other dependencies required are listed in the package.json file. Use `npm install` on the command line
 - Environment variables are defined in a .env file. You can find a .sample.env file in the repository root to guide you on setting up your .env file.
 
 ## Installation
@@ -63,14 +63,14 @@ Then you can post message to the group you created for all members of the group.
 Contributions are welcome and appreciated
 
 - Fork this repository
-- Open a terminal and execute the following command to make a local copy $ git clone git@github.com:your-username/Postit-Raphael-Etim
+- Open a terminal and execute the following command to make a local copy $ `git clone git@github.com:your-username/Postit-Raphael-Etim`
 - Run `cd Postit-Raphael-Etim` to navigate into the folder
 - Make your contributions to your local repo
-- Add a connection to the original repo using $ git remote add repo_nickname git://github.com/ludralph/Postit-Raphael-Etim.git. Note: repo_nickname is a nickname you choose
-- Run git $ remote -v to verify that the connection is established
+- Add a connection to the original repo using $ `git remote add repo_nickname git://github.com/ludralph/Postit-Raphael-Etim.git`. Note: repo_nickname is a nickname you choose
+- Run git $ `remote -v` to verify that the connection is established
 - Make your contributions to your local copy of the project
-- Run $ git add filename git commit -m "commit message" to add and commit your contributions
-- Run $ git push origin proposed-feature-name to push your changes to your copy of the repository
+- Run $ `git add filename`, `git commit -m "commit message"` to add and commit your contributions
+- Run $ `git push origin proposed-feature-name` to push your changes to your copy of the repository
 - If you feel you've made a contribution that will improve the project, raise a Pull Request against develop branch.
 - Be descriptive enough about your contributions so other contributors will understand what you've done
 
