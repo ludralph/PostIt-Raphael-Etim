@@ -12,8 +12,6 @@ import models from './models';
 dotenv.config();
 const env = process.env.NODE_ENV || 'development';
 
-const publicPath = path.join(__dirname, '../client/public/');
-const indexPath = path.resolve(__dirname, publicPath, 'index.html');
 
 const compiler = webpack(config);
 const app = express();
@@ -28,7 +26,8 @@ app.use(bodyParser.json());
 const secret = process.env.SECRET;
 app.set('SECRET', secret);
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/api/v1', routes);
 
 if (env === 'development') {
@@ -40,17 +39,14 @@ if (env === 'development') {
   app.use(webpackHotMiddleware(compiler));
 }
 
-app.use('/', express.static(publicPath));
-// app.get('/*', (req, res) => {   res.sendFile(path.join(__dirname,
-// '../client/public/index.html')); });
 
-app.get('*', (req, res) => {
-  res.sendFile(indexPath);
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 models
   .sequelize
-  .sync({force: false})
+  .sync({ force: false })
   .then(() => {
     app.listen(port);
   });
