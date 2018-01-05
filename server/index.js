@@ -12,7 +12,6 @@ import models from './models';
 dotenv.config();
 const env = process.env.NODE_ENV || 'development';
 
-
 const compiler = webpack(config);
 const app = express();
 const port = process.env.PORT || 5000;
@@ -27,7 +26,7 @@ const secret = process.env.SECRET;
 app.set('SECRET', secret);
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static(path.join(__dirname, '../client/public')));
 app.use('/api/v1', routes);
 
 if (env === 'development') {
@@ -41,7 +40,8 @@ if (env === 'development') {
 
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/public/index.html'));
+  res.sendFile(path.join(__dirname,
+'../client/public/index.html'));
 });
 
 models
