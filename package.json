@@ -88,6 +88,7 @@
     "redux-immutable-state-invariant": "^2.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.0.1",
+    "rimraf": "^2.6.2",
     "sass-loader": "*",
     "sequelize": "^3.30.4",
     "style-loader": "*",
