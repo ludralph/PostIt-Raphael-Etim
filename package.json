@@ -13,7 +13,7 @@
 		"test:client": "jest /client --coverage",
 		"test": "npm run test:server",
 		"build": "npm run remove-dist && npm run remove-build && npm run build:client && npm run build:server",
-		"build:client": "webpack -p --config ./webpack.deployment.config.js --progress && cp client/public/index.html client/dist/index.html",
+		"build:client": "webpack -p --config ./webpack.deployment.config.js --progress",
 		"remove-dist": "node_modules/.bin/rimraf ./client/dist",
 		"remove-build": "node_modules/.bin/rimraf ./build",
 		"build:server": "babel -d ./build ./server -s --copy-files",

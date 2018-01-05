@@ -14,7 +14,7 @@ module.exports = {
   },
   target: 'web',
   output: {
-    path: path.resolve(__dirname, 'client/dist'),
+    path: path.resolve(__dirname, 'client/public'),
     publicPath: '/',
     filename: 'bundle.min.js'
   },
