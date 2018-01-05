@@ -34,14 +34,14 @@ The steps outline will provide a walkthrough on how to install the app on your l
 
 - Clone this repository
 - From the terminal, change directory to postit app folder
-- Ensure that you are on the **develop** branch. If on any other branch, run **git checkout develop** on the terminal.
--  Run **npm install** from your terminal in your project directory to install all dependencies
--  Then run the app with the command **npm start**
+- Ensure that you are on the **develop** branch. If on any other branch, run `git checkout develop` on the terminal.
+-  Run `npm install` from your terminal in your project directory to install all dependencies
+-  Then run the app with the command `npm start`
 
 
 ## Usage
 To test out the endpoints, follow the following steps
-- Once all dependencies have beeen installed, run **npm start** on your terminal to test the endpoints
+- Once all dependencies have beeen installed, run `npm start` on your terminal to test the endpoints
 The app link for the hosted app on heroku is "https://postit-app-ralph.herokuapp.com/#/".
 
 ## Limitations
@@ -64,7 +64,7 @@ Contributions are welcome and appreciated
 
 - Fork this repository
 - Open a terminal and execute the following command to make a local copy $ git clone git@github.com:your-username/Postit-Raphael-Etim
-- Run cd Postit-Raphael-Etim to navigate into the folder
+- Run `cd Postit-Raphael-Etim` to navigate into the folder
 - Make your contributions to your local repo
 - Add a connection to the original repo using $ git remote add repo_nickname git://github.com/ludralph/Postit-Raphael-Etim.git. Note: repo_nickname is a nickname you choose
 - Run git $ remote -v to verify that the connection is established
