@@ -15,7 +15,7 @@ module.exports = {
   output: {
     path: `${__dirname}/client/public`,
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: 'bundle.min.js',
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'src')

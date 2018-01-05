@@ -10,6 +10,7 @@ import routes from './routes/index';
 import models from './models';
 
 dotenv.config();
+const env = process.env.NODE_ENV || 'development';
 const compiler = webpack(config);
 const app = express();
 const port = process.env.PORT || 5000;
@@ -23,14 +24,15 @@ app.use(bodyParser.json());
 const secret = process.env.SECRET;
 app.set('SECRET', secret);
 
-app.use(bodyParser.urlencoded({extended: false }));
-app.use(webpackMiddleware(compiler, {
-  hot: true,
-  publicPath: config.output.publicPath,
-  noInfo: true
-}));
-app.use(webpackHotMiddleware(compiler));
-
+app.use(bodyParser.urlencoded({extended: false}));
+if (env === 'development') {
+  app.use(webpackMiddleware(compiler, {
+    hot: true,
+    publicPath: config.output.publicPath,
+    noInfo: true
+  }));
+  app.use(webpackHotMiddleware(compiler));
+}
 app.use('/api/v1', routes);
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public/index.html'));
