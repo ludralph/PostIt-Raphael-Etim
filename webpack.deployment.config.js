@@ -26,14 +26,14 @@ module.exports = {
     new ExtractTextPlugin('styles.css'),
     new webpack
       .optimize
-      .UglifyJsPlugin()
+      .UglifyJsPlugin({ sourceMap: true, minimize: true })
 
   ],
   module: {
     loaders: [
       {
         test: /(\.css)$/,
-        use: ExtractTextPlugin.extract({use: 'css-loader'})
+        use: ExtractTextPlugin.extract({ use: 'css-loader' })
       }, {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
