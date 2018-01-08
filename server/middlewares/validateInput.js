@@ -52,7 +52,7 @@ const validateInput = {
   validateSignupInput(req, res, next) {
     const { error, isValid } = checkValidity(req.body);
     if (!isValid) {
-      return res.status(401).send({
+      return res.status(400).send({
         message: error
       });
     }
