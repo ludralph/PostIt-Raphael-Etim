@@ -32,6 +32,9 @@ export class Messages extends React.Component {
     const groupId = this.props.match.params.id;
     this.props.getGroup(groupId);
     this.props.getMessages(groupId);
+    $(document).ready(() => {
+      $('.tooltipped').tooltip({ delay: 50 });
+    });
   }
 
   /**

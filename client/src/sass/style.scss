@@ -1,235 +1,244 @@
-$primary-color: #FFFFFF;
+$primary-color: #ffffff;
 $font1: 'Roboto';
 
 html {
-  
-  height: 100% !important;
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
- body {
-  height: 100% !important;
+body {
+	height: 100% !important;
 }
 
 .login {
- min-height: 100% !important;
- width:100% !important;
- position: absolute;
+	min-height: 100% !important;
+	width: 100% !important;
+	position: absolute;
 }
 
 .login-form {
-  margin-top: 6%;
+	margin-top: 6%;
 }
 
 .message-board {
-  height: 100% !important;
-} 
-
-.logo {
-  font-family: $font1;
-  color: $primary-color;
-  padding: 10px;
-
+	height: 100% !important;
 }
 
-.msg-wrap{
-  padding:10px;
-  height:calc(100vh - 315px) !important;
-  overflow: auto;
-  border: 3px groove #1565c0;
-  border-radius: 1px;
-  margin-bottom: 10px;
-  
+.logo-right {
+	margin-right: 40px;
+}
+
+.logo {
+	font-family: $font1;
+	color: $primary-color;
+	padding: 10px;
+	margin-left: 225px;
+}
+
+.msg-wrap {
+	padding: 10px;
+	height: calc(100vh - 315px) !important;
+	overflow: auto;
+	border: 3px groove #1565c0;
+	border-radius: 1px;
+	margin-bottom: 10px;
 }
 
 .top-space {
-  padding-top: 3%;
+	padding-top: 3%;
 }
 
 .link {
-  padding:10px;
+	padding: 10px;
 }
 
 .nav-wrap {
-  padding-left: 5%;
-  padding-right: 5%;
+	padding-left: 5%;
+	padding-right: 5%;
 }
 
-.side-nav-bar {
-  top:64px !important;
-}
 
 .tabcontent {
-  padding: 5px 20px;
-  height: 100% !important;
+	padding: 5px 20px;
+	height: 100% !important;
 }
 .single-msg {
-  padding:5px;
-  border-bottom:1px solid #ddd;
+	padding: 5px;
+	border-bottom: 1px solid #ddd;
 }
 
-
 .msg {
-  position: relative;
+	position: relative;
 }
 
 .msg-heading {
-  color:#1e88e5;
-  font-weight: 700;
-  font-size:1.3rem;
+	color: #1e88e5;
+	font-weight: 700;
+	font-size: 1.3rem;
 }
 
 .time {
-  color:#bfbfbf;
+	color: #bfbfbf;
 }
 
 textarea {
-  height:4rem !important;
-  padding:5px !important;
-  resize: none;
+	height: 4rem !important;
+	padding: 5px !important;
+	resize: none;
 }
 
 .send-msg {
-  width: 100%;
-  position: relative;
-  bottom: 0;
-  margin-bottom: 0px;
+	width: 100%;
+	position: relative;
+	bottom: 0;
+	margin-bottom: 0px;
 }
 
 .send-msg button {
-  margin:10px 30px 5px;
+	margin: 10px 30px 5px;
 }
 
 .priority {
-  margin-top:0.5rem !important;
-}  
+	margin-top: 0.5rem !important;
+}
 
- .select-wrapper input.select-dropdown {
-  margin: 0 !important;
-} 
+.select-wrapper input.select-dropdown {
+	margin: 0 !important;
+}
 
 .modal {
-  max-height:70%;
-  padding: 15px;
+	max-height: 70%;
+	padding: 15px;
 }
 
 .errors {
-  margin-left: 40px;
+	margin-left: 40px;
 }
 
- .input-field select {
-  position:relative;
-  width:100%;
-  height:40px;
-  opacity:1;
-  pointer-events: auto;
-} 
+.input-field select {
+	position: relative;
+	width: 100%;
+	height: 40px;
+	opacity: 1;
+	pointer-events: auto;
+}
 
 .search {
-  margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 input[type=search]:not(.browser-default) {
-  border-bottom: none !important;
-  margin: 0px !important;
-  padding: 3px !important;
+	border-bottom: none !important;
+	margin: 0px !important;
+	padding: 3px !important;
 }
 
 .search-icon {
-  margin-top:10px;
+	margin-top: 10px;
 }
 
 .pagination {
-  margin-bottom: -1px;
+	margin-bottom: -1px;
 }
 
 .search-btn {
-  background: $primary-color !important;
-  color: #000 !important;
-  width: 100% !important;
-  padding: 0px !important;
-  box-shadow: none !important;
+	background: $primary-color !important;
+	color: #000 !important;
+	width: 100% !important;
+	padding: 0px !important;
+	box-shadow: none !important;
 }
 
 .search-btn i {
-  font-size: 24px !important;
+	font-size: 24px !important;
 }
 
 .search-btn:hover {
-  background-color: #f4f4f4 !important;
+	background-color: #f4f4f4 !important;
 }
 
 .search-btn:focus {
-  background-color: $primary-color !important;
-} 
+	background-color: $primary-color !important;
+}
 
 .no-user {
-  margin-top: 50px;
+	margin-top: 50px;
 }
 
 .group-members {
-  ul {
-  max-height:500px;
-  overflow: auto;
-  }
+	ul {
+		max-height: 500px;
+		overflow: auto;
+	}
 
-  h5 {
-    margin-top: 10%;
-  }
+	h5 {
+		margin-top: 10%;
+	}
 }
 
 .group-action {
-  margin: 15px 20px 0px 0px;
+	margin: 15px 20px 0px 0px;
 }
 
 .fgt-pwd {
-  padding: 2% 14%;
+	padding: 2% 14%;
 
-  form {
-    margin-top:20px;
-    padding:20px;
-  }
+	form {
+		margin-top: 20px;
+		padding: 20px;
+	}
 
-  .success {
-    border-radius:10px;
-    padding: 10px;
-  }
+	.success {
+		border-radius: 10px;
+		padding: 10px;
+	}
 }
 
 .nav-row {
-  margin-bottom: 0px !important;
-  h5 {
-    margin-top: 17px !important;
-  }
+	margin-bottom: 0px !important;
+	h5 {
+		margin-top: 17px !important;
+	}
 }
 
 .preloader-wrapper.active {
-  height: 150px;
-  width: 150px;
-  margin: 10% 35%; 
+	height: 150px;
+	width: 150px;
+	margin: 10% 35%;
 }
 
 .welcome-page {
-  position: absolute;
-  padding: 10% 0% 0% 5%;
-  color: #325a56;
+	margin-bottom: 39%;
+	padding: 10% 0% 0% 5%;
+	color: #325a56;
 }
 
-
+.group-members {
+	margin-bottom: 48%;
+}
 
 @media only screen and (max-width: 500px) {
-  .send-msg button {
-      padding: 0px;
-      margin:10px 0px 5px -15px;
-  }  
+	.send-msg button {
+		padding: 0px;
+		margin: 10px 0px 5px -15px;
+	}
+	.welcome-page {
+		margin-bottom: 85.9%;
+		padding: 10% 0% 0% 5%;
+		color: #325a56;
+	}
 }
 
 @media only screen and (max-width: 1140px) and (min-width: 993px) {
-  .search-user {
-    padding-left: 5vw !important;
-  }
+	.search-user {
+		padding-left: 5vw !important;
+	}
 
-  .msg{
-    @extend .search-user
-  }
+	.msg {
+		@extend .search-user;
+	}
+	.welcome-page {
+		margin-bottom: 38.8%;
+		padding: 10% 0% 0% 5%;
+		color: #325a56;
+	}
 }

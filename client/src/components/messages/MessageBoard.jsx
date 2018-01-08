@@ -8,6 +8,7 @@ import SideNav from './SideNav';
 import Messages from './Messages';
 import GroupMember from './GroupMember';
 import WelcomePage from './WelcomePage';
+import Footer from './Footer';
 import CreateGroupModal from './CreateGroupModal';
 import { logout } from '../../actions/authActions';
 import { getUserGroups, editGroupOff } from '../../actions/groupActions';
@@ -38,6 +39,7 @@ export class MessageBoard extends React.Component {
     if (this.props.auth.isAuthenticated) {
       this.props.getUserGroups(this.props.auth.currentUser.id);
     }
+   
   }
 
   /**
@@ -108,6 +110,7 @@ export class MessageBoard extends React.Component {
           </main>
 
         </div>
+        <Footer />
       </div>
     );
   }
