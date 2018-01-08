@@ -33,7 +33,7 @@ describe('Signup Endpoint', () => {
         password: 'password123',
       })
       .end((err, res) => {
-        expect(res.status).to.equal(401);
+        expect(res.status).to.equal(400);
         expect(res.body.message).to.equal('Username is required');
         done();
       });
@@ -48,7 +48,7 @@ describe('Signup Endpoint', () => {
         email: 'raphaelumoh@gmail.com',
       })
       .end((err, res) => {
-        expect(res.status).to.equal(401);
+        expect(res.status).to.equal(400);
         expect(res.body.message).to.equal('Password is required');
         done();
       });
@@ -63,7 +63,7 @@ describe('Signup Endpoint', () => {
         password: 'password123',
       })
       .end((err, res) => {
-        expect(res.status).to.equal(401);
+        expect(res.status).to.equal(400);
         expect(res.body.message).to.equal('Email is required');
         done();
       });
@@ -113,7 +113,7 @@ describe('Signup Endpoint', () => {
         password: 'user1234',
       })
       .end((err, res) => {
-        expect(res.status).to.equal(401);
+        expect(res.status).to.equal(400);
         expect(res.body.message).to.equal('Email is Invalid');
         done();
       });
