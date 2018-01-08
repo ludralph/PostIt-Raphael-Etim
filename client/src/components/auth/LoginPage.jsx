@@ -91,6 +91,7 @@ export class LoginPage extends React.Component {
                     value={this.state.username}
                     onChange={this.handleChange}
                     label="Username"
+                    autoComplete
                   />
                   <TextInput
                     icon="lock"
@@ -99,6 +100,7 @@ export class LoginPage extends React.Component {
                     value={this.state.password}
                     onChange={this.handleChange}
                     label="Password"
+                    autoComplete
                   />
                   <div className="row  center-align">
                     <Button

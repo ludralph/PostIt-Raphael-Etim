@@ -115,6 +115,7 @@ export class SignupPage extends React.Component {
                   onChange={this.handleChange}
                   label="Email Address"
                   error={this.state.errors.email}
+                  autoComplete
                 />
                 <TextInput
                   icon="account_circle"
@@ -124,6 +125,7 @@ export class SignupPage extends React.Component {
                   onChange={this.handleChange}
                   label="Username"
                   error={this.state.errors.username}
+                  autoComplete
                 />
                 <TextInput
                   icon="lock_outline"
@@ -133,6 +135,7 @@ export class SignupPage extends React.Component {
                   onChange={this.handleChange}
                   label="Password"
                   error={this.state.errors.password}
+                  autoComplete
                 />
                 <TextInput
                   icon="lock"
@@ -142,6 +145,7 @@ export class SignupPage extends React.Component {
                   onChange={this.handleChange}
                   label="Confirm Password"
                   error={this.state.errors.confirmpassword}
+                  autoComplete
                 />
                 <div className="row center-align">
                   <Button

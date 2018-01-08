@@ -118,7 +118,7 @@ export class GroupMember extends React.Component {
     const paginationSize = nonMembers.length;
 
     return (
-      <div className="col s12 m12 l9">
+      <div className="col s12 m12 l9 search-footer">
         <div className="row">
           <div className="col s12 m8 l8 search-user">
             <h4 className="center-align"> Add New Member </h4>
