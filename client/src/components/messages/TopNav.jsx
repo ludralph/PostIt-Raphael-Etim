@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
  */
 const TopNav = ({ logout }) => (
     <div>
-      <nav className=" blue darken-3">
+      <nav className="bg-color">
         <div className="nav-wrapper nav-wrap logo-right">
           <Link to="/messageboard" className="brand-logo">
             <h6 className="logo">

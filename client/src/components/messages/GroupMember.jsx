@@ -118,9 +118,9 @@ export class GroupMember extends React.Component {
     const paginationSize = nonMembers.length;
 
     return (
-      <div className="col s12 m12 l9 search-footer">
+      <div className="col s12 m12 l9 search-footer bg-color">
         <div className="row">
-          <div className="col s12 m8 l8 search-user">
+          <div className="col s12 m8 l8 search-user white">
             <h4 className="center-align"> Add New Member </h4>
             <form>
               <div className="search row z-depth-3">

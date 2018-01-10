@@ -95,12 +95,12 @@ export class SignupPage extends React.Component {
     return (
       <div>
       <TopNav />
-      <div className="login blue darken-3">
+      <div className="login bg-color">
         <div className="container">
           <div className="row top-space">
             <div className="col s12 m3 l3">
             </div>
-            <div className="col s12 m6 l6">
+            <div className="col s12 m6 l6 ">
               <form className="white col s12 z-depth-5">
                 <h6 className="center-align link">
                   Already a member?
@@ -150,7 +150,7 @@ export class SignupPage extends React.Component {
                 <div className="row center-align">
                   <Button
                     className=
-                    "btn waves-effect waves-light blue darken-2 signup-button"
+                    "btn waves-effect waves-light bg-color signup-button"
                     onClick={this.handleSubmit}
                     text="create account"
                     disabled={this.state.disabled}

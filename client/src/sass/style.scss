@@ -8,7 +8,9 @@ html {
 body {
 	height: 100% !important;
 }
-
+.bg-color{
+	background: linear-gradient(160deg, #02CCBA 0%, #AA7ECD 100%);
+}
 .login {
 	min-height: 100% !important;
 	width: 100% !important;

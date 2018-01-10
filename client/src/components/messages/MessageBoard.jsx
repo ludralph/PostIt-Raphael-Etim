@@ -82,7 +82,7 @@ export class MessageBoard extends React.Component {
       );
     }
     return (
-      <div className="message-board">
+      <div className="message-board bg-color">
         <TopNav logout={this.logout} />
         <div className="row">
 

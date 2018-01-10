@@ -72,7 +72,7 @@ export class LoginPage extends React.Component {
     return (
       <div>
         <TopNav />
-        <div className="login blue darken-3">
+        <div className="login bg-color">
           <div className="container">
             <div className="row top-space">
               <div className="col s12 m3 l3">
@@ -104,7 +104,7 @@ export class LoginPage extends React.Component {
                   />
                   <div className="row  center-align">
                     <Button
-                      className="btn waves-effect waves-light blue darken-2"
+                      className="btn waves-effect waves-light bg-color"
                       onClick={this.handleSubmit}
                       text="login"
                     />

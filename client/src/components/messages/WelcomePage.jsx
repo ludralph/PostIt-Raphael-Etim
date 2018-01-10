@@ -18,8 +18,8 @@ export class WelcomePage extends React.Component {
     const groupNo = this.props.groups.length;
 
     return (
-      <div className="white col s12 m12 l9">
-        <div className="welcome-page">
+      <div className=" col s12 m12 l9 ">
+        <div className="welcome-page white-text">
           <h4>Hi {currentUser.name},</h4>
           <h5>Email : {currentUser.email}</h5>
           <h5>Your Groups : {groupNo}</h5>

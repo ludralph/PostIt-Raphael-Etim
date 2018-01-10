@@ -8,11 +8,10 @@ import { Link } from 'react-router-dom';
  * @returns {JSX} jsx representation of the element
  */
 const SideNav = ({ groups, edit }) => (
-    <div className="col s12 m12 l3 pull-l2 blue darken-3">
-      <ul id="slide-out" className="side-nav side-nav-bar z-depth-3 fixed">
+    <div className="col s12 m12 l3 pull-l2 bg-color">
+      <ul id="slide-out" className="side-nav side-nav-bar z-depth-3 fixed bg-color">
         <li className="hide-on-medium">
-          <a className="modal-trigger" href="#group" onClick={edit}>
-            <i className="material-icons">loupe</i>
+          <a className="modal-trigger white-text" href="#group" onClick={edit}>
             Create New Group
           </a>
         </li>
@@ -23,7 +22,7 @@ const SideNav = ({ groups, edit }) => (
           <Link
             id={group.name.toLowerCase().split(' ').join('-')}
             to={`/messageboard/group/${group.id}/messages`}
-            className="waves-effect">
+            className="waves-effect white-text ">
             {group.name}
           </Link>
         </li>)}
