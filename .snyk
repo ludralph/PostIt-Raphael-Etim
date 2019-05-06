@@ -32,3 +32,6 @@ patch:
         patched: '2019-04-08T13:33:17.044Z'
     - babel-cli > chokidar > fsevents > node-pre-gyp > hawk > sntp > hoek:
         patched: '2019-04-08T13:33:17.044Z'
+  SNYK-JS-AXIOS-174505:
+    - axios:
+        patched: '2019-05-06T05:53:22.505Z'
