@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.3
+version: v1.13.5
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -32,3 +32,52 @@ patch:
         patched: '2019-04-08T13:33:17.044Z'
     - babel-cli > chokidar > fsevents > node-pre-gyp > hawk > sntp > hoek:
         patched: '2019-04-08T13:33:17.044Z'
+  SNYK-JS-LODASH-450202:
+    - babel-core > babel-register > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - redux > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-register > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-cli > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-core > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - react-redux > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-register > babel-core > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-cli > babel-register > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - webpack-dev-server > http-proxy-middleware > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-preset-env > babel-plugin-transform-es2015-block-scoping > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-preset-es2015 > babel-plugin-transform-es2015-block-scoping > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - sequelize > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-cli > babel-core > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - node-sass > sass-graph > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-preset-es2015 > babel-plugin-transform-es2015-sticky-regex > babel-helper-regex > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-preset-env > babel-plugin-transform-es2015-unicode-regex > babel-helper-regex > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-preset-es2015 > babel-plugin-transform-es2015-unicode-regex > babel-helper-regex > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - node-sass > gaze > globule > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-preset-env > babel-plugin-transform-es2015-sticky-regex > babel-helper-regex > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-preset-es2015 > babel-plugin-transform-es2015-classes > babel-helper-define-map > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-cli > babel-core > babel-register > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-cli > babel-register > babel-core > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
+    - babel-preset-env > babel-plugin-transform-es2015-classes > babel-helper-define-map > lodash:
+        patched: '2019-07-04T05:57:57.817Z'
