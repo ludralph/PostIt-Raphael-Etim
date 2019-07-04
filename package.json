@@ -103,7 +103,7 @@
     "webpack-dev-server": "3.1.11",
     "webpack-hot-middleware": "^2.19.0",
     "winston": "^2.3.1",
-    "snyk": "^1.148.0"
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "babel-jest": "^21.2.0",
