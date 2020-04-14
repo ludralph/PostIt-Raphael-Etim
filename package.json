@@ -65,7 +65,7 @@
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "^1.1.5",
     "isemail": "^3.0.0",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "jsonwebtoken": "^8.0.0",
     "jwt-simple": "^0.4.1",
     "loader-runner": "^2.1.1",
