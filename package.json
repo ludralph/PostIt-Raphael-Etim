@@ -92,7 +92,7 @@
     "redux-thunk": "^2.0.1",
     "rimraf": "^2.6.2",
     "sass-loader": "6.0.6",
-    "sequelize": "^4.17.2",
+    "sequelize": "^6.19.1",
     "style-loader": "*",
     "supertest": "^3.0.0",
     "toastr": "^2.1.2",
