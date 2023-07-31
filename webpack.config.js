@@ -1,50 +1,53 @@
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require('webpack');
 
-const extractSass = new ExtractTextPlugin({
-    filename: "[name].[contenthash].css",
-    disable: process.env.NODE_ENV === "development"
-});
 module.exports = {
-    
-    //devtool: debug ? "inline-sourcemap" : false,
-    entry: "./src/main.js",
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                exclude: /(node_modules)/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['react', 'es2015', 'stage-0']
-                }
-            },
-            {
-                test: /\.scss$/,
-                use: extractSass.extract({
-                    use: [{
-                        loader: "css-loader"
-                    }, {
-                        loader: "sass-loader"
-                    }],
-                    // use style-loader in development
-                    fallback: "style-loader"
-
-                })
-            }
-        
-        ]
-    },
-    output: {
-        path: __dirname + "dist",
-        filename: "bundle.min.js"
-    },
-    plugins: [
-        extractSass
-    ]
-    // plugins: debug ? [] : [
-    //     new webpack.optimize.DedupePlugin(),
-    //     new webpack.optimize.OccurrenceOrderPlugin(),
-    //     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-    // ],
+  devtool: 'inline-source-map',
+  entry: [
+    'eventsource-polyfill',
+    'webpack-hot-middleware/client?reload=true',
+    path.resolve(__dirname, 'client/src/index.js')
+  ],
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  target: 'web',
+  output: {
+    path: `${__dirname}/client/dist`,
+    publicPath: '/',
+    filename: 'bundle.min.js',
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, 'src')
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+  ],
+  module: {
+    loaders: [
+      {
+        test: /(\.css)$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        loader: 'url?prefix=font/&limit=5000'
+      },
+    ],
+  },
+  node: {
+    dns: 'empty',
+    net: 'empty',
+    fs: 'empty'
+  }
 };
