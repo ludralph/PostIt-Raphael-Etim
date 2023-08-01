@@ -56,8 +56,8 @@
 
 
 
-title: "Title"
-labels: "Use the following template to ask your question about Prisma. Make sure to provide clear and concise details to help others understand and address your concerns effectively."
+title: ["Title"]
+labels: ["Use the following template to ask your question about Prisma. Make sure to provide clear and concise details to help others understand and address your concerns effectively."]
 
 body:
   - type: markdown
@@ -74,7 +74,7 @@ body:
   - type: textarea
     id: steps
     attributes:
-      label: How to reproduce ["Optional"]
+      label: How to reproduce ["optional"]
       description: If your question is about specific behaviour of Prisma, tell us how to reproduce it.
       value: |
         <!--
@@ -86,7 +86,7 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: Expected behavior ["Optional"]
+      label: Expected behavior ["optional"]
       description: A clear and concise description of what you expected to happen.
   - type: textarea
     id: prisma-info
