@@ -69,10 +69,12 @@ body:
     attributes:
       label: Question
       description: Provide a clear and concise description of the question you have or problem you want to discuss.  
+      validations:
+        required: true
   - type: textarea
     id: steps
     attributes:
-      label: How to reproduce
+      label: How to reproduce ["Optional"]
       description: If your question is about specific behaviour of Prisma, tell us how to reproduce it.
       value: |
         <!--
@@ -89,7 +91,7 @@ body:
   - type: textarea
     id: prisma-info
     attributes:
-      label: Prisma information
+      label: Information about Prisma Schema, Client Queries and Environment ["optional"]
       description: Your Prisma schema, Prisma Client queries, Environment & setup, Prisma Version
       value: |
         <!-- Do not include your database credentials when sharing your Prisma schema! -->
