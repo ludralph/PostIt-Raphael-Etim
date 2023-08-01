@@ -86,7 +86,7 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: Expected behavior
+      label: Expected behavior ["Optional"]
       description: A clear and concise description of what you expected to happen.
   - type: textarea
     id: prisma-info
