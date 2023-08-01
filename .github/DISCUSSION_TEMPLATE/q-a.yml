@@ -69,8 +69,8 @@ body:
     attributes:
       label: Question
       description: Provide a clear and concise description of the question you have or problem you want to discuss.  
-      validations:
-        required: true
+    validations:
+      required: true
   - type: textarea
     id: steps
     attributes:
