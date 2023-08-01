@@ -57,8 +57,6 @@
 
 
 
-# labels: ["Use the following template to ask your question about Prisma. Make sure to provide clear and concise details to help others understand and address your concerns effectively."]
-
 body:
   - type: markdown
     attributes:
