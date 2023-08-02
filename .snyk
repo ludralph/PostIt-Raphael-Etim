@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.3
+version: v1.25.1
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -32,3 +32,27 @@ patch:
         patched: '2019-04-08T13:33:17.044Z'
     - babel-cli > chokidar > fsevents > node-pre-gyp > hawk > sntp > hoek:
         patched: '2019-04-08T13:33:17.044Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > request > hawk > hoek:
+        patched: '2023-05-23T15:32:16.681Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > request > hawk > boom > hoek:
+        patched: '2023-05-23T15:32:16.681Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > request > hawk > sntp > hoek:
+        patched: '2023-05-23T15:32:16.681Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2023-05-23T15:32:16.681Z'
+  'npm:debug:20170905':
+    - babel-cli > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
+        patched: '2023-05-23T15:32:16.681Z'
+  'npm:extend:20180424':
+    - node-sass > request > extend:
+        patched: '2023-05-23T15:32:16.681Z'
+    - supertest > superagent > extend:
+        patched: '2023-05-23T15:32:16.681Z'
+    - babel-cli > chokidar > fsevents > node-pre-gyp > request > extend:
+        patched: '2023-05-23T15:32:16.681Z'
+  'npm:stringstream:20180511':
+    - babel-cli > chokidar > fsevents > node-pre-gyp > request > stringstream:
+        patched: '2023-05-23T15:32:16.681Z'
+  'npm:tough-cookie:20170905':
+    - babel-cli > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
+        patched: '2023-05-23T15:32:16.681Z'
